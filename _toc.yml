@@ -5,9 +5,17 @@ chapters:
   sections:
   - file: CourseFiles/AboutUs
   - file: CourseFiles/CurriculumAlignmentTables
+  - file: CourseFiles/Rubric
 - file: CourseFiles/Modules
   sections:
   - file: CourseFiles/Module_1/Module_1
+    sections:
+      - file: CourseFiles/Module_1/Worksheet_1_1_CoinFlipping
+      - file: CourseFiles/Module_1/Worksheet_1_1_CoinFlipping_Solutions
+      - file: CourseFiles/Module_1/Worksheet_1_2_SquareRootN
+      - file: CourseFiles/Module_1/Worksheet_1_2_SquareRootN_Guide
+      - file: CourseFiles/Module_1/Worksheet_1_3_EffectOfPriors
+      - file: CourseFiles/Module_1/Worksheet_1_3_EffectOfPriors_Guide
   - file: CourseFiles/Module_2/Module_2
   - file: CourseFiles/Module_3/Module_3
   - file: CourseFiles/Module_4/Module_4
