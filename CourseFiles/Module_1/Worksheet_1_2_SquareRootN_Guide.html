@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>GUIDE to Worksheet 1.2: The Spread in Distributions &#8212; What Do Your Data Say?</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Worksheet 1.3: Bayes’ Theorem and the Effect of Priors" href="Worksheet_1_3_EffectOfPriors.html" />
+    <link rel="prev" title="Worksheet 1.2: The Spread in Distributions" href="Worksheet_1_2_SquareRootN.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/PCA_Animation_WDYDS.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">What Do Your Data Say?</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    What Do Your Data Say?
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Resources.html">
+   Course Resources
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../AboutUs.html">
+     About Us
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../CurriculumAlignmentTables.html">
+     Curriculum Alignment Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Rubric.html">
+     Rubric
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../Modules.html">
+   Modules
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="Module_1.html">
+     Module 1
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_1_CoinFlipping.html">
+       Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_1_CoinFlipping_Solutions.html">
+       SOLUTIONS to Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_2_SquareRootN.html">
+       Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       GUIDE to Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_3_EffectOfPriors.html">
+       Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_3_EffectOfPriors_Guide.html">
+       GUIDE to Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_2/Module_2.html">
+     Module 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_3/Module_3.html">
+     Module 3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_4/Module_4.html">
+     Module 4
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ejohnson643/WhatDoYourDataSay/main?urlpath=tree/CourseFiles/CourseFiles/Module_1/Worksheet_1_2_SquareRootN_Guide.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay/issues/new?title=Issue%20on%20page%20%2FCourseFiles/Module_1/Worksheet_1_2_SquareRootN_Guide.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/CourseFiles/Module_1/Worksheet_1_2_SquareRootN_Guide.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>GUIDE to Worksheet 1.2: The Spread in Distributions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="guide-to-worksheet-1-2-the-spread-in-distributions">
+<h1>GUIDE to Worksheet 1.2: The Spread in Distributions<a class="headerlink" href="#guide-to-worksheet-1-2-the-spread-in-distributions" title="Permalink to this headline">#</a></h1>
+<p>This notebook is meant to provide hints and guidance on how to complete Worksheet 1.2: The Spread in Distributions.  It will not necessarily answer every part of every problem, but it will get you to the interesting points of the worksheet.</p>
+<p>As a reminder, this worksheet is an introduction into showing parameter dependence of results, calculating eCDFs and percentiles, and visualizing distributional shapes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">r</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">p_heads</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_coins</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">N_exp</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="n">obs_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The shape of &#39;outcomes&#39; is </span><span class="si">{</span><span class="n">obs_heads</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The shape of &#39;outcomes&#39; is (10000,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on theory, we expect the number of heads to be binomially distributed.  That is, it will be unimodal with most of the outcomes near <span class="math notranslate nohighlight">\(N_{coins}\times p_{heads} = 25\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The minimum observed number of heads is </span><span class="si">{</span><span class="n">obs_heads</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The maximum observed number of heads is </span><span class="si">{</span><span class="n">obs_heads</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean number of heads is </span><span class="si">{</span><span class="n">obs_heads</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The median number of heads is </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The variance in the number of heads is </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The minimum observed number of heads is 12
+The maximum observed number of heads is 38
+The mean number of heads is 25
+The median number of heads is 25
+The variance in the number of heads is 12.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_coins</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">## Possible outcomes</span>
+<span class="n">prob_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N_coins</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcomes</span><span class="p">):</span>
+    <span class="n">prob_obs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_exp</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The probability of any outcome is </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">prob_obs</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The probability of any outcome is 100.00%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">prob_obs</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Heads&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability of Obs.&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_2_SquareRootN_Guide_7_0.png" src="../../_images/Worksheet_1_2_SquareRootN_Guide_7_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp_val</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcomes</span><span class="p">):</span>
+    <span class="n">exp_val</span> <span class="o">+=</span> <span class="n">outcome</span> <span class="o">*</span> <span class="n">prob_obs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+
+<span class="n">obs_var</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcomes</span><span class="p">):</span>
+    <span class="n">obs_var</span> <span class="o">+=</span> <span class="p">(</span><span class="n">outcome</span> <span class="o">-</span> <span class="n">exp_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">prob_obs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The expected value of the experiment is </span><span class="si">{</span><span class="n">exp_val</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The observed variance of the experiment is </span><span class="si">{</span><span class="n">obs_var</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expected value of the experiment is 25
+The observed variance of the experiment is 12.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>The expected value of the number of heads will probably <em>increase</em> with the likelihood of heads and the number of coins that we toss!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_coins_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">])</span>
+
+<span class="n">exp_val_vs_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">nn</span><span class="p">,</span> <span class="n">N_coins</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Flipping </span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2"> coins </span><span class="si">{</span><span class="n">N_exp</span><span class="si">}</span><span class="s2"> times!&quot;</span><span class="p">)</span>
+    
+    <span class="n">obs_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">)</span>
+    
+    <span class="n">exp_val</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_coins</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">outcome</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">obs_heads</span><span class="p">:</span>  <span class="c1">## What is this doing?</span>
+            <span class="k">continue</span>
+        
+        <span class="n">obs_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span>
+        
+        <span class="n">exp_val</span> <span class="o">+=</span> <span class="n">outcome</span> <span class="o">*</span> <span class="n">obs_prob</span>
+    
+    <span class="n">exp_val_vs_N</span><span class="p">[</span><span class="n">nn</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp_val</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The expected value is </span><span class="si">{</span><span class="n">exp_val</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10 coins 10000 times!
+The expected value is 5.01
+
+Flipping 20 coins 10000 times!
+The expected value is 9.99
+
+Flipping 50 coins 10000 times!
+The expected value is 25
+
+Flipping 100 coins 10000 times!
+The expected value is 50.1
+
+Flipping 200 coins 10000 times!
+The expected value is 100
+
+Flipping 500 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expected value is 250
+
+Flipping 1000 coins 10000 times!
+The expected value is 500
+
+Flipping 2000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expected value is 1e+03
+
+Flipping 5000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expected value is 2.5e+03
+
+Flipping 10000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expected value is 5e+03
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_heads_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="n">N_coins</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">exp_val_vs_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Flipping </span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2"> coins </span><span class="si">{</span><span class="n">N_exp</span><span class="si">}</span><span class="s2"> times! (p_heads = </span><span class="si">{</span><span class="n">p_heads</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    
+    <span class="n">obs_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="o">=</span><span class="n">p_heads</span><span class="p">)</span>
+    
+    <span class="n">exp_val</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_coins</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">outcome</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">obs_heads</span><span class="p">:</span>  <span class="c1">## What is this doing?</span>
+            <span class="k">continue</span>
+        
+        <span class="n">obs_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span>
+        
+        <span class="n">exp_val</span> <span class="o">+=</span> <span class="n">outcome</span> <span class="o">*</span> <span class="n">obs_prob</span>
+    
+    <span class="n">exp_val_vs_p</span><span class="p">[</span><span class="n">pp</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp_val</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The expected value is </span><span class="si">{</span><span class="n">exp_val</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 1000 coins 10000 times! (p_heads = 0.1)
+The expected value is 99.6
+
+Flipping 1000 coins 10000 times! (p_heads = 0.2)
+The expected value is 200
+
+Flipping 1000 coins 10000 times! (p_heads = 0.3)
+The expected value is 300
+
+Flipping 1000 coins 10000 times! (p_heads = 0.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expected value is 400
+
+Flipping 1000 coins 10000 times! (p_heads = 0.5)
+The expected value is 500
+
+Flipping 1000 coins 10000 times! (p_heads = 0.6)
+The expected value is 600
+
+Flipping 1000 coins 10000 times! (p_heads = 0.7)
+The expected value is 700
+
+Flipping 1000 coins 10000 times! (p_heads = 0.8)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expected value is 800
+
+Flipping 1000 coins 10000 times! (p_heads = 0.9)
+The expected value is 900
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">,</span> <span class="n">exp_val_vs_N</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$E[X]$&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">,</span> <span class="n">exp_val_vs_p</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$E[X]$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_2_SquareRootN_Guide_12_0.png" src="../../_images/Worksheet_1_2_SquareRootN_Guide_12_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp_val_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">nn</span><span class="p">,</span> <span class="n">N_coins</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Flipping </span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2"> coins </span><span class="si">{</span><span class="n">N_exp</span><span class="si">}</span><span class="s2"> times!&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+        <span class="n">obs_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="o">=</span><span class="n">p_heads</span><span class="p">)</span>
+    
+        <span class="n">exp_val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_coins</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">outcome</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">obs_heads</span><span class="p">:</span>  <span class="c1">## What is this doing?</span>
+                <span class="k">continue</span>
+
+            <span class="n">obs_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span>
+
+            <span class="n">exp_val</span> <span class="o">+=</span> <span class="n">outcome</span> <span class="o">*</span> <span class="n">obs_prob</span>
+
+        <span class="n">exp_val_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">,</span> <span class="n">pp</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp_val</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10 coins 10000 times!
+
+Flipping 20 coins 10000 times!
+
+Flipping 50 coins 10000 times!
+
+Flipping 100 coins 10000 times!
+
+Flipping 200 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 500 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 1000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 2000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 5000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10000 coins 10000 times!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">,</span> <span class="n">exp_val_arr</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p_heads</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">nn</span><span class="p">,</span> <span class="n">N_coins</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">):</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">,</span> <span class="n">exp_val_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$E[X]$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$E[X]$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_2_SquareRootN_Guide_14_0.png" src="../../_images/Worksheet_1_2_SquareRootN_Guide_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obs_var_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">nn</span><span class="p">,</span> <span class="n">N_coins</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Flipping </span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2"> coins </span><span class="si">{</span><span class="n">N_exp</span><span class="si">}</span><span class="s2"> times!&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+        <span class="n">obs_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="o">=</span><span class="n">p_heads</span><span class="p">)</span>
+            
+        <span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_coins</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">outcome</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">obs_heads</span><span class="p">:</span>  <span class="c1">## What is this doing?</span>
+                <span class="k">continue</span>
+
+            <span class="n">obs_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span>
+
+            <span class="n">obs_var</span> <span class="o">+=</span> <span class="p">(</span><span class="n">outcome</span> <span class="o">-</span> <span class="n">exp_val_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">,</span> <span class="n">pp</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">obs_prob</span>
+
+        <span class="n">obs_var_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">,</span> <span class="n">pp</span><span class="p">]</span> <span class="o">=</span> <span class="n">obs_var</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10 coins 10000 times!
+
+Flipping 20 coins 10000 times!
+
+Flipping 50 coins 10000 times!
+
+Flipping 100 coins 10000 times!
+
+Flipping 200 coins 10000 times!
+
+Flipping 500 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 1000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 2000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 5000 coins 10000 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10000 coins 10000 times!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">,</span> <span class="n">obs_var_arr</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p_heads</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">nn</span><span class="p">,</span> <span class="n">N_coins</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">):</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">,</span> <span class="n">obs_var_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$Var[X]$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$Var[X]$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_2_SquareRootN_Guide_16_0.png" src="../../_images/Worksheet_1_2_SquareRootN_Guide_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">N_exp</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">N_coins</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">p_heads</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">obs_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="o">=</span><span class="n">p_heads</span><span class="p">)</span>
+
+<span class="n">head_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span>
+<span class="n">head_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">msort</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">head_counts</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="n">eCDF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="n">head_counts</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">head_vals</span><span class="p">])</span>
+<span class="n">eCDF</span> <span class="o">=</span> <span class="n">eCDF</span> <span class="o">/</span> <span class="n">eCDF</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/0z/q4zqhhxd4kv0r6fzjkg8lzfr0000gn/T/ipykernel_67894/2115058168.py:10: DeprecationWarning: msort is deprecated, use np.sort(a, axis=0) instead
+  head_vals = np.msort(list(head_counts.keys()))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">perc_10_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eCDF</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">## Why do we need the [0]?</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perc_10_idx</span><span class="p">)</span>
+<span class="n">perc_10</span> <span class="o">=</span> <span class="n">head_vals</span><span class="p">[</span><span class="n">perc_10_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The 10th percentile is </span><span class="si">{</span><span class="n">perc_10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">## Confirm:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="n">perc_25_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eCDF</span> <span class="o">&lt;</span> <span class="mf">0.25</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perc_25_idx</span><span class="p">)</span>
+<span class="n">perc_25</span> <span class="o">=</span> <span class="n">head_vals</span><span class="p">[</span><span class="n">perc_25_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The 25th percentile is </span><span class="si">{</span><span class="n">perc_25</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">## Confirm:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+
+<span class="n">perc_50_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eCDF</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perc_50_idx</span><span class="p">)</span>
+<span class="n">perc_50</span> <span class="o">=</span> <span class="n">head_vals</span><span class="p">[</span><span class="n">perc_50_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The 50th percentile is </span><span class="si">{</span><span class="n">perc_50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">## Confirm:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+
+<span class="n">perc_75_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eCDF</span> <span class="o">&lt;</span> <span class="mf">0.75</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perc_75_idx</span><span class="p">)</span>
+<span class="n">perc_75</span> <span class="o">=</span> <span class="n">head_vals</span><span class="p">[</span><span class="n">perc_75_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The 75th percentile is </span><span class="si">{</span><span class="n">perc_75</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">## Confirm:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="mi">75</span><span class="p">))</span>
+
+<span class="n">perc_90_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eCDF</span> <span class="o">&lt;</span> <span class="mf">0.9</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perc_90_idx</span><span class="p">)</span>
+<span class="n">perc_90</span> <span class="o">=</span> <span class="n">head_vals</span><span class="p">[</span><span class="n">perc_90_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The 90th percentile is </span><span class="si">{</span><span class="n">perc_90</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">## Confirm:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="mi">90</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5]
+The 10th percentile is 44
+44.0
+[0 1 2 3 4 5 6 7 8]
+The 25th percentile is 47
+47.0
+[ 0  1  2  3  4  5  6  7  8  9 10 11]
+The 50th percentile is 50
+50.0
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+The 75th percentile is 53
+53.0
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+The 90th percentile is 57
+57.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">head_vals</span><span class="p">,</span> <span class="n">eCDF</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Obs. Heads&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head_vals</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">perc_10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$P(X\leq x)=0.1$&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">perc_10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_vals</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">perc_25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$P(X\leq x)=0.25$&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">perc_25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_vals</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">perc_50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$P(X\leq x)=0.5$&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">perc_50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">head_vals</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">perc_75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$P(X\leq x)=0.75$&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">perc_75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">head_vals</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">perc_90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C5&#39;</span><span class="p">,</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$P(X\leq x)=0.9$&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">perc_90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Heads&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_2_SquareRootN_Guide_19_0.png" src="../../_images/Worksheet_1_2_SquareRootN_Guide_19_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">median_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">)))</span>
+<span class="n">iqr_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">nn</span><span class="p">,</span> <span class="n">N_coins</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Flipping </span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2"> coins </span><span class="si">{</span><span class="n">N_exp</span><span class="si">}</span><span class="s2"> times!&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+        <span class="n">obs_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_exp</span><span class="p">,</span> <span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="o">=</span><span class="n">p_heads</span><span class="p">)</span>
+
+        <span class="n">median_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">,</span> <span class="n">pp</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span>
+        
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">75</span><span class="p">])</span>
+        
+        <span class="n">iqr_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">,</span> <span class="n">pp</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10 coins 200 times!
+
+Flipping 20 coins 200 times!
+
+Flipping 50 coins 200 times!
+
+Flipping 100 coins 200 times!
+
+Flipping 200 coins 200 times!
+
+Flipping 500 coins 200 times!
+
+Flipping 1000 coins 200 times!
+
+Flipping 2000 coins 200 times!
+
+Flipping 5000 coins 200 times!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10000 coins 200 times!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">],</span> <span class="p">[</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">,</span> <span class="n">median_arr</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p_heads</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">,</span> <span class="n">iqr_arr</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p_heads</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">nn</span><span class="p">,</span> <span class="n">N_coins</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">):</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">,</span> <span class="n">median_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">,</span> <span class="n">iqr_arr</span><span class="p">[</span><span class="n">nn</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N_coins</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Median Num. Heads&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Median Num. Heads&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{Coins}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;IQR Num. Heads&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;IQR Num. Heads&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_2_SquareRootN_Guide_21_0.png" src="../../_images/Worksheet_1_2_SquareRootN_Guide_21_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iqr_arr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ],
+       [ 2.  ,  2.  ,  2.25,  2.  ,  3.  ,  2.  ,  3.  ,  2.25,  2.  ],
+       [ 2.25,  3.25,  4.  ,  4.  ,  5.25,  5.  ,  5.  ,  4.  ,  2.  ],
+       [ 4.  ,  6.  ,  6.  ,  6.  ,  7.  ,  7.  ,  7.  ,  5.  ,  4.  ],
+       [ 6.  ,  8.  ,  8.  ,  8.  ,  9.  ,  9.25,  8.  ,  8.  ,  6.  ],
+       [ 8.  , 12.25, 13.  , 16.25, 16.25, 13.25, 15.  , 12.  ,  8.  ],
+       [12.25, 17.  , 19.  , 21.25, 21.  , 21.25, 19.  , 16.25, 12.  ],
+       [18.  , 25.  , 22.25, 30.25, 26.  , 26.75, 29.  , 25.  , 16.25],
+       [29.  , 44.25, 46.5 , 39.25, 46.  , 43.5 , 50.25, 35.  , 32.  ],
+       [41.  , 54.25, 64.75, 64.  , 62.25, 66.5 , 61.25, 53.5 , 35.25]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">pp</span><span class="p">,</span> <span class="n">p_heads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_heads_arr</span><span class="p">):</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">,</span> 
+                 <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">obs_var_arr</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">])</span><span class="o">/</span><span class="n">exp_val_arr</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$p_</span><span class="si">{Heads}</span><span class="s2"> = $&quot;</span> <span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p_heads</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_coins_arr</span><span class="p">,</span> <span class="n">N_coins_arr</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span> <span class="s1">&#39;-k&#39;</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$y = 1/\sqrt{N_</span><span class="si">{coins}</span><span class="s1">}$&#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;($\beta = -1/2$)&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$N_</span><span class="si">{coins}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\sqrt</span><span class="si">{Var[X]}</span><span class="s2"> / E[X]$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_2_SquareRootN_Guide_23_0.png" src="../../_images/Worksheet_1_2_SquareRootN_Guide_23_0.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./CourseFiles/Module_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Worksheet_1_2_SquareRootN.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Worksheet 1.2: The Spread in Distributions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Worksheet_1_3_EffectOfPriors.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Worksheet 1.3: Bayes’ Theorem and the Effect of Priors</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Eric Johnson<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

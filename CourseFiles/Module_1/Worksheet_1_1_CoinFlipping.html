@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Worksheet 1.1: Coin Tossing &#8212; What Do Your Data Say?</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SOLUTIONS to Worksheet 1.1: Coin Tossing" href="Worksheet_1_1_CoinFlipping_Solutions.html" />
+    <link rel="prev" title="Module 1" href="Module_1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/PCA_Animation_WDYDS.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">What Do Your Data Say?</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    What Do Your Data Say?
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Resources.html">
+   Course Resources
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../AboutUs.html">
+     About Us
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../CurriculumAlignmentTables.html">
+     Curriculum Alignment Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Rubric.html">
+     Rubric
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../Modules.html">
+   Modules
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="Module_1.html">
+     Module 1
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_1_CoinFlipping_Solutions.html">
+       SOLUTIONS to Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_2_SquareRootN.html">
+       Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_2_SquareRootN_Guide.html">
+       GUIDE to Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_3_EffectOfPriors.html">
+       Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_3_EffectOfPriors_Guide.html">
+       GUIDE to Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_2/Module_2.html">
+     Module 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_3/Module_3.html">
+     Module 3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_4/Module_4.html">
+     Module 4
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay/issues/new?title=Issue%20on%20page%20%2FCourseFiles/Module_1/Worksheet_1_1_CoinFlipping.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/CourseFiles/Module_1/Worksheet_1_1_CoinFlipping.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Worksheet 1.1: Coin Tossing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="worksheet-1-1-coin-tossing">
+<h1>Worksheet 1.1: Coin Tossing<a class="headerlink" href="#worksheet-1-1-coin-tossing" title="Permalink to this headline">#</a></h1>
+<p>Welcome to your first worksheet of this course! The worksheets are designed to work in parallel to the course notes and lectures. They are not intended to be summary assessments at the end of a module, but as <strong>necessary content</strong> that you consume on your way to the assignments (and eventually attacking your own data!). As a result, if there are parts of the worksheet that you don’t understand or are having trouble with, make sure to <strong>ask for help!</strong></p>
+<p>In this worksheet, you will practice implementing the concepts enumerated in the first few sections of the Module One course notes, up to the section on cumulative density functions. You should complete this worksheet in your own Jupyter notebook and try to complete every question. Even if you think that you are proficient in Python coding, you should make sure that you can write working answers to all the parts of this problem - it will be useful code for later parts of the course, so your effort won’t be wasted!</p>
+<div class="admonition-worksheet-goals admonition">
+<p class="admonition-title"><strong>Worksheet Goals:</strong> </p>
+<p>By the end of this worksheet, you should be able to:</p>
+<ul class="simple">
+<li><p><mark style="background-color: #e26563">PCS-3</mark> Generate random numbers</p></li>
+<li><p><mark style="background-color: #e26563">PCS-2</mark> <mark style="background-color: #6b9cee">MVD</mark> Generate and plot distributions</p></li>
+<li><p><mark style="background-color: #e26563">PCS-3</mark> Perform simulations of simple experiments</p></li>
+<li><p><mark style="background-color: #e26563">PCS-2</mark> <mark style="background-color: #6b9cee">MVD</mark> Calculate the mean and variance of an experiment and display them on a figure</p></li>
+</ul>
+</div>
+<p>At this point in the notes, we’ve started talking about flipping coins, binomial distributions, PDFs, and moments of distributions, but what does this actually look like in practice? To start to see how your computer can be used to solve generic statistical problems, we first have to make sure that our computer can be useful in the most basic of situations. The coin flip is that basic problem that has the benefit of being useful both as a basic theoretical concept, and as a basic computational one.</p>
+<p>One of the bigger ideas that we hope you take away from this course is that if you can program, you can use <strong>simulation</strong> as an integral part of experimentation and analysis. This is most obvious in the case of flipping coins. You could get a couple coins, flip them many times, record the results, and make the same figures as below, but it is much, much faster just to let the computer do the flipping for you!</p>
+<p>So without any further ado, let’s get flipping!</p>
+<hr class="docutils" />
+<p><strong>Please complete the following tasks:</strong></p>
+<ol>
+<li><p>As introduced in the tutorial, the basic random number generator in Python is the <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> function.</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">help()</span></code> function to read about the various arguments and keyword arguments that <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> takes.  Describe how to use this function in your own words.</p></li>
+<li><p>Generate many random numbers (how many is “many”?) and print their maximum and minimum to the screen.  How many of your numbers are bigger than 0.5?  How many are bigger than 0.6?  0.95?</p></li>
+<li><p>Based on your generated numbers, what is the likelihood of getting a number bigger than 0.75?</p></li>
+<li><p>To what number would I want to compare my random numbers so that 60% of the time I get a <code class="docutils literal notranslate"><span class="pre">True</span></code> and the rest of the time I get a <code class="docutils literal notranslate"><span class="pre">False</span></code>?</p></li>
+<li><p>Explain in words how you can use <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> to simulate a coin where <span class="math notranslate nohighlight">\(P(\text{Heads}) = 0.6\)</span>.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>NOTE:</strong>
+One trick that helps when you are trying to code new things, is to attempt to map out your problem <strong>in words</strong>.  This is known as writing <strong>pseudo-code</strong>, and is similar to outlining an essay.  In this problem, it might seem trivial, but as your scripts become longer and more complex, having a plan can be essential for staying on target.</p>
+</div></blockquote>
+</li>
+<li><p>As pointed out in the course notes, flipping one coin isn’t that exciting, but flipping many coins can be very interesting!</p>
+<ol class="simple">
+<li><p>Again using <span class="math notranslate nohighlight">\(p = P(\text{Heads}) = 0.6\)</span>, flip <span class="math notranslate nohighlight">\(N=10\)</span> coins.</p></li>
+<li><p>Count the number of heads.</p></li>
+<li><p>Write a <strong>function</strong> that returns the number of heads in <span class="math notranslate nohighlight">\(N\)</span> flips of a coin with <span class="math notranslate nohighlight">\(p = P(\text{Heads})\)</span>.  That is, <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(p\)</span> are <strong>inputs</strong> (arguments) to your function and <span class="math notranslate nohighlight">\(k=\)</span> the number of heads is the <strong>output</strong>.</p></li>
+<li><p><strong>Bonus:</strong> Describe your function and write a <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">docstring</a>.  Consider the following questions: How did you choose to count the number of heads in your coin tosses?  What are other ways you could have done this?  Do you flip all your coins at once or one at a time?  Does your function check the inputs to make sure they’re the correct type or value?</p></li>
+</ol>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(Y\)</span> be the random variable corresponding to the number of heads generated in an “experiment” of flipping <span class="math notranslate nohighlight">\(N=10\)</span> coins, where each coin has <span class="math notranslate nohighlight">\(P(\text{Heads}) = 0.6\)</span>.  Repeat this experiment <span class="math notranslate nohighlight">\(M=100\)</span> times, saving the outcome each time.</p>
+<blockquote>
+<div><p><strong>NOTE:</strong>
+If you are feeling lost, try writing down what you want to happen in words.  Pseudo-coding is especially useful when you are trying to work out <em>what information</em> you will need to be saving, and then <em>how</em> you want to save it.  For example, if you want to save the outputs in a list, then you will use slightly different functions than someone who wants to save the output in a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>Let’s explore the data (!?) you just generated.</p>
+<ol class="simple">
+<li><p>What are the maximal and minimal numbers of heads that you observed in your experiments?</p></li>
+<li><p>How many unique values are there in your dataset (Hint: <code class="docutils literal notranslate"><span class="pre">np.unique</span></code>)?</p></li>
+<li><p>How many times do you observe 0 heads, 1 heads, 2 heads, etc.?  What would be an appropriate diagram with which to display this information?</p></li>
+<li><p>Create a figure that shows your <strong>frequency distribution</strong>.  Label the axes and if necessary, provide a legend or annotate your figure.  Make sure the <span class="math notranslate nohighlight">\(y\)</span>-axis is scaled and labeled so that it is easy to read off how many times you observed each number of heads.</p></li>
+<li><p>Describe your distribution qualitatively.  Estimate the mean, median, and mode by eye.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>NOTE:</strong>
+As we will continue to emphasize, making effective visualizations of your data is incredibly important.  In particular, you should always have a goal in mind of what you want to convey, and your figure should make that as clear as possible.  Just as with writing code, it can be very useful to write down <em>ahead of time</em> what you want your figures to show.</p>
+</div></blockquote>
+</li>
+<li><p>It’s often useful to annotate your figures with relevant calculations or quantities.  Let’s do that here.</p>
+<ol class="simple">
+<li><p>Using either <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> or the formula for expected value, calculate the mean, <span class="math notranslate nohighlight">\(\mu\)</span> of your observations.  Display this value on your figure using the <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> function and using a <code class="docutils literal notranslate"><span class="pre">legend</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.text</span></code>.</p></li>
+<li><p>Using either <code class="docutils literal notranslate"><span class="pre">np.median</span></code> or some other method, calculate the median of your observations and display the value on your figure.</p></li>
+<li><p>Calculate the mode of your observations and display the value on your figure.</p></li>
+<li><p>Calculate the standard deviation, <span class="math notranslate nohighlight">\(\sigma\)</span> of your observations either by using the formula for variance or the <code class="docutils literal notranslate"><span class="pre">np.std</span></code> function.  Display <span class="math notranslate nohighlight">\(\mu\pm\sigma\)</span> using <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> and annotate the value of <span class="math notranslate nohighlight">\(\sigma\)</span> in a legend or using <code class="docutils literal notranslate"><span class="pre">plt.text</span></code>.</p></li>
+<li><p><strong>Bonus:</strong> Use the <code class="docutils literal notranslate"><span class="pre">axes.get_ylim</span></code> and <code class="docutils literal notranslate"><span class="pre">axes.set_ylim</span></code> functions to control the range of your <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> function and to preserve the <span class="math notranslate nohighlight">\(y\)</span>-axis range of your figure.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>NOTE:</strong>
+If the previous problem didn’t present any figure-design challenges, this problem should.  Figure-making can be fussy work, but after some practice you’ll develop a set of templates that make things faster.  Specific things you could think about are axes sizes, legend or text placement, and font sizes.  Also, annotating <em>widths</em> is somewhat difficult; you should explore different ideas if you have time.</p>
+<p>You should also note that this figure now represents maybe your first foray into illustrating a computational analysis.  You can now <em>see</em> how the differences in your summary quantities relate to your data in slightly different ways.</p>
+<p>As a final note, you should notice that we suggested multiple ways for computing most of these quantities.  You should make sure that you can use any of these methods.  It might seem trivial for calculating a mean, but being able to replicate your results in different ways is an important part of being a computational worker.  When an result or method isn’t clear, one of the first things we turn to is to see if we can get a similar conclusion.  You can start building that skill here.</p>
+</div></blockquote>
+</li>
+<li><p>As noted above, the quantity you should be working with is a <em>frequency distribution</em>, so how can we make it a <strong>probability distribution</strong>?</p>
+<ol class="simple">
+<li><p>Make a list of the different outcomes and the number of times each outcome is observed.  You should try to do this “by hand”, but you can also look at <code class="docutils literal notranslate"><span class="pre">np.histogram</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code>.  Make sure that both sets of outputs are <em>integers</em>.</p></li>
+<li><p>What is the sum of the counts list?  (This is a good sanity check that you are doing things right.)</p></li>
+<li><p>Based on your data, what is the probability of getting 0 heads?  1 heads?  2 heads?  That is, if I randomly grabbed one of your outcomes out of a bag, how often would I get <span class="math notranslate nohighlight">\(k=4\)</span> heads?</p></li>
+<li><p>Generate a list of the <em>probabilities</em> of each of your outcomes.  Use this list to show the <strong>PDF</strong> of your data.  Using your PDF, replicate your earlier annotated figure.  Confirm that the sum of your probabilities is 1.</p></li>
+<li><p>Compare your figure to one generated by <code class="docutils literal notranslate"><span class="pre">sns.histplot</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code>.  Are the bins, bar heights, and other features the same?  Describe any discrepancies or similarities.  In <code class="docutils literal notranslate"><span class="pre">sns.histplot</span></code>, what is the overlaid line?</p></li>
+</ol>
+</li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./CourseFiles/Module_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Module_1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Module 1</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Worksheet_1_1_CoinFlipping_Solutions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SOLUTIONS to Worksheet 1.1: Coin Tossing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Eric Johnson<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1119 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>SOLUTIONS to Worksheet 1.1: Coin Tossing &#8212; What Do Your Data Say?</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Worksheet 1.2: The Spread in Distributions" href="Worksheet_1_2_SquareRootN.html" />
+    <link rel="prev" title="Worksheet 1.1: Coin Tossing" href="Worksheet_1_1_CoinFlipping.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/PCA_Animation_WDYDS.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">What Do Your Data Say?</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    What Do Your Data Say?
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Resources.html">
+   Course Resources
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../AboutUs.html">
+     About Us
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../CurriculumAlignmentTables.html">
+     Curriculum Alignment Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Rubric.html">
+     Rubric
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../Modules.html">
+   Modules
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="Module_1.html">
+     Module 1
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_1_CoinFlipping.html">
+       Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       SOLUTIONS to Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_2_SquareRootN.html">
+       Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_2_SquareRootN_Guide.html">
+       GUIDE to Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_3_EffectOfPriors.html">
+       Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_1_3_EffectOfPriors_Guide.html">
+       GUIDE to Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_2/Module_2.html">
+     Module 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_3/Module_3.html">
+     Module 3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_4/Module_4.html">
+     Module 4
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ejohnson643/WhatDoYourDataSay/main?urlpath=tree/CourseFiles/CourseFiles/Module_1/Worksheet_1_1_CoinFlipping_Solutions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay/issues/new?title=Issue%20on%20page%20%2FCourseFiles/Module_1/Worksheet_1_1_CoinFlipping_Solutions.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/CourseFiles/Module_1/Worksheet_1_1_CoinFlipping_Solutions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>SOLUTIONS to Worksheet 1.1: Coin Tossing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="solutions-to-worksheet-1-1-coin-tossing">
+<h1>SOLUTIONS to Worksheet 1.1: Coin Tossing<a class="headerlink" href="#solutions-to-worksheet-1-1-coin-tossing" title="Permalink to this headline">#</a></h1>
+<p>Solutions by Eric Johnson</p>
+<p>These are solutions to Worksheet 1.1 that I am also using as an example of how to type and format <strong>completed solutions</strong> to assignments.  The main deliverable for the assignments is a more terse report-style PDF, but the code used to generate that PDF must also be turned in.  This is an example of what such code could look like.</p>
+<p>In particular, this notebook will <strong>always indicate what problem</strong> we’re working on!  We may penalize assignments that have code that we cannot parse.  This is not meant to be overly prescriptive about things, but is a bare minimum requirement that we have discovered over teaching this course many times.  In this example, I am going to copy the questions over - I personally find this useful to remember what I’m doing - but you only need to give the problem number.</p>
+<p>Also! Please restart and re-run your entire notebook before submitting by going to the menu: Kernel &gt; Restart and Run All</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1">## Setting the seed so that the output is the same everytime.</span>
+<span class="c1">## Don&#39;t do this until you&#39;re done messing around and want to start </span>
+<span class="c1">## writing things up!</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 1.</strong> As introduced in the tutorial, the basic random number generator in Python is the <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> function.</p>
+<p><strong>Problem  1.a.</strong> Use the <code class="docutils literal notranslate"><span class="pre">help()</span></code> function to read about the various arguments and keyword arguments that <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> takes.  Describe how to use this funtion in your own words.</p>
+</div></blockquote>
+<p>It seems like <code class="docutils literal notranslate"><span class="pre">rand</span></code> gives uniform random numbers between 0 and 1 based on an input shape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function rand:
+
+rand(...) method of numpy.random.mtrand.RandomState instance
+    rand(d0, d1, ..., dn)
+    
+    Random values in a given shape.
+    
+    .. note::
+        This is a convenience function for users porting code from Matlab,
+        and wraps `random_sample`. That function takes a
+        tuple to specify the size of the output, which is consistent with
+        other NumPy functions like `numpy.zeros` and `numpy.ones`.
+    
+    Create an array of the given shape and populate it with
+    random samples from a uniform distribution
+    over ``[0, 1)``.
+    
+    Parameters
+    ----------
+    d0, d1, ..., dn : int, optional
+        The dimensions of the returned array, must be non-negative.
+        If no argument is given a single Python float is returned.
+    
+    Returns
+    -------
+    out : ndarray, shape ``(d0, d1, ..., dn)``
+        Random values.
+    
+    See Also
+    --------
+    random
+    
+    Examples
+    --------
+    &gt;&gt;&gt; np.random.rand(3,2)
+    array([[ 0.14022471,  0.96360618],  #random
+           [ 0.37601032,  0.25528411],  #random
+           [ 0.49313049,  0.94909878]]) #random
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 1.b.</strong>  Generate many random numbers (how many is “many”?) and print their maximum and minimum to the screen.  How many of your numbers are bigger than 0.5?  How many are bigger than 0.6?  0.95?</p>
+</div></blockquote>
+<p>I think “many” can be a big number, so let’s do a million.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">rands</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">bigger_than_5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rands</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">bigger_than_6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rands</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="n">bigger_than_95</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rands</span> <span class="o">&gt;</span> <span class="mf">0.95</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">bigger_than_5</span><span class="si">}</span><span class="s2"> random numbers bigger than 0.5&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">bigger_than_6</span><span class="si">}</span><span class="s2"> random numbers bigger than 0.6&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">bigger_than_95</span><span class="si">}</span><span class="s2"> random numbers bigger than 0.95&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 499202 random numbers bigger than 0.5
+There are 399945 random numbers bigger than 0.6
+There are 49940 random numbers bigger than 0.95
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 1.c.</strong> Based on your generated numbers, what is the likelihood of getting a number bigger than 0.75?</p>
+</div></blockquote>
+<p>The probability should just be the fraction that are bigger:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_075</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rands</span> <span class="o">&gt;</span> <span class="mf">0.75</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The probability of getting a number bigger than 0.75 is </span><span class="si">{</span><span class="n">prob_075</span><span class="si">:</span><span class="s2">%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The probability of getting a number bigger than 0.75 is 24.983800%
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 1.d.</strong> To what number would I want to compare my random numbers so that 60% of the time I get a <code class="docutils literal notranslate"><span class="pre">True</span></code> and the rest of the time I get a <code class="docutils literal notranslate"><span class="pre">False</span></code>?</p>
+</div></blockquote>
+<p>As we can see from the previous problem, we can use 0.6 as a threshold to compare our numbers to.  That is, if we ask <code class="docutils literal notranslate"><span class="pre">random_number</span> <span class="pre">&lt;</span> <span class="pre">0.6</span></code>, then 60% of the time we’ll get True and 40% False.</p>
+<blockquote>
+<div><p><strong>Problem 1.e.</strong> Explain in words how you can use <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> to simulate a coin where <span class="math notranslate nohighlight">\(P(\text{Heads}) = 0.6\)</span>.</p>
+</div></blockquote>
+<p>See previous answer except that now we interpret True as being a Heads and False as being Tails.</p>
+<blockquote>
+<div><p><strong>Problem 2.</strong>  As pointed out in the course notes, flipping one coin isn’t that exciting, but flipping many coins can be very exciting!</p>
+<p><strong>Problem 2.a.</strong>  Again using <span class="math notranslate nohighlight">\(p=P(\text{Heads}) = 0.6\)</span>, flip <span class="math notranslate nohighlight">\(N = 10\)</span> coins.</p>
+</div></blockquote>
+<p>We can use our plan from the previous problem: draw 10 random numbers, compare them to 0.6, and interpret heads as True and Tails as False.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_coins</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">flips</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N_coins</span><span class="p">)</span>
+<span class="n">heads</span> <span class="o">=</span> <span class="n">flips</span> <span class="o">&lt;</span> <span class="n">p</span>
+
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_coins</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">heads</span><span class="p">[</span><span class="n">ii</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">flips</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &lt;  0.6 so the coin toss yielded Heads!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">flips</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &gt;= 0.6 so the coin toss yielded Tails!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9537 &gt;= 0.6 so the coin toss yielded Tails!
+0.9805 &gt;= 0.6 so the coin toss yielded Tails!
+0.2880 &lt;  0.6 so the coin toss yielded Heads!
+0.0471 &lt;  0.6 so the coin toss yielded Heads!
+0.4702 &lt;  0.6 so the coin toss yielded Heads!
+0.0805 &lt;  0.6 so the coin toss yielded Heads!
+0.4765 &lt;  0.6 so the coin toss yielded Heads!
+0.2317 &lt;  0.6 so the coin toss yielded Heads!
+0.2091 &lt;  0.6 so the coin toss yielded Heads!
+0.0027 &lt;  0.6 so the coin toss yielded Heads!
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 2.b.</strong> Count the number of heads.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">heads</span><span class="p">)</span><span class="si">}</span><span class="s2"> heads!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There were 8 heads!
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 2.c.</strong> Write a <strong>function</strong> that returns the number of heads in <span class="math notranslate nohighlight">\(N\)</span> flips of a coin with <span class="math notranslate nohighlight">\(p = P(\text{Heads})\)</span>.  That is, <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(p\)</span> are <strong>inputs</strong> (arguments) to your function and <span class="math notranslate nohighlight">\(k=\)</span> the number of heads is the <strong>output</strong>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coin_flipper</span><span class="p">(</span><span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate &#39;N_coins&#39; tosses of a coin with &#39;p_heads&#39; probability of</span>
+<span class="sd">    heads to get the number of heads.</span>
+<span class="sd">    </span>
+<span class="sd">    This function draws &#39;N_coins&#39; uniform random numbers at once and then</span>
+<span class="sd">    uses logical comparison to see if they are less than &#39;p_heads&#39;.  We</span>
+<span class="sd">    can then add up all the Trues to get the number of Heads!</span>
+<span class="sd">    </span>
+<span class="sd">    Inputs:</span>
+<span class="sd">    =======</span>
+<span class="sd">    N_coins: (integer) Number of coins to flip</span>
+<span class="sd">    p_heads: (float) Probability of individual flip being Heads</span>
+<span class="sd">    </span>
+<span class="sd">    Outputs:</span>
+<span class="sd">    ========</span>
+<span class="sd">    N_heads: (integer) Number of flips that were heads.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1">## &quot;Flip&quot; N_coins coins.</span>
+    <span class="n">flips</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N_coins</span><span class="p">)</span>
+    
+    <span class="c1">## See if they were heads</span>
+    <span class="n">is_heads</span> <span class="o">=</span> <span class="n">flips</span> <span class="o">&lt;</span> <span class="n">p_heads</span>
+    
+    <span class="c1">## Count the number of heads</span>
+    <span class="n">N_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">is_heads</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">N_heads</span>
+
+<span class="c1">## Let&#39;s test our new function!</span>
+<span class="n">N_coins</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">245</span><span class="p">]</span>
+<span class="n">p_heads</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="c1">## Does it work??</span>
+    <span class="n">N_heads</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_coins</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">p_heads</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+    
+    <span class="c1">## Seems to!</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Out of </span><span class="si">{</span><span class="n">N_coins</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">}</span><span class="s2"> flips, </span><span class="si">{</span><span class="n">N_heads</span><span class="si">}</span><span class="s2"> were heads!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out of 10 flips, 6 were heads!
+Out of 100 flips, 15 were heads!
+Out of 245 flips, 98 were heads!
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 2.d.</strong> <strong>Bonus:</strong> Describe your function and write a <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">docstring</a>.  Consider the following questions: How did you choose to count the number of heads in your coin tosses?  What are other ways you could have done this?  Do you flip all your coins at once or one at a time?  Does your function check the inputs to make sure they’re the correct type or value?</p>
+</div></blockquote>
+<p>See the function above for an example!</p>
+<blockquote>
+<div><p><strong>Problem 3.</strong> Let <span class="math notranslate nohighlight">\(Y\)</span> be the random variable corresponding to the number of heads generated in an “experiment” of flipping <span class="math notranslate nohighlight">\(N=10\)</span> coins, where each coin has <span class="math notranslate nohighlight">\(P(\text{Heads}) = 0.6\)</span>.  Repeat this experiment <span class="math notranslate nohighlight">\(M=100\)</span> times, saving the outcome each time.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Set our parameters</span>
+<span class="n">N_exp</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">N_coins</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p_heads</span> <span class="o">=</span> <span class="mf">0.6</span>
+
+<span class="c1">## Initialize the output</span>
+<span class="n">obs_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N_exp</span><span class="p">)</span>
+
+<span class="c1">## Loop to do many experiments!</span>
+<span class="k">for</span> <span class="n">expNo</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_exp</span><span class="p">):</span>
+    <span class="n">obs_heads</span><span class="p">[</span><span class="n">expNo</span><span class="p">]</span> <span class="o">=</span> <span class="n">coin_flipper</span><span class="p">(</span><span class="n">N_coins</span><span class="p">,</span> <span class="n">p_heads</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 4.</strong> Let’s explore the data (!?) you just generated.</p>
+<p><strong>Problem 4.a.</strong> What are the maximal and minimal numbers of heads that you observed in your experiments?</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The fewest heads observed was </span><span class="si">{</span><span class="n">obs_heads</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The most heads observed was </span><span class="si">{</span><span class="n">obs_heads</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The fewest heads observed was 2.0
+The most heads observed was 10.0
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 4.b.</strong> How many unique values are there in your dataset (Hint: <code class="docutils literal notranslate"><span class="pre">np.unique</span></code>)?</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_outcomes</span><span class="p">)</span><span class="si">}</span><span class="s2"> unique outcomes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unique_outcomes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There were 9 unique outcomes:
+[ 2.  3.  4.  5.  6.  7.  8.  9. 10.]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 4.c.</strong> How many times do you observe 0 heads, 1 heads, 2 heads, etc.?  What would be an appropriate diagram with which to display this information?</p>
+</div></blockquote>
+<p>We should probably use a histogram, but for now we can just print off the results by looping through the possible outcomes (0 heads to 10 heads) and counting how many experiments yielded that result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_coins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">N_matching</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">N_matching</span><span class="si">}</span><span class="s2"> experiments with </span><span class="si">{</span><span class="n">outcome</span><span class="si">}</span><span class="s2"> Heads!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There were 0 experiments with 0 Heads!
+There were 0 experiments with 1 Heads!
+There were 1 experiments with 2 Heads!
+There were 4 experiments with 3 Heads!
+There were 10 experiments with 4 Heads!
+There were 19 experiments with 5 Heads!
+There were 26 experiments with 6 Heads!
+There were 21 experiments with 7 Heads!
+There were 16 experiments with 8 Heads!
+There were 1 experiments with 9 Heads!
+There were 2 experiments with 10 Heads!
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 4.d.</strong> Create a figure that shows your <strong>frequency distribution</strong>.  Label the axes and if necessary, provide a legend or annotate your figure.  Make sure the <span class="math notranslate nohighlight">\(y\)</span>-axis is scaled and labeled so that it is easy to read off how many times you observed each number of heads.</p>
+</div></blockquote>
+<p>We can repurpose the loop above to save the results.  We can then use a bar plot to plot the frequency distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_coins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">N_obs_outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="n">outcomes</span><span class="p">:</span>
+    <span class="n">N_matching</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span>
+    <span class="n">N_obs_outcomes</span><span class="p">[</span><span class="n">outcome</span><span class="p">]</span> <span class="o">=</span> <span class="n">N_matching</span>
+    
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">N_obs_outcomes</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Heads&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Times Observed&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>
+
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;UNAnnotated_CoinFlip_Histogram.png&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_1_CoinFlipping_Solutions_26_0.png" src="../../_images/Worksheet_1_1_CoinFlipping_Solutions_26_0.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 4.e.</strong> Describe your distribution qualitatively.  Estimate the mean, median, and mode by eye.</p>
+</div></blockquote>
+<p>The distribution seems to be unimodal centered between 5 and 7.  The mean and median are probably ~6, but the mode is 6.</p>
+<blockquote>
+<div><p><strong>Problem 5.</strong> It’s often useful to annotate your figures with relevant calculations or quantities.  Let’s do that here.</p>
+<p><strong>Problem 5.a.</strong> Using either <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> or the formula for expected value, calculate the mean, <span class="math notranslate nohighlight">\(\mu\)</span> of your observations.  Display this value on your figure using the <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> function and using a <code class="docutils literal notranslate"><span class="pre">legend</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.text</span></code>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_N_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean number of heads is </span><span class="si">{</span><span class="n">mean_N_heads</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean number of heads is 6.09
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 5.b.</strong> Using either <code class="docutils literal notranslate"><span class="pre">np.median</span></code> or some other method, calculate the median of your observations and display the value on your figure.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">median_N_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The median number of heads is </span><span class="si">{</span><span class="n">median_N_heads</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The median number of heads is 6.0
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 5.c.</strong> Calculate the mode of your observations and display the value on your figure.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mode_N_heads</span> <span class="o">=</span> <span class="n">outcomes</span><span class="p">[</span><span class="n">N_obs_outcomes</span> <span class="o">==</span> <span class="n">N_obs_outcomes</span><span class="o">.</span><span class="n">max</span><span class="p">()][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mode of the number of heads is </span><span class="si">{</span><span class="n">mode_N_heads</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mode of the number of heads is 6
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 5.d.</strong> Calculate the standard deviation, <span class="math notranslate nohighlight">\(\sigma\)</span> of your observations either by using the formula for variance or the <code class="docutils literal notranslate"><span class="pre">np.std</span></code> function.  Display <span class="math notranslate nohighlight">\(\mu\pm\sigma\)</span> using <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> and annotate the value of <span class="math notranslate nohighlight">\(\sigma\)</span> in a legend or using <code class="docutils literal notranslate"><span class="pre">plt.text</span></code>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">std_N_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The standard deviation of the number of heads is </span><span class="si">{</span><span class="n">std_N_heads</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The standard deviation of the number of heads is 1.5368474224853943
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 5.e. BONUS:</strong> Use the <code class="docutils literal notranslate"><span class="pre">axes.get_ylim</span></code> and <code class="docutils literal notranslate"><span class="pre">axes.set_ylim</span></code> functions to control the range of your <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> function and to preserve the <span class="math notranslate nohighlight">\(y\)</span>-axis range of your figure.</p>
+</div></blockquote>
+<p>Since I wrote this worksheet, I have learned about the <code class="docutils literal notranslate"><span class="pre">plt.axvline</span></code> function that does this for you automatically!  I’ll show how both can be used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">N_obs_outcomes</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+
+<span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">mean_N_heads</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="n">ylim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ymax</span><span class="o">=</span><span class="n">ylim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean = </span><span class="si">{</span><span class="n">mean_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median_N_heads</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Median = </span><span class="si">{</span><span class="n">median_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mode_N_heads</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mode = </span><span class="si">{</span><span class="n">mode_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_N_heads</span><span class="o">-</span><span class="n">std_N_heads</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Std Dev = </span><span class="si">{</span><span class="n">std_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_N_heads</span><span class="o">+</span><span class="n">std_N_heads</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Heads&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Times Observed&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;Annotated_CoinFlip_Histogram.png&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_1_CoinFlipping_Solutions_37_0.png" src="../../_images/Worksheet_1_1_CoinFlipping_Solutions_37_0.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 6.</strong>  As noted above, the quantity you should be working with is a <em>frequency distribution</em>, so how can we make it a <em>probability distribution</em>?</p>
+<p><strong>Problem 6.a.</strong> Make a list of the different outcomes and the number of times each outcome is observed.  You should try to do this “by hand”, but you can also look at <code class="docutils literal notranslate"><span class="pre">np.histogram</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code>.  Make sure that both sets of outputs are <em>integers</em>.</p>
+</div></blockquote>
+<p>We did this above, but we can compare to <code class="docutils literal notranslate"><span class="pre">np.histogram</span></code> as well.  Notice that this function does not know that the outcomes must be integers and tries to infer the bins from the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freqs</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">freqs</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">freqs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">}</span><span class="s2"> exps with k in [</span><span class="si">{</span><span class="n">bins</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bins</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There were 1 exps with k in [2, 2.8]
+There were 4 exps with k in [2.8, 3.6]
+There were 10 exps with k in [3.6, 4.4]
+There were 19 exps with k in [4.4, 5.2]
+There were 0 exps with k in [5.2, 6]
+There were 26 exps with k in [6, 6.8]
+There were 21 exps with k in [6.8, 7.6]
+There were 16 exps with k in [7.6, 8.4]
+There were 1 exps with k in [8.4, 9.2]
+There were 2 exps with k in [9.2, 10]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 6.b.</strong> What is the sum of the counts list?  (This is a good sanity check that you are doing things right.)</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">N_obs_outcomes</span><span class="p">)</span><span class="si">}</span><span class="s2"> experiments counted! (Should be </span><span class="si">{</span><span class="n">N_exp</span><span class="si">}</span><span class="s2">!)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There were 100 experiments counted! (Should be 100!)
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 6.c.</strong> Based on your data, what is the probability of getting 0 heads?  1 heads?  2 heads?  That is, if I randomly grabbed one of your outcomes out of a bag, how often would I get <span class="math notranslate nohighlight">\(k=4\)</span> heads?</p>
+</div></blockquote>
+<p>Similar to the previous problem, we can convert between <em>number</em> and <em>probability</em> by dividing by the number of experiments.  That is, out of 100 experiments, we saw none that had 0 heads, so the estimated probability of 0 heads is 0%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_coins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">p_matching</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_exp</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The probability of </span><span class="si">{</span><span class="n">outcome</span><span class="si">}</span><span class="s2"> Heads is </span><span class="si">{</span><span class="n">p_matching</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The probability of 0 Heads is 0!
+The probability of 1 Heads is 0!
+The probability of 2 Heads is 0.01!
+The probability of 3 Heads is 0.04!
+The probability of 4 Heads is 0.1!
+The probability of 5 Heads is 0.19!
+The probability of 6 Heads is 0.26!
+The probability of 7 Heads is 0.21!
+The probability of 8 Heads is 0.16!
+The probability of 9 Heads is 0.01!
+The probability of 10 Heads is 0.02!
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 6.d.</strong> Generate a list of the <em>probabilities</em> of each of your outcomes.  Use this list to show the <strong>PDF</strong> of your data.  Using your PDF, replicate your earlier annotated figure.  Confirm that the sum of your probabilities is 1.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_coins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">prob_outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="c1">## NOTE THIS!</span>
+<span class="k">for</span> <span class="n">outcome</span> <span class="ow">in</span> <span class="n">outcomes</span><span class="p">:</span>
+    <span class="n">p_matching</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">obs_heads</span> <span class="o">==</span> <span class="n">outcome</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_exp</span>
+    <span class="n">prob_outcomes</span><span class="p">[</span><span class="n">outcome</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_matching</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The total likelihood of the outcomes is </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">prob_outcomes</span><span class="p">)</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">prob_outcomes</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+
+<span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">mean_N_heads</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="n">ylim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ymax</span><span class="o">=</span><span class="n">ylim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean = </span><span class="si">{</span><span class="n">mean_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median_N_heads</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Median = </span><span class="si">{</span><span class="n">median_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mode_N_heads</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mode = </span><span class="si">{</span><span class="n">mode_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_N_heads</span><span class="o">-</span><span class="n">std_N_heads</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Std Dev = </span><span class="si">{</span><span class="n">std_N_heads</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_N_heads</span><span class="o">+</span><span class="n">std_N_heads</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Heads&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability of Observing&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;Annotated_CoinFlip_Histogram_Normed.png&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The total likelihood of the outcomes is 1
+</pre></div>
+</div>
+<img alt="../../_images/Worksheet_1_1_CoinFlipping_Solutions_45_1.png" src="../../_images/Worksheet_1_1_CoinFlipping_Solutions_45_1.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>Problem 6.e.</strong> Compare your figure to one generated by <code class="docutils literal notranslate"><span class="pre">sns.histplot</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code>.  Are the bins, bar heights, and other features the same?  Describe any discrepancies or similarities.  In <code class="docutils literal notranslate"><span class="pre">sns.distplot</span></code>, what is the overlaid line?</p>
+</div></blockquote>
+<p>If we provide bin edges, we can make the output of <code class="docutils literal notranslate"><span class="pre">histplot</span></code> match our bar plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">obs_heads</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_1_1_CoinFlipping_Solutions_47_0.png" src="../../_images/Worksheet_1_1_CoinFlipping_Solutions_47_0.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./CourseFiles/Module_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Worksheet_1_1_CoinFlipping.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Worksheet 1.1: Coin Tossing</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Worksheet_1_2_SquareRootN.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Worksheet 1.2: The Spread in Distributions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Eric Johnson<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
