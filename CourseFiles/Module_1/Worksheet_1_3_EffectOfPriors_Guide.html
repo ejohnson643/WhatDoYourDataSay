@@ -473,13 +473,14 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Bayes’ Theorem states
-$<span class="math notranslate nohighlight">\(
+<p>Bayes’ Theorem states</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c188cb2b-e08f-42a7-a903-93113be06925">
+<span class="eqno">(1)<a class="headerlink" href="#equation-c188cb2b-e08f-42a7-a903-93113be06925" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P(A | B) = \frac{P(B|A)P(A)}{P(B)}.
-\)</span><span class="math notranslate nohighlight">\(
-In terms of our problem, \)</span>B<span class="math notranslate nohighlight">\( is the likelihood of \)</span>k=46<span class="math notranslate nohighlight">\( heads and \)</span>A<span class="math notranslate nohighlight">\( is the specific value of \)</span>p_{H}$, so we can write:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e4372cc1-33cc-43ea-a06f-e17871ac1626">
-<span class="eqno">(1)<a class="headerlink" href="#equation-e4372cc1-33cc-43ea-a06f-e17871ac1626" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\end{equation}\]</div>
+<p>In terms of our problem, <span class="math notranslate nohighlight">\(B\)</span> is the likelihood of <span class="math notranslate nohighlight">\(k=46\)</span> heads and <span class="math notranslate nohighlight">\(A\)</span> is the specific value of <span class="math notranslate nohighlight">\(p_{H}\)</span>, so we can write:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-82be39f9-7ed3-4807-831f-3a67e3324461">
+<span class="eqno">(2)<a class="headerlink" href="#equation-82be39f9-7ed3-4807-831f-3a67e3324461" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P(p=p_H | k = 42) = \frac{P(k=42|p=p_H)P(p=p_H)}{P(k=42)}
 \end{equation}\]</div>
 <p>In our simulation, we know <span class="math notranslate nohighlight">\(k=42\)</span> and the number of coins that we flipped but we maybe don’t know <span class="math notranslate nohighlight">\(p_H\)</span> the likelihood of a single coin being heads.</p>
@@ -605,9 +606,10 @@ The sum of the bin heights is 1
 <p>For now, this isn’t much of a problem because the <span class="math notranslate nohighlight">\(y\)</span>-axis quantity is useful and meaningful as is, but in general it may be useful to normalize by dividing by the sum of the <span class="math notranslate nohighlight">\(y\)</span>-values, as shown in orange above.  (Notice the different <span class="math notranslate nohighlight">\(y\)</span>-axis scale!)</p>
 <hr class="docutils" />
 <p>Recall that Bayes’ Theorem can be written (we can get rid of the constant denominator):</p>
-<p>[
-P(p=p_H | N=5, k = 2) \propto P(k=2 | N=5, p=p_H)\times P(p=p_H).
-]</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6b7280ad-bea7-43e7-8921-78e014088703">
+<span class="eqno">(3)<a class="headerlink" href="#equation-6b7280ad-bea7-43e7-8921-78e014088703" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    P(p=p_H | N=5, k = 2) \propto P(k=2 | N=5, p=p_H)\times P(p=p_H).
+\end{equation}\]</div>
 <p>That is, now that we have a likelihood function and a prior, we have enough information to use Bayes’ Theorem to calculate our desired <em>posterior distribution</em>.  That is, the point of Bayes’ Theorem is to estimate parameters given data, and this is what is represented in the LHS of the Theorem.</p>
 <p>In Python, the method then requires that we simply multiply the prior and the likelihood and normalize the result!</p>
 <div class="cell docutils container">

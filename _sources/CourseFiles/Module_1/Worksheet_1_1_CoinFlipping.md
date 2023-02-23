@@ -33,8 +33,9 @@ So without any further ado, let’s get flipping!
         
     5. Explain in words how you can use `np.random.rand` to simulate a coin where $P(\text{Heads}) = 0.6$.
 
-	> **NOTE:**
-	> One trick that helps when you are trying to code new things, is to attempt to map out your problem **in words**.  This is known as writing **pseudo-code**, and is similar to outlining an essay.  In this problem, it might seem trivial, but as your scripts become longer and more complex, having a plan can be essential for staying on target.
+    ```{note}
+    One trick that helps when you are trying to code new things, is to attempt to map out your problem **in words**.  This is known as writing **pseudo-code**, and is similar to outlining an essay.  In this problem, it might seem trivial, but as your scripts become longer and more complex, having a plan can be essential for staying on target.
+    ```
 
 2. As pointed out in the course notes, flipping one coin isn't that exciting, but flipping many coins can be very interesting!
     1. Again using $p = P(\text{Heads}) = 0.6$, flip $N=10$ coins.
@@ -44,8 +45,9 @@ So without any further ado, let’s get flipping!
 
 3. Let $Y$ be the random variable corresponding to the number of heads generated in an "experiment" of flipping $N=10$ coins, where each coin has $P(\text{Heads}) = 0.6$.  Repeat this experiment $M=100$ times, saving the outcome each time.
     
-	> **NOTE:**
-	> If you are feeling lost, try writing down what you want to happen in words.  Pseudo-coding is especially useful when you are trying to work out *what information* you will need to be saving, and then *how* you want to save it.  For example, if you want to save the outputs in a list, then you will use slightly different functions than someone who wants to save the output in a `np.ndarray`.
+	```{note}
+    If you are feeling lost, try writing down what you want to happen in words.  Pseudo-coding is especially useful when you are trying to work out *what information* you will need to be saving, and then *how* you want to save it.  For example, if you want to save the outputs in a list, then you will use slightly different functions than someone who wants to save the output in a `np.ndarray`.
+    ```
     
 4. Let's explore the data (!?) you just generated.
     1. What are the maximal and minimal numbers of heads that you observed in your experiments?
@@ -54,8 +56,9 @@ So without any further ado, let’s get flipping!
     4. Create a figure that shows your **frequency distribution**.  Label the axes and if necessary, provide a legend or annotate your figure.  Make sure the $y$-axis is scaled and labeled so that it is easy to read off how many times you observed each number of heads.
     5. Describe your distribution qualitatively.  Estimate the mean, median, and mode by eye. 
 
-	> **NOTE:**
-	> As we will continue to emphasize, making effective visualizations of your data is incredibly important.  In particular, you should always have a goal in mind of what you want to convey, and your figure should make that as clear as possible.  Just as with writing code, it can be very useful to write down *ahead of time* what you want your figures to show.
+	```{note}
+    As we will continue to emphasize, making effective visualizations of your data is incredibly important.  In particular, you should always have a goal in mind of what you want to convey, and your figure should make that as clear as possible.  Just as with writing code, it can be very useful to write down *ahead of time* what you want your figures to show.
+    ```
 
     
 5. It's often useful to annotate your figures with relevant calculations or quantities.  Let's do that here.
@@ -69,12 +72,17 @@ So without any further ado, let’s get flipping!
         
     5. **Bonus:** Use the `axes.get_ylim` and `axes.set_ylim` functions to control the range of your `plt.vlines` function and to preserve the $y$-axis range of your figure.
 
-	> **NOTE:**
-	> If the previous problem didn't present any figure-design challenges, this problem should.  Figure-making can be fussy work, but after some practice you'll develop a set of templates that make things faster.  Specific things you could think about are axes sizes, legend or text placement, and font sizes.  Also, annotating *widths* is somewhat difficult; you should explore different ideas if you have time.
-	>
-	> You should also note that this figure now represents maybe your first foray into illustrating a computational analysis.  You can now *see* how the differences in your summary quantities relate to your data in slightly different ways.
-	>
-	> As a final note, you should notice that we suggested multiple ways for computing most of these quantities.  You should make sure that you can use any of these methods.  It might seem trivial for calculating a mean, but being able to replicate your results in different ways is an important part of being a computational worker.  When an result or method isn't clear, one of the first things we turn to is to see if we can get a similar conclusion.  You can start building that skill here.
+	```{note}
+    If the previous problem didn't present any figure-design challenges, this problem should.  Figure-making can be fussy work, but after some practice you'll develop a set of templates that make things faster.  Specific things you could think about are axes sizes, legend or text placement, and font sizes.  Also, annotating *widths* is somewhat difficult; you should explore different ideas if you have time.
+	
+    &nbsp;
+
+	If this figure represents your first foray into illustrating a computational analysis, note how you can now *see* how the differences in your summary quantities relate to your data in slightly different ways.
+
+    &nbsp;
+	
+	As a final note, you should notice that we suggested multiple ways for computing most of these quantities.  You should make sure that you can use any of these methods.  It might seem trivial for calculating a mean, but being able to replicate your results in different ways is an important part of being a computational worker.  When an result or method isn't clear, one of the first things we turn to is to see if we can get a similar conclusion via a different calculation.  You can start building that skill here.
+    ```
 
 6. As noted above, the quantity you should be working with is a *frequency distribution*, so how can we make it a **probability distribution**?
     1. Make a list of the different outcomes and the number of times each outcome is observed.  You should try to do this "by hand", but you can also look at `np.histogram` or `plt.hist`.  Make sure that both sets of outputs are *integers*.

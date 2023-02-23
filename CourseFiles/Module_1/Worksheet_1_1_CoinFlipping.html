@@ -434,10 +434,10 @@ title="Print to PDF"
 <li><p>To what number would I want to compare my random numbers so that 60% of the time I get a <code class="docutils literal notranslate"><span class="pre">True</span></code> and the rest of the time I get a <code class="docutils literal notranslate"><span class="pre">False</span></code>?</p></li>
 <li><p>Explain in words how you can use <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> to simulate a coin where <span class="math notranslate nohighlight">\(P(\text{Heads}) = 0.6\)</span>.</p></li>
 </ol>
-<blockquote>
-<div><p><strong>NOTE:</strong>
-One trick that helps when you are trying to code new things, is to attempt to map out your problem <strong>in words</strong>.  This is known as writing <strong>pseudo-code</strong>, and is similar to outlining an essay.  In this problem, it might seem trivial, but as your scripts become longer and more complex, having a plan can be essential for staying on target.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One trick that helps when you are trying to code new things, is to attempt to map out your problem <strong>in words</strong>.  This is known as writing <strong>pseudo-code</strong>, and is similar to outlining an essay.  In this problem, it might seem trivial, but as your scripts become longer and more complex, having a plan can be essential for staying on target.</p>
+</div>
 </li>
 <li><p>As pointed out in the course notes, flipping one coin isn’t that exciting, but flipping many coins can be very interesting!</p>
 <ol class="simple">
@@ -448,10 +448,10 @@ One trick that helps when you are trying to code new things, is to attempt to ma
 </ol>
 </li>
 <li><p>Let <span class="math notranslate nohighlight">\(Y\)</span> be the random variable corresponding to the number of heads generated in an “experiment” of flipping <span class="math notranslate nohighlight">\(N=10\)</span> coins, where each coin has <span class="math notranslate nohighlight">\(P(\text{Heads}) = 0.6\)</span>.  Repeat this experiment <span class="math notranslate nohighlight">\(M=100\)</span> times, saving the outcome each time.</p>
-<blockquote>
-<div><p><strong>NOTE:</strong>
-If you are feeling lost, try writing down what you want to happen in words.  Pseudo-coding is especially useful when you are trying to work out <em>what information</em> you will need to be saving, and then <em>how</em> you want to save it.  For example, if you want to save the outputs in a list, then you will use slightly different functions than someone who wants to save the output in a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are feeling lost, try writing down what you want to happen in words.  Pseudo-coding is especially useful when you are trying to work out <em>what information</em> you will need to be saving, and then <em>how</em> you want to save it.  For example, if you want to save the outputs in a list, then you will use slightly different functions than someone who wants to save the output in a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>.</p>
+</div>
 </li>
 <li><p>Let’s explore the data (!?) you just generated.</p>
 <ol class="simple">
@@ -461,10 +461,10 @@ If you are feeling lost, try writing down what you want to happen in words.  Pse
 <li><p>Create a figure that shows your <strong>frequency distribution</strong>.  Label the axes and if necessary, provide a legend or annotate your figure.  Make sure the <span class="math notranslate nohighlight">\(y\)</span>-axis is scaled and labeled so that it is easy to read off how many times you observed each number of heads.</p></li>
 <li><p>Describe your distribution qualitatively.  Estimate the mean, median, and mode by eye.</p></li>
 </ol>
-<blockquote>
-<div><p><strong>NOTE:</strong>
-As we will continue to emphasize, making effective visualizations of your data is incredibly important.  In particular, you should always have a goal in mind of what you want to convey, and your figure should make that as clear as possible.  Just as with writing code, it can be very useful to write down <em>ahead of time</em> what you want your figures to show.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As we will continue to emphasize, making effective visualizations of your data is incredibly important.  In particular, you should always have a goal in mind of what you want to convey, and your figure should make that as clear as possible.  Just as with writing code, it can be very useful to write down <em>ahead of time</em> what you want your figures to show.</p>
+</div>
 </li>
 <li><p>It’s often useful to annotate your figures with relevant calculations or quantities.  Let’s do that here.</p>
 <ol class="simple">
@@ -474,12 +474,14 @@ As we will continue to emphasize, making effective visualizations of your data i
 <li><p>Calculate the standard deviation, <span class="math notranslate nohighlight">\(\sigma\)</span> of your observations either by using the formula for variance or the <code class="docutils literal notranslate"><span class="pre">np.std</span></code> function.  Display <span class="math notranslate nohighlight">\(\mu\pm\sigma\)</span> using <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> and annotate the value of <span class="math notranslate nohighlight">\(\sigma\)</span> in a legend or using <code class="docutils literal notranslate"><span class="pre">plt.text</span></code>.</p></li>
 <li><p><strong>Bonus:</strong> Use the <code class="docutils literal notranslate"><span class="pre">axes.get_ylim</span></code> and <code class="docutils literal notranslate"><span class="pre">axes.set_ylim</span></code> functions to control the range of your <code class="docutils literal notranslate"><span class="pre">plt.vlines</span></code> function and to preserve the <span class="math notranslate nohighlight">\(y\)</span>-axis range of your figure.</p></li>
 </ol>
-<blockquote>
-<div><p><strong>NOTE:</strong>
-If the previous problem didn’t present any figure-design challenges, this problem should.  Figure-making can be fussy work, but after some practice you’ll develop a set of templates that make things faster.  Specific things you could think about are axes sizes, legend or text placement, and font sizes.  Also, annotating <em>widths</em> is somewhat difficult; you should explore different ideas if you have time.</p>
-<p>You should also note that this figure now represents maybe your first foray into illustrating a computational analysis.  You can now <em>see</em> how the differences in your summary quantities relate to your data in slightly different ways.</p>
-<p>As a final note, you should notice that we suggested multiple ways for computing most of these quantities.  You should make sure that you can use any of these methods.  It might seem trivial for calculating a mean, but being able to replicate your results in different ways is an important part of being a computational worker.  When an result or method isn’t clear, one of the first things we turn to is to see if we can get a similar conclusion.  You can start building that skill here.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the previous problem didn’t present any figure-design challenges, this problem should.  Figure-making can be fussy work, but after some practice you’ll develop a set of templates that make things faster.  Specific things you could think about are axes sizes, legend or text placement, and font sizes.  Also, annotating <em>widths</em> is somewhat difficult; you should explore different ideas if you have time.</p>
+<p> </p>
+<p>If this figure represents your first foray into illustrating a computational analysis, note how you can now <em>see</em> how the differences in your summary quantities relate to your data in slightly different ways.</p>
+<p> </p>
+<p>As a final note, you should notice that we suggested multiple ways for computing most of these quantities.  You should make sure that you can use any of these methods.  It might seem trivial for calculating a mean, but being able to replicate your results in different ways is an important part of being a computational worker.  When an result or method isn’t clear, one of the first things we turn to is to see if we can get a similar conclusion via a different calculation.  You can start building that skill here.</p>
+</div>
 </li>
 <li><p>As noted above, the quantity you should be working with is a <em>frequency distribution</em>, so how can we make it a <strong>probability distribution</strong>?</p>
 <ol class="simple">

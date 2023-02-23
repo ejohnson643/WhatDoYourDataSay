@@ -410,26 +410,16 @@ title="Print to PDF"
 <h1>Worksheet 1.2: The Spread in Distributions<a class="headerlink" href="#worksheet-1-2-the-spread-in-distributions" title="Permalink to this headline">#</a></h1>
 <p>As a reminder, the worksheets are designed to work in parallel to the course notes and lectures. They are not intended to be summary assessments at the end of a module, but as <strong>necessary content</strong> that you consume on your way to the assignments (and eventually attacking your own data!). As a result, if there are parts of the worksheet that you don’t understand or are having trouble with, make sure to <strong>ask for help!</strong></p>
 <p>In this worksheet, you will practice implementing the concepts enumerated in the first two main sections of the Module One course notes, <strong>up to the section on Bayes’ Theorem</strong>. You should complete this worksheet in your own Jupyter notebook and try to complete every question. Even if you think that you are proficient in Python coding, you should make sure that you can write working answers to all the parts of this problem - it will be useful code for later parts of the course, so your effort won’t be wasted!</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p><strong>Worksheet Goals:</strong></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>By the end of this worksheet, you should be able to:</p></td>
-</tr>
-<tr class="row-odd"><td><p>- <mark style="background-color: #6b9cee">MVS</mark> Visualize results as a function of different parameters</p></td>
-</tr>
-<tr class="row-even"><td><p>- <mark style="background-color: #e26563">PCS-2</mark> <mark style="background-color: #6b9cee">MVD</mark> Calculate and visualize empirical cumulative density functions</p></td>
-</tr>
-<tr class="row-odd"><td><p>- <mark style="background-color: #e26563">PCS-1</mark> Calculate percentiles</p></td>
-</tr>
-<tr class="row-even"><td><p>- <mark style="background-color: #e26563">PCS-2</mark> <mark style="background-color: #6b9cee">MVD</mark> Visualize the “shapes” of distributions in different ways</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-</tr>
-</tbody>
-</table>
+<div class="admonition-worksheet-goals admonition">
+<p class="admonition-title"><strong>Worksheet Goals:</strong></p>
+<p>By the end of this worksheet, you should be able to:</p>
+<ul class="simple">
+<li><p><mark style="background-color: #6b9cee">MVS</mark> Visualize results as a function of different parameters</p></li>
+<li><p><mark style="background-color: #e26563">PCS-2</mark> <mark style="background-color: #6b9cee">MVD</mark> Calculate and visualize empirical cumulative density functions</p></li>
+<li><p><mark style="background-color: #e26563">PCS-1</mark> Calculate percentiles</p></li>
+<li><p><mark style="background-color: #e26563">PCS-2</mark> <mark style="background-color: #6b9cee">MVD</mark> Visualize the “shapes” of distributions in different ways</p></li>
+</ul>
+</div>
 <p>At this point in the notes, we’ve talked about flipping coins, PDFs, CDFs, and the Central Limit Theorem, but what does this actually look like in practice? In particular, you may be feeling that the CLT is somewhat theoretical, even though we presented it in somewhat physical terms. In this worksheet we will use the coin flip again to help you make these theorems and mathematical definitions more concrete.</p>
 <p>In particular, we appeal to common sense and point out that obviously it’s possible to get 8 heads out of 10 coin flips, even from a fair coin. But how often should we expect to see a deviation of 3 heads from the mean value of 5? What if we flip 20 coins, is a deviation of 3 heads more or less likely? The CLT answers this exactly, but probably not intuitively – that is where this worksheet steps in.</p>
 <p>Additionally, one of the bigger ideas that we hope you take away from this course is that because computation is “cheap,” you can use your computer to quickly assess how different things depend on various parameters in your problem. In the case of coin flips, it might be obvious to you how the mean and variance are going to change as you increase the number of coin flips or the probability of heads,  but if it’s not, you can use your computer to help get an answer!</p>
@@ -437,18 +427,19 @@ title="Print to PDF"
 <hr class="docutils" />
 <ol>
 <li><p>Using your code from worksheet 1.1, simulate <span class="math notranslate nohighlight">\(N\)</span> tosses of <span class="math notranslate nohighlight">\(M\)</span> coins with <span class="math notranslate nohighlight">\(P(\text{Heads}) = p\)</span>, where <span class="math notranslate nohighlight">\(M = 50\)</span> and <span class="math notranslate nohighlight">\(p = 0.5\)</span>.  Keep track of the number of heads, <span class="math notranslate nohighlight">\(k\)</span>, of each experiment.  You may choose the number of experiments, <span class="math notranslate nohighlight">\(N\)</span>, but make it large enough to be useful without overwhelming your computer.</p>
-<blockquote>
-<div><p><strong>NOTE:</strong>
-This problem should teach you the value in avoiding <strong>hardcoding</strong>.  If in the previous worksheet you had written <code class="docutils literal notranslate"><span class="pre">rands</span> <span class="pre">=</span> <span class="pre">np.random.rand(100)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">rands</span> <span class="pre">=</span> <span class="pre">np.random.rand(M)</span></code> or <code class="docutils literal notranslate"><span class="pre">Heads</span> <span class="pre">=</span> <span class="pre">rands</span> <span class="pre">&lt;</span> <span class="pre">0.6</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Heads</span> <span class="pre">=</span> <span class="pre">rands</span> <span class="pre">&lt;</span> <span class="pre">p</span></code>, where <code class="docutils literal notranslate"><span class="pre">M</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> were  <em>variables</em> in your notebook, then it will be a pain to copy over your code!  Try and practice this going forward!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This problem should teach you the value in avoiding <strong>hardcoding</strong>.  If in the previous worksheet you had written <code class="docutils literal notranslate"><span class="pre">rands</span> <span class="pre">=</span> <span class="pre">np.random.rand(100)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">rands</span> <span class="pre">=</span> <span class="pre">np.random.rand(M)</span></code> or <code class="docutils literal notranslate"><span class="pre">Heads</span> <span class="pre">=</span> <span class="pre">rands</span> <span class="pre">&lt;</span> <span class="pre">0.6</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Heads</span> <span class="pre">=</span> <span class="pre">rands</span> <span class="pre">&lt;</span> <span class="pre">p</span></code>, where <code class="docutils literal notranslate"><span class="pre">M</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> were  <em>variables</em> in your notebook, then it will be a pain to copy over your code!  Try and practice this going forward!</p>
 <p> </p>
 <p>Also, welcome to the world of vague parameters.  In the real world, no one tells you how many simulations to do.  We will model this throughout the course and ask you to justify what reasonable parameters might be.</p>
-</div></blockquote>
+</div>
 </li>
 <li><p>Before writing any more code, write down a prediction for what the distribution of <span class="math notranslate nohighlight">\(k\)</span> will look like.  Be as precise or prophetic as you want, but at the minimum you should write down an expectation for what the “shape” of the distribution will be and where the peak will lie.</p></li>
 <li><p>Use your work from the previous worksheet to plot the distribution and calculate the mean and variance of <span class="math notranslate nohighlight">\(k\)</span>.  Examine how it did or did not conform to your expectation.</p>
-<blockquote>
-<div><p><strong>NOTE:</strong> These two problems might seem pedantic, but they are central to being a good scientist.  Even in small situations where you are plotting distributions of simulated coin tosses, having quantitative expectations is important!  This is not just philosophical, but also practical: if you don’t know what you’re expecting, you will never know if something has gone wrong (or right)!</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These two problems might seem pedantic, but they are central to being a good scientist.  Even in small situations where you are plotting distributions of simulated coin tosses, having quantitative expectations is important!  This is not just philosophical, but also practical: if you don’t know what you’re expecting, you will never know if something has gone wrong (or right)!</p>
+</div>
 </li>
 <li><p>As in the previous assignment, consider your PDF as a list of outcomes (what are the potential outcomes in this simulation?) and the probability of observing each of those outcomes.  Using the formulas for the first and second moments</p>
 <div class="math notranslate nohighlight">
@@ -457,10 +448,10 @@ This problem should teach you the value in avoiding <strong>hardcoding</strong>.
 <div class="math notranslate nohighlight">
 \[    Var[X] = \sum_{x \in X}(x-\mu)^2P(x),\]</div>
 <p>calculate the mean and variance of your PDF. That is, <strong>do not</strong> use any Python package to make these calculations.  (You should however check your work with the built-in functions!)</p>
-<blockquote>
-<div><p><strong>NOTE:</strong>
-It’s surprising how many coding errors we all make. These formulas aren’t complex, and yet, when I code them up I make errors. So this task has two goals. First, getting you to practice coding, practice debugging, etc. Second, to give you an opportunity to reflect on the formulas themselves. Why do these formulas correspond to the features on a distribution that you intuitively expect?  Why is the first a formula for an <em>average</em> and the second a formula for <em>spread</em>?</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s surprising how many coding errors we all make. These formulas aren’t complex, and yet, when I code them up I make errors. So this task has two goals. First, getting you to practice coding, practice debugging, etc. Second, to give you an opportunity to reflect on the formulas themselves. Why do these formulas correspond to the features on a distribution that you intuitively expect?  Why is the first a formula for an <em>average</em> and the second a formula for <em>spread</em>?</p>
+</div>
 </li>
 <li><p>Now that we have code that generates arbitrary simulated coin tosses and we know how to calculate <span class="math notranslate nohighlight">\(E[X]\)</span>, we want to explore how the expected value depends on <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <ol class="simple">
@@ -471,9 +462,10 @@ It’s surprising how many coding errors we all make. These formulas aren’t co
 <li><p>Plot <span class="math notranslate nohighlight">\(E[X]\)</span> as a function of <span class="math notranslate nohighlight">\(M\)</span> for an <em>interesting</em> set of <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
 <li><p>Replicate this process for an arbitrary (yet <em>interesting</em>) list of values of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
 </ol>
-<blockquote>
-<div><p><strong>NOTE:</strong> In this problem we have again asked you to slow down and be conscious about why this is an interesting thing to do.  In this case, the theory about this relationship is straightforward, but for <em>your data</em> or <em>your problem</em>, it probably won’t be.  Practicing stating your expectations ahead of time and planning your figures ahead of time and testing your code iteratively is only going to help when the problems are actually hard.  Actually, I cannot emphasize how useful it is to make sure that any loops you run work <strong>once</strong>, then <strong>twice</strong>, then a few times, and <strong>then over all iterations</strong>.  You will waste a lot of time if you write a loop and then set it to run a million times right away.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this problem we have again asked you to slow down and be conscious about why this is an interesting thing to do.  In this case, the theory about this relationship is straightforward, but for <em>your data</em> or <em>your problem</em>, it probably won’t be.  Practicing stating your expectations ahead of time and planning your figures ahead of time and testing your code iteratively is only going to help when the problems are actually hard.  Actually, I cannot emphasize how useful it is to make sure that any loops you run work <strong>once</strong>, then <strong>twice</strong>, then a few times, and <strong>then over all iterations</strong>.  You will waste a lot of time if you write a loop and then set it to run a million times right away.</p>
+</div>
 </li>
 <li><p>In a similar manner to the previous problem, generate a figure showing the relationship between <span class="math notranslate nohighlight">\(Var[X]\)</span> and <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.  Make sure to practice setting expectations, planning your figure, and planning your code.  Based on what you see, you may want to try different ranges and resolutions of values of <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
 <li><p>Using the code in the notes, generate and plot the empirical CDF for your simulations using <span class="math notranslate nohighlight">\(M=50\)</span> and <span class="math notranslate nohighlight">\(p=0.5\)</span>.  What list/array in the example code makes up the <span class="math notranslate nohighlight">\(x\)</span>-coordinates and which is the <span class="math notranslate nohighlight">\(y\)</span>-coordinate?  (You should examine the type, size, and values of each of the objects created in the sample code, if you have questions, please ask!)</p>
@@ -484,9 +476,10 @@ It’s surprising how many coding errors we all make. These formulas aren’t co
 <li><p>Using these indices (I hope you saved them!), find the values of <span class="math notranslate nohighlight">\(k\)</span> that correspond to <code class="docutils literal notranslate"><span class="pre">CDF</span> <span class="pre">&gt;</span> <span class="pre">0.1</span></code>.  What is the smallest of these values?  How does it compare to <code class="docutils literal notranslate"><span class="pre">np.percentile(data,</span> <span class="pre">10)</span></code>?</p></li>
 <li><p>Use this process to find each of the requested percentiles.  Show these percentiles as vertical lines on your figure and annotate them.</p></li>
 </ol>
-<blockquote>
-<div><p><strong>NOTE:</strong> This is probably the first empirical CDF that you have plotted, and you should feel ok that it seemed more complicated than plotting PDFs and frequency distributions – it definitely requires a bit more coding.  However, we cannot understate how useful eCDFs are.  As we have discussed in the notes and you might have noticed in your own plotting, PDFs can be extremely sensitive to <strong>binning</strong>, and as a result, using empirical PDFs to perform calculations is incredibly suspect.  Instead, we will continue to emphasize that eCDFs are <strong>exact</strong>; they don’t average over any of your data and use all of your observations to make calculations.  In this way, you should not look at CDFs as simply a different way of looking at your data, but as a <em>more reliable method for making calculations</em>.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is probably the first empirical CDF that you have plotted, and you should feel ok that it seemed more complicated than plotting PDFs and frequency distributions – it definitely requires a bit more coding.  However, we cannot understate how useful eCDFs are.  As we have discussed in the notes and you might have noticed in your own plotting, PDFs can be extremely sensitive to <strong>binning</strong>, and as a result, using empirical PDFs to perform calculations is incredibly suspect.  Instead, we will continue to emphasize that eCDFs are <strong>exact</strong>; they don’t average over any of your data and use all of your observations to make calculations.  In this way, you should not look at CDFs as simply a different way of looking at your data, but as a <em>more reliable method for making calculations</em>.</p>
+</div>
 </li>
 <li><p>Make a figure showing how the median and inter-quartile range (IQR) depend on <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
 <li><p>Make a figure showing how the ratio of the standard deviation (square root of the variance) to the mean depends on <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
@@ -496,10 +489,10 @@ It’s surprising how many coding errors we all make. These formulas aren’t co
 <p>depends on <span class="math notranslate nohighlight">\(M\)</span>.</p>
 </li>
 <li><p>Describe the shape of the previous two curves.  How does it seem that the number of coin tosses impacts the relationship of the standard deviation to the mean?  How does this relate to the CLT?  In particular, do you see that <span class="math notranslate nohighlight">\(\sigma/\mu\sim M^{-1/2}\)</span>?</p>
-<blockquote>
-<div><p><strong>NOTE:</strong> The <span class="math notranslate nohighlight">\(\sim\)</span> symbol is a shorthand notation for conveying the dependence of some quantity on a particular parameter. It certainly isn’t the case that <span class="math notranslate nohighlight">\(\sigma/\mu = N^{-1/2}\)</span>, since there are prefactors and constants that sit in front of the <span class="math notranslate nohighlight">\(N^{-1/2}\)</span> that you would need to identify to produce an equality. A very useful way to demonstrate such dependencies quantitatively is to make a log-log plot. What that means is that you take the logarithm of the x and y axes, this can be done in Python using the <code class="docutils literal notranslate"><span class="pre">plt.xscale</span></code> and <code class="docutils literal notranslate"><span class="pre">plt.yscale</span></code> functions. Why should we do this? Consider a scenario where you have data <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> such that <span class="math notranslate nohighlight">\(X=\alpha Y^{\beta}\)</span>. How could we figure out what the values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are for your data? If you take the logarithm of the left and right hand sides of the relation above you would get <span class="math notranslate nohighlight">\(logX=log\alpha + \beta logY\)</span>, where we have used the properties of the logarithm to rearrange the equation. But what you see now is that if we were to plot logX vs logY the resulting plot should be a \textbf{line} with a y-intercept and a slope. The y-intercept will give you the value of <span class="math notranslate nohighlight">\(log\alpha\)</span> and the slope will be <span class="math notranslate nohighlight">\(\beta\)</span>. Hence if you really wish to show that <span class="math notranslate nohighlight">\(\sigma/\mu \sim N^{-1/2}\)</span> then you should really plot log of <span class="math notranslate nohighlight">\(\sigma/\mu\)</span> vs log<span class="math notranslate nohighlight">\(N\)</span> and assess the slope of the resulting straight line.<br />
-\end{tcolorbox}</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span class="math notranslate nohighlight">\(\sim\)</span> symbol is a shorthand notation for conveying the dependence of some quantity on a particular parameter. It certainly isn’t the case that <span class="math notranslate nohighlight">\(\sigma/\mu = N^{-1/2}\)</span>, since there are prefactors and constants that sit in front of the <span class="math notranslate nohighlight">\(N^{-1/2}\)</span> that you would need to identify to produce an equality. A very useful way to demonstrate such dependencies quantitatively is to make a log-log plot. What that means is that you take the logarithm of the x and y axes, this can be done in Python using the <code class="docutils literal notranslate"><span class="pre">plt.xscale</span></code> and <code class="docutils literal notranslate"><span class="pre">plt.yscale</span></code> functions. Why should we do this? Consider a scenario where you have data <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> such that <span class="math notranslate nohighlight">\(X=\alpha Y^{\beta}\)</span>. How could we figure out what the values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are for your data? If you take the logarithm of the left and right hand sides of the relation above you would get <span class="math notranslate nohighlight">\(logX=log\alpha + \beta logY\)</span>, where we have used the properties of the logarithm to rearrange the equation. But what you see now is that if we were to plot logX vs logY the resulting plot should be a \textbf{line} with a y-intercept and a slope. The y-intercept will give you the value of <span class="math notranslate nohighlight">\(log\alpha\)</span> and the slope will be <span class="math notranslate nohighlight">\(\beta\)</span>. Hence if you really wish to show that <span class="math notranslate nohighlight">\(\sigma/\mu \sim N^{-1/2}\)</span> then you should really plot log of <span class="math notranslate nohighlight">\(\sigma/\mu\)</span> vs log<span class="math notranslate nohighlight">\(N\)</span> and assess the slope of the resulting straight line.</p>
+</div>
 </li>
 <li><p><strong>BONUS</strong>: In the vein of the previous note, change the axes of your plot to be log-scaled and add a line that has <span class="math notranslate nohighlight">\(\beta = -1/2\)</span> for comparison to your data.  What do you observe?</p></li>
 <li><p><strong>BONUS</strong>: Divide the previous two curves by <span class="math notranslate nohighlight">\(\sqrt{M}\)</span>.  What do you observe?</p></li>
