@@ -6,8 +6,12 @@ chapters:
   - file: CourseFiles/AboutUs
   - file: CourseFiles/CurriculumAlignmentTables
   - file: CourseFiles/Rubric
+  - file: CourseFiles/HowTo_AssignmentAttempt
+  - file: CourseFiles/HowTo_AssignmentCompletion
+  - file: CourseFiles/HowTo_SelfAssessment
 - file: CourseFiles/Modules
   sections:
+  - file: CourseFiles/Module_0/Module_0
   - file: CourseFiles/Module_1/Module_1
     sections:
       - file: CourseFiles/Module_1/Worksheet_1_1_CoinFlipping

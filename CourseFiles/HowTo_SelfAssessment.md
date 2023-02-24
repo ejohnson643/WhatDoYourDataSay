@@ -1,0 +1,17 @@
+# How-To: Self-Assessment
+
+As mentioned in the [syllabus](../intro), a significant portion of the assessment in this course will be provided by you via self-assessments.  You may never have encountered such an assessment in your academic career, so we want to provide some guidance on how to approach them.  We also know that they are free points: click a few buttons and they should be done, but we want to briefly argue why you should take them seriously.
+
+## Why Self-Assess?
+
+Firstly, the self-assessments are for you to think critically about your performance in the course, but also for *us as instructors* to get a handle on how the course is going for you.  This is especially hard for us to do remotely, so we hope that these self-assessments will provide guidance on changes we have to make over the course of the quarter.  If you think you're doing well but we see that you can't complete worksheets or you think you're doing something wrong but you're doing great, that helps us target office hours, discussion posts, worksheets, assignment guides, etc.  We really don't want you to get lost in the aether, self-assessments help us check in with you.
+
+Secondly, and more importantly, self-assessing is a real, important skill for your academic or post-academic career.  At some point, formal assessment ends: there are no more quizzes, homework, or grades, and you have to just do stuff and turn it in to your boss.  The difference then between hoping it works and knowing it works is as much about your ability to self-assess as it is your specific capabilities.  And we just noted that this works in both directions: we're as interested in boosting self-doubters as we are checking the overly-confident.  In short, taking the time to process "where did I do well?" and "where can I improve?" is practicing an actual useful skill.
+
+## Class Rubric
+
+As mentioned in the syllabus, the learning objectives of this course are scaffolded more precisely in the [course rubric](Rubric) This rubric describes differing levels of success for students so that you can place your own performance and understand better where you're succeeding or need help.  You will be asked to directly consider the rubric when you complete the assignment self-assessment. 
+
+## Curriculum Alignment Tables
+
+To assist with this process more specifically within each module, we have created [curriculum alignment tables](CurriculumAlignmentTables) for each module.  These tables specify the more specific learning goals that you will be working on in each module, and then which pieces of course content are designed to help you work on those goals.  For example, in the Module 1 table, you can see that the first worksheet is really designed to help you work on the <mark style="background-color: #e26563">Performing Computations and Simulations (PCS)</mark> skills and the <mark style="background-color: #6b9cee">Manipulating & Visualizing Data (MVD)</mark> skills.  However, the second worksheet more broadly addresses all 4 types of learning objectives, so you might want to spend more time on that worksheet to get more holistic practice.  We hope that these tables are useful for you to allocate your time better as well as to indicate the intuition behind each of the pieces of content.
