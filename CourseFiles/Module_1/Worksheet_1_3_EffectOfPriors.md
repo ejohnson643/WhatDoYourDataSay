@@ -6,9 +6,9 @@ In this worksheet, you will practice implementing the concepts enumerated in the
 
 ```{admonition} Worksheet Goals
 By the end of this worksheet, you should be able to:
- - Implement Bayes' Theorem in Python to generate a posterior distribution for the probability of a coin flip being heads, $p$.
- - Normalize curves to convert them to PDFs
- - Approximate the area under a curve.
+ - <mark style="background-color: #6b9cee">MVS</mark> <mark style="background-color: #e26563">PCS</mark> <mark style="background-color: #ffda5c">TS</mark> Implement Bayes' Theorem in Python to generate a posterior distribution for the probability of a coin flip being heads, $p$.
+ - <mark style="background-color: #6b9cee">MVS</mark> <mark style="background-color: #e26563">PCS</mark> Normalize curves to convert them to PDFs
+ - <mark style="background-color: #e26563">PCS</mark> Approximate the area under a curve.
 ```
 
 1. Using your code from worksheet 1.1, simulate $N=100$ tosses of a coin with $p=P(\text{HEADS})=0.4$.  That is, record whether each of the $N=100$ tosses was a heads or a tails.

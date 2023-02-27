@@ -1,0 +1,9 @@
+# Assignment 1
+
+Before we can really talk about building and assessing statistical models with data, you will need to be familiar with some basics of probability theory, coding, and simulation.  This module will provide these basics as well as motivate why our framework for confronting data from a statistical viewpoint is justified.  You will quickly see that while some of these basics resemble what you might learn in an introductory statistics textbook, our emphasis will reside much more on the practical and intuitive aspects of probability rather than on developing a series of rules and tests.  In particular, we believe that a modern quantitative thinker knows not just the \textbf{theory} of what a probability density function is (for example), but also how to \textbf{generate} one from data or simulations, how to \textbf{visualize} one, and how to \textbf{manipulate} one to make different calculations.
+
+These notes have three sections: the first section will simply link to the Python tutorial that should be completed before/during the reading of this text.  The next two sections will then introduce basic probability concepts, such as probability and frequency distributions, and Bayes Theorem, respectively.  Each section will emphasize \textbf{theory, calculation, visualization}, and \textbf{simulation} somewhat evenly.  At the end of the chapter will be a reference section summarizing the main takeaways as well as providing some details on technical aspects that are not discussed in the main part of the chapter.\\
+
+\begin{mybox}{Big Idea}
+    Data is \textit{distributional} because of inherent randomness in the physical world.  We can visualize data distributions in our computers and use both theory and simulation to compute interesting quantities using these distributions.
+\end{mybox}
