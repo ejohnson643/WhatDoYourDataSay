@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Module 2" href="../Module_2/Module_2.html" />
+    <link rel="next" title="Assignment 1" href="Assignment_1.html" />
     <link rel="prev" title="Worksheet 1.3: Bayes’ Theorem and the Effect of Priors" href="Worksheet_1_3_EffectOfPriors.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -141,6 +141,21 @@ const thebe_selector_output = ".output, .cell_output"
      Rubric
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_AssignmentAttempt.html">
+     How-To: Make an Assignment Attempt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_AssignmentCompletion.html">
+     How-To: Complete Assignments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_SelfAssessment.html">
+     How-To: Self-Assessment
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -153,9 +168,14 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_0/Module_0.html">
+     Module 0: Python Tutorial
+    </a>
+   </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="Module_1.html">
-     Module 1
+     Module 1: The Basics
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
     <label for="toctree-checkbox-3">
@@ -163,6 +183,11 @@ const thebe_selector_output = ".output, .cell_output"
      </i>
     </label>
     <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="Module1_CourseNotes.html">
+       Module 1 Course Notes
+      </a>
+     </li>
      <li class="toctree-l3">
       <a class="reference internal" href="Worksheet_1_1_CoinFlipping.html">
        Worksheet 1.1: Coin Tossing
@@ -191,6 +216,11 @@ const thebe_selector_output = ".output, .cell_output"
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
        GUIDE to Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Assignment_1.html">
+       Assignment 1
       </a>
      </li>
     </ul>
@@ -475,12 +505,12 @@ title="Print to PDF"
 </div>
 <p>Bayes’ Theorem states</p>
 <div class="amsmath math notranslate nohighlight" id="equation-c188cb2b-e08f-42a7-a903-93113be06925">
-<span class="eqno">(1)<a class="headerlink" href="#equation-c188cb2b-e08f-42a7-a903-93113be06925" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(10)<a class="headerlink" href="#equation-c188cb2b-e08f-42a7-a903-93113be06925" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P(A | B) = \frac{P(B|A)P(A)}{P(B)}.
 \end{equation}\]</div>
 <p>In terms of our problem, <span class="math notranslate nohighlight">\(B\)</span> is the likelihood of <span class="math notranslate nohighlight">\(k=46\)</span> heads and <span class="math notranslate nohighlight">\(A\)</span> is the specific value of <span class="math notranslate nohighlight">\(p_{H}\)</span>, so we can write:</p>
 <div class="amsmath math notranslate nohighlight" id="equation-82be39f9-7ed3-4807-831f-3a67e3324461">
-<span class="eqno">(2)<a class="headerlink" href="#equation-82be39f9-7ed3-4807-831f-3a67e3324461" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(11)<a class="headerlink" href="#equation-82be39f9-7ed3-4807-831f-3a67e3324461" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P(p=p_H | k = 42) = \frac{P(k=42|p=p_H)P(p=p_H)}{P(k=42)}
 \end{equation}\]</div>
 <p>In our simulation, we know <span class="math notranslate nohighlight">\(k=42\)</span> and the number of coins that we flipped but we maybe don’t know <span class="math notranslate nohighlight">\(p_H\)</span> the likelihood of a single coin being heads.</p>
@@ -607,7 +637,7 @@ The sum of the bin heights is 1
 <hr class="docutils" />
 <p>Recall that Bayes’ Theorem can be written (we can get rid of the constant denominator):</p>
 <div class="amsmath math notranslate nohighlight" id="equation-6b7280ad-bea7-43e7-8921-78e014088703">
-<span class="eqno">(3)<a class="headerlink" href="#equation-6b7280ad-bea7-43e7-8921-78e014088703" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(12)<a class="headerlink" href="#equation-6b7280ad-bea7-43e7-8921-78e014088703" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P(p=p_H | N=5, k = 2) \propto P(k=2 | N=5, p=p_H)\times P(p=p_H).
 \end{equation}\]</div>
 <p>That is, now that we have a likelihood function and a prior, we have enough information to use Bayes’ Theorem to calculate our desired <em>posterior distribution</em>.  That is, the point of Bayes’ Theorem is to estimate parameters given data, and this is what is represented in the LHS of the Theorem.</p>
@@ -710,10 +740,10 @@ The probability that the coin is within 5% of 0.5 is 18.63%
             <p class="prev-next-title">Worksheet 1.3: Bayes’ Theorem and the Effect of Priors</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Module_2/Module_2.html" title="next page">
+    <a class='right-next' id="next-link" href="Assignment_1.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Module 2</p>
+        <p class="prev-next-title">Assignment 1</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

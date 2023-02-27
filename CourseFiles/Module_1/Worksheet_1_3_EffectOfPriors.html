@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="GUIDE to Worksheet 1.3: Bayes’ Theorem and the Effect of Priors" href="Worksheet_1_3_EffectOfPriors_Guide.html" />
@@ -139,6 +141,21 @@ const thebe_selector_output = ".output, .cell_output"
      Rubric
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_AssignmentAttempt.html">
+     How-To: Make an Assignment Attempt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_AssignmentCompletion.html">
+     How-To: Complete Assignments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_SelfAssessment.html">
+     How-To: Self-Assessment
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -151,9 +168,14 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_0/Module_0.html">
+     Module 0: Python Tutorial
+    </a>
+   </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="Module_1.html">
-     Module 1
+     Module 1: The Basics
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
     <label for="toctree-checkbox-3">
@@ -161,6 +183,11 @@ const thebe_selector_output = ".output, .cell_output"
      </i>
     </label>
     <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="Module1_CourseNotes.html">
+       Module 1 Course Notes
+      </a>
+     </li>
      <li class="toctree-l3">
       <a class="reference internal" href="Worksheet_1_1_CoinFlipping.html">
        Worksheet 1.1: Coin Tossing
@@ -406,6 +433,68 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="worksheet-1-3-bayes-theorem-and-the-effect-of-priors">
 <h1>Worksheet 1.3: Bayes’ Theorem and the Effect of Priors<a class="headerlink" href="#worksheet-1-3-bayes-theorem-and-the-effect-of-priors" title="Permalink to this headline">#</a></h1>
+<p>As a reminder, the worksheets are designed to work in parallel to the course notes and lectures.  They are not intended to be summary assessments at the end of a module, but as <strong>necessary content</strong> that you consume on your way to the assignments (and eventually attacking your own data!).  As a result, if there are parts of the worksheet that you don’t understand or are having trouble with, make sure to <strong>ask for help!</strong></p>
+<p>In this worksheet, you will practice implementing the concepts enumerated in the Module One course notes, particularly <strong>the section on Bayes’ Theorem</strong>.  You should complete this worksheet in your own Jupyter notebook and try to complete <strong>every question</strong>.  Even if you think that you are proficient in Python coding, you should make sure that you can write working answers to all the parts of this problem - it will be useful code for later parts of the course, so your effort won’t be wasted!</p>
+<div class="admonition-worksheet-goals admonition">
+<p class="admonition-title">Worksheet Goals</p>
+<p>By the end of this worksheet, you should be able to:</p>
+<ul class="simple">
+<li><p><mark style="background-color: #6b9cee">MVS</mark> <mark style="background-color: #e26563">PCS</mark> <mark style="background-color: #ffda5c">TS</mark> Implement Bayes’ Theorem in Python to generate a posterior distribution for the probability of a coin flip being heads, <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p><mark style="background-color: #6b9cee">MVS</mark> <mark style="background-color: #e26563">PCS</mark> Normalize curves to convert them to PDFs</p></li>
+<li><p><mark style="background-color: #e26563">PCS</mark> Approximate the area under a curve.</p></li>
+</ul>
+</div>
+<ol>
+<li><p>Using your code from worksheet 1.1, simulate <span class="math notranslate nohighlight">\(N=100\)</span> tosses of a coin with <span class="math notranslate nohighlight">\(p=P(\text{HEADS})=0.4\)</span>.  That is, record whether each of the <span class="math notranslate nohighlight">\(N=100\)</span> tosses was a heads or a tails.</p></li>
+<li><p>Let’s pretend that you didn’t know that <span class="math notranslate nohighlight">\(p=0.4\)</span>, and you wanted to use Bayes’ Theorem to examine the likelihood that the coin’s heads probability was any given value as you flip the coin.  (This is the process illustrated in Section 3.1 of the notes.)</p>
+<ol>
+<li><p>Write down Bayes’ Theorem in terms of the variables in this problem.  Specifically, what are the posterior, the likelihood, and the prior dependent on?</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Just because we’re coding doesn’t mean that pen and paper aren’t useful!  Writing down formulas and equations in terms of quantities and variables that mean something to you can be very helpful for keeping your head on straight.</p>
+</div>
+</li>
+<li><p>Consider the following statements:</p>
+<ol class="simple">
+<li><p>The likelihood that the first two coin tosses were heads given <span class="math notranslate nohighlight">\(p=0.3\)</span> is 0.09.</p></li>
+<li><p>Before flipping any coins, the likelihood that <span class="math notranslate nohighlight">\(p=0.3\)</span> is the same as the likelihood that <span class="math notranslate nohighlight">\(p=0.5\)</span>.</p></li>
+<li><p>The likelihood that <span class="math notranslate nohighlight">\(p=0.3\)</span> given that the first two coin tosses were heads is 0.0014.</p></li>
+</ol>
+<p>Each of these quantities is an example of statements that can be made with each of the three components of Bayes’ Theorem (posterior, likelihood, prior).  <strong>Match</strong> each statement to the component of Bayes’ Theorem that was used to generate it.</p>
+</li>
+<li><p>If you are given a list of heads and tails from a coin tossing experiment.  Which quantities are <em>known</em> and which are *\textit{<em>unknown</em>: <span class="math notranslate nohighlight">\(k\)</span>, the number of heads, <span class="math notranslate nohighlight">\(N\)</span>, the number of flips, or <span class="math notranslate nohighlight">\(p\)</span> the likelihood of heads?  Are there other quantities in this problem that we aren’t considering?  Why does the statement of Bayes’ Theorem at the beginning of Section 3.1 of the notes allow us to measure the <em>unknown</em> quantity?</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Taking stock of what you do an don’t know is often helpful when building code, and in solving problems in general!  Also, formulas that involve quantities that you don’t know are usually the ones you need to focus on.  We’re not using Bayes’ Theorem just to use it; we’re using it because it allows us to extract what we want out of our simulations.</p>
+</div>
+</li>
+</ol>
+<p>At this point you may be feeling that you have a handle on what the different parts of Bayes’ Theorem are telling you (or you may be completely lost, that’s ok!), but you have no idea how to implement it in your computer.  The rest of this worksheet is dedicated to helping you figure out how this works.</p>
+</li>
+<li><p>Recall that in Python, we don’t manipulate variables symbolically, we always have actual <em>numbers</em> behind any variable.  This is why plotting involves assembling literally a list of <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates.  In this way, if we wanted to plot a distribution that represented a <strong>uniform prior distribution</strong> for <span class="math notranslate nohighlight">\(p=P(\text{HEADS})\)</span>, what would be our <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates?</p>
+<ol class="simple">
+<li><p>Make a grid of values of <span class="math notranslate nohighlight">\(p\)</span>.  What is the maximum allowed value and what is the minimum?  How can you control the resolution of this grid?  What is an appropriate function in Python for this task?</p></li>
+<li><p>If you were to use this grid to plot a distribution, would this grid be the <span class="math notranslate nohighlight">\(x\)</span>- or <span class="math notranslate nohighlight">\(y\)</span>-coordinates?</p></li>
+<li><p>What do the <span class="math notranslate nohighlight">\(y\)</span>-coordinates of a plotted probability distribution represent?  If my distribution is <strong>uniform</strong>, do the <span class="math notranslate nohighlight">\(y\)</span>-coordinates differ?</p></li>
+<li><p>Plot your <span class="math notranslate nohighlight">\(y\)</span>-coordinates vs. your <span class="math notranslate nohighlight">\(x\)</span>-coordinates.  Does your plot resemble a uniform distribution of <span class="math notranslate nohighlight">\(p\)</span>?</p></li>
+<li><p>Add up the area under your curve.  If you have used uniform grid-spacing, then this area will be the sum of the <span class="math notranslate nohighlight">\(y\)</span>-coordinates multiplied by your grid spacing, <span class="math notranslate nohighlight">\(\Delta x\)</span>.  If you have not used uniform spacing, you can approximate the area by summing <span class="math notranslate nohighlight">\(y_i\times \Delta x_i\)</span> for each point <span class="math notranslate nohighlight">\(i\)</span> in your plot.</p></li>
+<li><p>Divide your <span class="math notranslate nohighlight">\(y\)</span>-coordinates by an appropriate factor so that the area under your line is 1.  Justify why this makes the line represent a probability density function for <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Which part of Bayes’ Theorem does this curve represent?</p></li>
+</ol>
+</li>
+<li><p>Consider the first 5 simulated flips of your coin, so that <span class="math notranslate nohighlight">\(N=5\)</span>.</p>
+<ol class="simple">
+<li><p>What is <span class="math notranslate nohighlight">\(k\)</span>, the number of heads?</p></li>
+<li><p>For each value of <span class="math notranslate nohighlight">\(p\)</span> in your grid from the previous problem, what is the likelihood of observing <span class="math notranslate nohighlight">\(k\)</span> heads in <span class="math notranslate nohighlight">\(N=5\)</span> flips?  Save these likelihoods in an list or array.</p></li>
+<li><p>Plot these likelihoods versus the grid of values of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>What part of Bayes’ Theorem does this curve represent?  (Hint: it’s on the right-hand side of the formula.)</p></li>
+</ol>
+</li>
+<li><p>So now we have two likelihood arrays “on” the same grid of values of <span class="math notranslate nohighlight">\(p\)</span>.  If you deduced that these arrays represent the likelihood and prior distributions, you are correct!  Bayes’ Theorem thus tells us that to get the posterior distribution, we should multiply the likelihood and prior functions; do that now.  Normalize the resulting array so that the area under the curve is 1.  You should now have the posterior distribution for <span class="math notranslate nohighlight">\(p\)</span>!  What is the most likely value for <span class="math notranslate nohighlight">\(p\)</span>?</p></li>
+</ol>
+<hr class="docutils" />
+<p>This process is somewhat different and complicated, so for continued practice or if you’re stuck (and to continue exploring Bayes’ Theorem), download and complete the workbook <a class="reference internal" href="Worksheet_1_3_EffectOfPriors_Guide.html"><span class="doc std std-doc">here</span></a>.  In this workbook you will find some useful code that will help you complete this worksheet and move on to replicating the figures in the notes and working on the assignment.</p>
+<p>As always, if you’re feeling too lost or it’s not making a ton of sense.  Ask for help on the discussion boards or bring up some questions in the study sessions.  This topic in particular is a bit different from things you may have seen, so be patient with yourself!  Good luck!</p>
 </section>
 
     <script type="text/x-thebe-config">
