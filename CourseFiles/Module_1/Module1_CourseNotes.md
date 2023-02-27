@@ -89,7 +89,7 @@ Why must $P(X=T)=1-p$?  This is a (hopefully intuitive) rule that the probabilit
 Now, while you've probably been told your whole life that a coin toss has a random outcome, you may be wondering how exactly (physically) this can be.  To better understand this, it is instructive to consider [a paper](http://gauss.stat.su.se/gu/sg/2012VT/penny.pdf) by Joe Keller, one of the giants of applied mathematics in the $20^{\text{th}}$ century.  In this paper, Keller treats the coin as a regular Newtonian object, subject to the force of gravity.  He notes that tossing a coin is a relatively simple mechanics problem: it has some initial conditions (at $t=0$, the coin is given some rotational and translational inertia), and some governing equations of motion (Newton's laws).  Given these initial conditions and equations of motion, you can relatively simply have your computer calculate the consequences: starting with $u$ angular velocity and $\omega$ translational velocity, the coin will come up heads or tails.  If you change the initial conditions, the outcome will change correspondingly.  (In his analysis, he ignores air resistance, bouncing, and the option to land on the coin's side, which actually makes his point more salient.)  So then how is it that this deterministic process is our base model for a random process?
 
 
-```{figure} ./keller.jpg
+```{figure} ./Resources/keller.jpg
 ---
 name: fig_keller
 alt: Figure 2 from *The Probability of Heads* by Keller (1986).
@@ -120,7 +120,7 @@ P(X=x) = \begin{cases}
 ```
 to explicitly state the coin flip distribution.  The binomial distribution then describes how the different number of heads in $N$ coin flips are distributed.
 
-```{figure} ./TwoEmpDists_Binom_Chapter2Figure.jpg
+```{figure} ./Resources/TwoEmpDists_Binom_Chapter2Figure.jpg
 ---
 name: fig_TwoEmpBinom
 alt: Visualization of two empirical distributions generated from flipping 10 fair coins 100 times.  The theoretical binomial distribution is plotted over each in orange.
@@ -231,7 +231,7 @@ Use the above code to make CDFs of the distributions in [Worksheet 1.1](Workshee
 
 Particularly interesting quantities are the **median**, which is the 50th percentile, and the **Inter-Quartile Range** (IQR), which is the distance between the 25th and 75th percentiles (the first and third **quartiles**).  In both the examples in {numref}`fig_TwoEmpCDFsBinom`, the median and IQR are 5 and 2, respectively.  The median and IQR are often more useful for characterizing a distribution than the mean and variance because they are *robust to outliers* in your observations.
 
-```{figure} ./TwoEmpDists_Binom_Chapter2Figure.jpg
+```{figure} ./Resources/TwoEmpDists_Binom_Chapter2Figure.jpg
 ---
 name: fig_TwoEmpCDFsBinom
 ---
@@ -308,7 +308,7 @@ The reason then that Bayes' Theorem is so appealing is that it gives us an expli
 
 Keeping the analogy that $A = $FEATURE and $B = $DATA, then $P(DATA|FEATURE)$ is the opposite conditional statement to the one we're interested in, and is called the **likelihood function**.  That is, it is the conditional likelihood of observing our data given some feature of the sampling distribution.  In many cases (we'll get into this), we have a **model** for how our data are generated, and this model may depend on some **parameters**, which may be features of a distribution.  In any case, when we have such a model, Bayes' Theorem accounts for it with this term.
 
-The term $P(A)$ is known as the **prior** and it represents our *prior*knowledge about how we think that the feature $A$ is distributed *before* we collect any data.  You may be inclined to assert that we don't have any information about $A$, otherwise we wouldn't be doing experiments to measure it, but this isn't really  true - we often do have some guesses as to the shape or size of $A$.  For example, if I hand you a coin and tell you it's from the U.S. Mint, it would not be entirely reasonable of you to state that you have absolutely no notion as to how often the coin will land on heads.  Based on personal experience alone, it would be more prudent to start from the assumption that the coin is probably fair and wait for new evidence to convince you otherwise.  It's worth mentioning that even if you want to insist that you don't know anything, you can often plug in what is called a **non-informative} prior, for example, a uniform distribution for $p$ from 0 to 1 in the case of the coin toss.  Also, regardless of your choice of prior, given enough evidence Bayes' Theorem will always converge to the same posterior distribution, so this seemingly arbitrary choice doesn't often end up having that large of an impact.  (We'll explore this more concretely in a worksheet later.)
+The term $P(A)$ is known as the **prior** and it represents our *prior*knowledge about how we think that the feature $A$ is distributed *before* we collect any data.  You may be inclined to assert that we don't have any information about $A$, otherwise we wouldn't be doing experiments to measure it, but this isn't really  true - we often do have some guesses as to the shape or size of $A$.  For example, if I hand you a coin and tell you it's from the U.S. Mint, it would not be entirely reasonable of you to state that you have absolutely no notion as to how often the coin will land on heads.  Based on personal experience alone, it would be more prudent to start from the assumption that the coin is probably fair and wait for new evidence to convince you otherwise.  It's worth mentioning that even if you want to insist that you don't know anything, you can often plug in what is called a **non-informative** prior, for example, a uniform distribution for $p$ from 0 to 1 in the case of the coin toss.  Also, regardless of your choice of prior, given enough evidence Bayes' Theorem will always converge to the same posterior distribution, so this seemingly arbitrary choice doesn't often end up having that large of an impact.  (We'll explore this more concretely in a worksheet later.)
 
 Let's now work a specific example to see how this works.
 
@@ -328,7 +328,7 @@ which is the first factor on the right-hand side of Bayes' Theorem.
 
 Then, before we start flipping the coin, we can visualize our prior for the heads probability in {numref}`fig_BayesExample_0_NoInfo`.  As a counter-point, we also consider a prior in which we strongly believe that the coin will be fair, with much less likelihood that it is biased.  This is shown in {numref}`fig_BayesExample_0_Info`.  In this thought experiment, the coin actually is biased to have a heads probability of $p=0.28,$ which is shown in the figures, but of course, we wouldn't know this when we're given the coin.
 
-```{figure} ./BayesExample_toss0_nonInfoPrior.jpg
+```{figure} ./Resources/BayesExample_toss0_nonInfoPrior.jpg
 ---
 name: fig_BayesExample_0_NoInfo
 scale: 40%
@@ -336,7 +336,7 @@ scale: 40%
 A non-informative prior (uniform distribution).
 ```
 
-```{figure} ./BayesExample_toss0_infoPrior.jpg
+```{figure} ./Resources/BayesExample_toss0_infoPrior.jpg
 ---
 name: fig_BayesExample_0_Info
 scale: 40%
@@ -368,7 +368,7 @@ f(p) = P_{Binom}(k{=}0|N{=}1, p) \times P(p),
 ```
 for two different choices of $P(p)$ (as shown in {numref}`fig_BayesExample_0_NoInfo` and {numref}`fig_BayesExample_0_Info`).
 
-```{figure} ./BayesExample_toss1_nonInfoPrior.jpg
+```{figure} ./Resources/BayesExample_toss1_nonInfoPrior.jpg
 ---
 name: fig_BayesExample_1_NoInfo
 scale: 40%
@@ -376,7 +376,7 @@ scale: 40%
 A posterior distribution for the heads probability of a coin after one toss with a non-informative prior.
 ```
 
-```{figure} ./BayesExample_toss1_infoPrior.jpg
+```{figure} ./Resources/BayesExample_toss1_infoPrior.jpg
 ---
 name: fig_BayesExample_1_Info
 scale: 40%
@@ -403,7 +403,7 @@ A posterior distribution for the heads probability of a coin after one toss with
 In {numref}`fig_BayesExample_2_NoInfo` and {numref}`fig_BayesExample_2_Info`, we've flipped two coins, one of which is a heads, so the posteriors have recentered themselves on $p=0.5$. Then in {numref}`fig_BayesExample_10_NoInfo` and {numref}`fig_BayesExample_10_Info`, we've skipped ahead to flipping 10 coins, of which 9 were tails!  Now we can see that both posteriors are starting to look similar, and the effect of our prior choice is becoming much less signficant.
 
 
-```{figure} ./BayesExample_toss2_nonInfoPrior.jpg
+```{figure} ./Resources/BayesExample_toss2_nonInfoPrior.jpg
 ---
 name: fig_BayesExample_2_NoInfo
 scale: 40%
@@ -411,7 +411,7 @@ scale: 40%
 A posterior distribution for the heads probability of a coin after two tosses with a non-informative prior.
 ```
 
-```{figure} ./BayesExample_toss2_infoPrior.jpg
+```{figure} ./Resources/BayesExample_toss2_infoPrior.jpg
 ---
 name: fig_BayesExample_2_Info
 scale: 40%
@@ -435,7 +435,7 @@ A posterior distribution for the heads probability of a coin after two tosses wi
 \label{fig:BayesExample_2_Info}
 \end{minipage} -->
 
-```{figure} ./BayesExample_toss10_nonInfoPrior.jpg
+```{figure} ./Resources/BayesExample_toss10_nonInfoPrior.jpg
 ---
 name: fig_BayesExample_10_NoInfo
 scale: 40%
@@ -443,7 +443,7 @@ scale: 40%
 A posterior distribution for the heads probability of a coin after ten tosses with a non-informative prior.
 ```
 
-```{figure} ./BayesExample_toss10_infoPrior.jpg
+```{figure} ./Resources/BayesExample_toss10_infoPrior.jpg
 ---
 name: fig_BayesExample_10_Info
 scale: 40%
@@ -451,7 +451,7 @@ scale: 40%
 A posterior distribution for the heads probability of a coin after ten tosses with an informative prior.
 ```
 
-```{figure} ./BayesExample_toss100_nonInfoPrior.jpg
+```{figure} ./Resources/BayesExample_toss100_nonInfoPrior.jpg
 ---
 name: fig_BayesExample_100_NoInfo
 scale: 40%
@@ -459,7 +459,7 @@ scale: 40%
 A posterior distribution for the heads probability of a coin after one hundred tosses with a non-informative prior.
 ```
 
-```{figure} ./BayesExample_toss100_infoPrior.jpg
+```{figure} ./Resources/BayesExample_toss100_infoPrior.jpg
 ---
 name: fig_BayesExample_100_Info
 scale: 40%
@@ -539,14 +539,14 @@ At this point then, the question is how a bacteria "knows" that it is moving up 
 
 What researchers had difficulty with was in prescribing precise concentration profiles of chemicals and recording how bacteria modulated the frequency with which they did runs vs tumbles. So, to make the observations easier, some researchers chopped off the ends of the long flagella, and rooted the bacateria at the base of a flagellum down onto a slide. Now the bacteria couldn't move translationally, but when the flagella rotated counter-clockwise (CCW) the bacteria would spin clockwise (CW), and vice versa. Now that the bacteria was spatially fixed, they could then pipette in very precise spatial profiles of chemicals and watch how the bacteria, now stuck in place, would respond. Watching a [video](https://www.youtube.com/watch?v=4hexn-DtSt4) of this is somewhat entertaining, but I hope you can appreciate how very simple experimental design choices can be the key to opening up decades worth of insights.
 
-```{figure} ./bacchem1.png
+```{figure} ./Resources/bacchem1.png
 ---
 name: fig_chem1
 ---
 The run-and-tumble trajectories of bacteria in two conditions: the absence of any stimulus (left) and in the presence of a positive stimulus gradient (right).  Although it's a cartoon, the idea is that there will be more runs that are longer in the direction of the gradient, compared to the movement when there is no stimulus.
 ```
 
-```{figure} ./runandtumble.png
+```{figure} ./Resources/runandtumble.png
 ---
 name: fig_runtumble
 ---
