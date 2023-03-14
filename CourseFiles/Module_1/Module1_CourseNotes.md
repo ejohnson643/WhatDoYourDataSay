@@ -1,4 +1,4 @@
-# Module 1 Course Notes
+# Module 1: The Basics
 
 Before we can really talk about building and assessing statistical models with data, you will need to be familiar with some basics of probability theory, coding, and simulation.  This module will provide these basics as well as motivate why our framework for confronting data from a statistical viewpoint is justified.  You will quickly see that while some of these basics resemble what you might learn in an introductory statistics textbook, our emphasis will reside much more on the practical and intuitive aspects of probability rather than on developing a series of rules and tests.  In particular, we believe that a modern quantitative thinker knows not just the **theory** of what a probability density function is (for example), but also how to **generate** one from data or simulations, how to **visualize** one, and how to **manipulate** one to make different calculations.
 

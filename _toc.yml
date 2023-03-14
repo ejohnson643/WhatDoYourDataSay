@@ -22,7 +22,16 @@ chapters:
       - file: CourseFiles/Module_1/Worksheet_1_3_EffectOfPriors
       - file: CourseFiles/Module_1/Worksheet_1_3_EffectOfPriors_Guide
       - file: CourseFiles/Module_1/Assignment_1
+      - file: CourseFiles/Module_1/Assignment1_Hints
   - file: CourseFiles/Module_2/Module_2
+    sections:
+      - file: CourseFiles/Module_2/Module2_CourseNotes
+      - file: CourseFiles/Module_2/Worksheet_2_1_Bootstrapping
+      - file: CourseFiles/Module_2/Worksheet_2_1_Bootstrapping_Solutions
+      - file: CourseFiles/Module_2/Worksheet_2_2_OLS_LinReg
+      - file: CourseFiles/Module_2/Worksheet_2_2_OLS_LinReg_Solutions
+      - file: CourseFiles/Module_2/Assignment_2
+      - file: CourseFiles/Module_2/Assignment2_Hints
   - file: CourseFiles/Module_3/Module_3
   - file: CourseFiles/Module_4/Module_4
 - file: markdown
