@@ -727,56 +727,52 @@ This work may have seemed very technical, and it was.  We omitted a ton of algeb
 Following the example at the end of the notes, implement Bayesian OLS Linear Regression to your data from [Worksheet 2.2](./Worksheet_2_2_OLS_LinReg).  How do the distributions for the regression coefficients and noise spread ($\sigma$) compare to the values you used to make the data?
 ```
 
-<!--     
-
-
-\subsection{Confidence Regions for Model Parameters*
+### Confidence regions for model parameters
 
 We've now discussed how to make point estimates of regression coefficients by maximizing the likelihood of the data and by considering posterior distributions of $\vec{\beta}$, but we haven't finished the estimation until we've generated confidence regions.  
 
-You won't be surprised to see that there are 3 approaches to determining regions of confidence in your estimates: ML estimation, examining posteriors, and bootstrapping. You also won't be surprised to see that ML estimation will involve a lot of formulas and math, often relying on assumptions of homoscedasticity and normality of the residuals. We will present those calculations below. However, as is a theme that repeats itself throughout this course, the bootstrapping approach to producing estimates for parameter bounds is practical, straightforward, and generic. 
-% In the case of the ML solution to OLS you can produce parameter estimates in a large number of bootstrapped with replacement samples and report the standard deviation of the resulting parameter distributions.
+You might not be surprised to learn that we're going to discuss three approaches to determining regions of confidence in your estimates: ML estimation, examining posteriors with Bayes' Theorem, and bootstrapping. You also won't be surprised to see that ML estimation will involve a lot of formulas and math, often relying on assumptions of homoscedasticity and normality of the residuals. We will present those calculations below. However, as is a theme that repeats itself throughout this course, the bootstrapping approach to producing estimates for parameter bounds is comparatively practical, straightforward, and generic. 
 
-The Bayesian approach requires no additional work than what you have already done to make the (MAP) estimate! The whole point of the Bayesian approach is that it gives a distributional estimate of parameters, and hence you need only report some statistic or region related to the spread of the parameter in question. 
+The Bayesian approach requires no additional work beyond what you have already done to make the (MAP) estimate. The whole point of the Bayesian approach is that it gives a distributional estimate of parameters, and hence you need only report some statistic or region related to the spread of the parameter in question.
 
 In this section, we'll just show an example of the different methods.  As discussed earlier, the MLE confidence interval will be a formula that can be derived theoretically, the MAP estimator most naturally receives a credible interval that can be generated from the posterior, and we can bootstrap our OLS estimate to approximate the population distributions for our parameters and get confidence intervals computationally.
 
 That is, we'll explain the details of the MLE confidence interval, but the credible interval and bootstrap confidence intervals can be generated using the methods given earlier.  We'll show more detailed work and code for these methods at the end of the notes.
 
-\subsubsection{MLE*
+#### Confidence intervals of ML estimates of regression coefficients
+
 
 The formula for the confidence interval for a regression coefficient is
-\begin{equation*\label{eqn:LinRegCoeffConfInt*
-    \left[
-        \hat{\beta}_j \pm t_{\alpha/2, N-2*\hat{s*_{\beta_j*
-    \right],
-\end{equation*
+```{math}
+:label: eqn_LinRegCoeffConfInt
+\left[
+    \hat{\beta}_j \pm t_{\alpha/2, N-2*\hat{s*_{\beta_j*
+\right],
+```
 where 
-\[
-    \hat{s*_{\beta_j* = \sqrt{
-        \frac{1*{N-2*
-        \frac{\sum_{i=1*^Nr_i^2*{
-        \sum_{i=1*^N(x_{i, j*-\bar{x*_j)^2*
-\]
-is the standard error in the $j^{\text{th*$ regression coefficient.  $t_{p, \nu*$ is the $p^{\text{th*$ percentile of the Student's $t$ distribution with $\nu$ degrees of freedom (\vrb{scipy.stats.t.ppf(p, nu)*).  This is a result of the fact that regression coefficients (under OLS assumptions) are $t$-distributed, which is probably not obvious to you.  It's worth noting that ML confidence intervals are often written as \texttt{Estimate* $\pm$ \texttt{Percentile*$\times$\texttt{Standard Error*, but you shouldn't assume this form unless you know that you can.  In the case of regression coefficients, the *standard error*, is given by the formula above for $\hat{s*_{\beta_j*$.
+```{math}
+\hat{s}_{\beta_j} = \sqrt{
+        \frac{1}{N-2}
+        \frac{\sum_{i=1}^Nr_i^2}{
+        \sum_{i=1}^N(x_{i, j}-\bar{x}_j)^2}
+```
+is the [**standard error**](https://stats.stackexchange.com/questions/44838/how-are-the-standard-errors-of-coefficients-calculated-in-a-regression/44841#44841) in the $j^{\text{th}}$ regression coefficient.  $t_{p, \nu}$ is the $p^{\text{th}}$ percentile of the Student's $t$ distribution with $\nu$ degrees of freedom (`scipy.stats.t.ppf(p, nu)`).  This is a result of the fact that regression coefficients (under OLS assumptions) are $t$-distributed, which is probably not obvious to you.  It's worth noting that ML confidence intervals are often written as `Estimate` $\pm$ `Percentile` $\times$ `Standard Error`, but you shouldn't assume this form unless you know that you can.  In the case of regression coefficients, the *standard error*, is given by the formula above for $\hat{s}_{\beta_j}$.
 
-More generically, it can be shown that the variance in $\beta_j$ is given by $\Sigma_{j,j*$ (the  $j^{\text{th*$ diagonal element of $\Sigma$, where 
-\[
-    \Sigma = \sigma^2(X^TX)^{-1*.
-\]
-This matrix is called the *covariance matrix* for $\vec{\beta}$ and is relatively easy to compute (it's often returned by your linear regression function).  So once you have this matrix, you can take the square root of the $j^{\text{th*$ diagonal to get the standard error in that coefficient.  Then the confidence interval can be found by taking $t_{1-\alpha/2, N-2*$ plus/minus the OLS estimate $\hat{\beta}_j$. 
+More generically, it can be shown that the variance in $\beta_j$ is given by $\Sigma_{j,j}$ (the  $j^{\text{th}}$ diagonal element of $\Sigma$, where 
+```{math}
+\Sigma = \sigma^2(X^TX)^{-1}
+```
+This matrix is called the [**covariance matrix**](https://en.wikipedia.org/wiki/Covariance_matrix) for $\vec{\beta}$ and is relatively easy to compute (it's often returned by your linear regression function).  So once you have this matrix, you can take the square root of the $j^{\text{th}}$ diagonal to get the standard error in that coefficient.  Then the confidence interval can be found by taking $t_{1-\alpha/2, N-2}$ plus/minus the OLS estimate $\hat{\beta}_j$. 
 
-For a non-linear model, this formula provides an *approximation* to the confidence interval, but without knowing more precisely how our parameters are distributed, we cannot derive more precise intervals generically.  In this case, as stated above, you may want to turn to bootstrapping as it provides an empirical route to estimating the spread in parameter estimates.\\
+For a non-linear model, this formula provides an *approximation* to the confidence interval, but without knowing more precisely how our parameters are distributed, we cannot derive more precise intervals generically.  In this case, as stated above, you may want to turn to bootstrapping as it provides an empirical route to estimating the spread in parameter estimates.
 
-\begin{TryItBox*
-    Take a stab at Worksheet 2.3.  Once that's done, you should now be able to tackle the first three problems of Assignment 2.
-\end{TryItBox*
+```{admonition} Try It Yourself!
+Take a stab at [Worksheet 2.3](./Worksheet_2_3_Boot_LinReg).  Once that's done, you should now be able to attempt the first three problems of [Assignment 2](./Assignment_2).
+```
 
+### Model fitting vs prediction
 
-\subsection{Model Fitting vs Prediction*
 One goal then of a statistical model is that it performs well on *new data* and not just the data on which it was built.  To this point, everything we've discussed is related to *training* the model -- estimating the model parameters from the data.  Parallel to the process of model fitting, we also want to assess the model's *predictive ability*, in particular, its ability to predict responses on previously unobserved inputs, or *generalization*.
-
-% The central challenge or goal of a statistical model is that it performs well, predicts, new and previously unseen data -- not just those on which the model is trained. Everything we have spoken about thus far is related to training a model -- estimating parameters from data. The ability to perform well on previous unobserved inputs is called generalization. 
 
 As a result of these dual goals, it is often recommended in machine learning texts that you should split your data into two sets: a *testing* set for assessing generalization, and a *training* set for fitting the model (estimating the model parameters).  You might see right away then that there are two errors that we want to monitor: the error in matching the training data and the error in predicting the test data.  We'll refer to these as the training and testing error, respectively.
 
@@ -784,70 +780,93 @@ Obviously, a very good model will have both small training and testing errors, b
 
 More intuitively, these two errors directly correspond to the problems of *overfitting* and *underfitting*.  Underfitting results when the model is unable to to describe even the training data set.  This often corresponds to a model that doesn't have enough flexibility (or is simply inappropriate) to fit the data.  As an example, think about using a linear function to fit a sinusoid.  Overfitting on the other hand results from data that has incorporated the shape of the training data too much and can't predict new data.  This often corresponds to a model having too much flexibility, so that it is inferring more from the data than may be justified.
 
-% So there are actually 2 errors in play when condition training a model and assessing its ability to generalize. Not surprisingly, they are referred to as test error and training error. The test error is assessed on some fraction of the data that has been put aside as a test set that the model isn't trained on. More later on how to determine how to break one dataset into training and test. We want both these to be low. THe model should be well fit to data, and should be able to predict unseen data. Rather obviously, the training data is greater than or equal to the expected value of the training error. So the factors that determine how well a model will perform are its ability to make the training error small, and to reduce the gap between the training and test error. These two factors correspond to the two central challenges in statistical modeling and machine learning: Underfitting and overfitting. Underfitting is when the model is unable to fit a training data set (think using a linear model to fit quadratic data). Overfitting is when a model it is overtrained on a training dataset, leading to large gaps between training and test errors (think fitting a nth order polynomial model to n data points -- this type of model is over leveraged on the training data and will perform very poorly on new/unseen data). 
-
-In this way, we can control whether a model is likely to over- or under-fit by altering its ``capacity" or ``flexibility".  Defining this quantity formally is difficult, but you can think of it as a model's ability to fit a wide variety of functions.  For example, if we extend our linear model to include a quadratic term:
-\[
+In this way, we can control whether a model is likely to over- or under-fit by altering its "capacity" or "flexibility".  Defining this quantity formally is difficult, but you can think of it as a model's ability to fit a wide variety of functions.  For example, if we extend our linear model to include a quadratic term:
+```{math}
 y = \beta_0 + \beta_1 x + \beta_2 x^2,
-\]
-it has more capacity than the linear model in Equation \ref{eqn:LinReg*.  We could then use OLS to find $\beta_2$ in addition to the other regression coefficients and fit nonlinear models.  As such, we say that models with low capacity may struggle to fit even the training set, while high capacity models might become too conformed to the training set by assuming it has features that it does not.
-% We can control whether a model is likely to overfit or underfit by altering its capacity. Attempting to define capacity formally is problematic. Informally, a model's capacity is its ability to fit a wide variety of functions (think of generalized the linear regression model to include nonlinear terms such as $x_i^2$, $exp(x)$, etc. This would be treated as independent covariates and the identical approach to parameter estimation can be used to now fit nonlinear models to the data. In this way you can impart more capacity to the model by giving it a larger variety of functions to fit to the data. Models with low capacity may struggle to fit to the training set. Models with high capcaity can overfit by memorizing properties of the training set that do not serve them well on the test set.
+```
+it has more capacity than the linear model in Equation {eq}`eqn_LinReg`.  We could then use OLS to find $\beta_2$ in addition to the other regression coefficients and fit nonlinear models.  As such, we say that models with low capacity may struggle to fit even the training set, while high capacity models might become too conformed to the training set by assuming it has features that it does not.
 
-An appropriate, but useless, statement is that a statistical model will generally perform best when its capacity is appropriate for the true complexity of the task and the amount of training data. This topic of capacity will come back when we address regularization-based approaches to statistical modeling in Module 4.  Surprising as it may seem, these approaches will attempt to modulate model capacity and fit the model in a way that is more consistent with the data.\\
+An appropriate, but useless, statement is that a statistical model will generally perform best when its capacity is appropriate for the true complexity of the task and the amount of training data. This topic of capacity will come back when we address regularization-based approaches to statistical modeling in [Module 4](../Module_4/Module_4).  Surprising as it may seem, these approaches will attempt to modulate model capacity and fit the model in a way that is more consistent with the data.
 
-\begin{TryItBox*
-Split your data from Worksheet 2.2 into a testing and training set.  Use the training set to fit the linear model and assess the *prediction error*, the discrepancy between the model prediction and the actual test data.  Now swap the roles of the two sets, what can you say about your model's generalizability?
-\end{TryItBox*
-
-% But, as a preview, regularization is an approach to being able to modulate model capacity in a manner that is appropriate for the data at hand. Said another way, regularization is a modification of a statistical modeling scheme that attempted to reduce its generalization error (the difference between the test and training error), but not its training error. Currently, this might seem impossible. This is what we discuss in Module 4. 
-
+```{admonition} Try It Yourself!
+Split your data from [Worksheet 2.2](./Worksheet_2_2_OLS_LinReg) into a testing and training set.  Use the training set to fit the linear model and assess the *prediction error*, the discrepancy between the model prediction and the actual test data.  Now swap the roles of the two sets, what can you say about your model's generalizability?
+```
 
 Let's get back to practicalities.  You have a dataset and you want to train your model and assess its generalizabilty.  If you have enough data, you split it into training and test sets so that you can monitor performance and fitting at the same time.
 
-% Now the rubber hits the road. You have a dataset, and you wish to train your algorithm (say a linear model) and wish to assess its ability to generalize. Ideally, you have lots of data. If you have lots of data then you split the data into a training and test subsets. 
-
 How do you know that you have enough data to do this?  Empirically, we would say that such a data is large enough that we've reached a regime where bootstrapped estimates are insensitive to adding more data.  That is, you could run the tests that you've been doing in the worksheets where you ramp up the number of samples that you include in your estimates.  If your estimates keep changing significantly (whatever that may mean) when you add more data, then you don't have enough data to split into two sets.
 
-% What does lots of data mean? Empirically, you can define this as the dataset being so large that bootstrapped sampling with replacement based error bounds on any parametric estimate stops being sensitive to the size of the data. 
+For the sake of argument, let's say that you do have "enough" data to split into two sets (if you don't you will just have to proceed with even more caution).  How then, should you split your data?  Ideally, the testing and training sets are drawn from a single common distribution, so you can na\"ively guess that breaking your data along the lines of $x < x_0$ and $x > x_0$ will be dangerous, because there might be real differences in your data between those two sets.  In such a case, not only might your training error be large because you don't have a wide-enough range of data to fit your model, your testing error will also be large because the model will never have seen data from the other region.  Instead, the best we can usually do is to select our sets *randomly* from our full data set.  One way to do this quickly in Python is to use `np.random.shuffle(np.arange(N))` to generate a shuffled list of *indices*.  Then you can, for example, take the first 10\% of these indices to grab your testing set data.
 
-For the sake of argument, let's say that you do have ``enough" data to split into two sets, and if you don't you will just have to proceed with even more caution!  How then, should you split your data?  Ideally, the testing and training sets are drawn from a single common distribution, so you can na\"ively guess that breaking your data along the lines of $x < x_0$ and $x > x_0$ will be dangerous, because there might be real differences in your data between those two sets.  In such a case, not only might your training error be large because you don't have a wide-enough range of data to fit your model, your testing error will also be large because the model will never have seen data from the other region.  Instead, the best we can usually do is to select our sets *randomly* from our full data set.  One way to do this quickly in Python is to use \vrb{np.random.shuffle(np.arange(N))* to generate a shuffled list of *indices*.  Then you can, for example, take the first 10\% of these indices to grab your testing set data.
+While this previous point may have been somewhat obvious, it's a bit less obvious what proportions we should split the data.  If we allocate too much data to the testing set, then we'll get a bad fit, but if we allocate too little, then it won't be clear whether the predictive performance was due to the data in the testing set or the model.  This is especially tricky if we're comparing two methods or models!  How then can we balance this?  The answer is called *cross-validation*, which we'll now describe.
 
-% How should you split your data? Ideally, the test and training data are samples from a common distribution. By way of example, the following would be a terrible way to split the data into training and test: The data is a single response and covariate $(x,y)$, where the training set includes all data with $x<x_0$ and the test includes all data with $x>x_0$. In this extreme example, the test and training datasets are nonoverlapping and hence not only will the generalization error be large, we also don't believe that this is a good test of generalization! 
+```{admonition} Try It Yourself!
+Modulate the size and characteristics of your testing and training sets.  How do training and testing error change as you change the size of the testing set?  What happens if you break your data into two sets by putting a threshold on your covariate so that all the data below the threshold is training data and the data above is testing data? Why is this a bad idea?
+```
 
-While this previous point may have been somewhat obvious, it's a bit less obvious what proportions we should split the data.  If we allocate too much data to the testing set, then we'll get a bad fit, but if we allocate too little, then it won't be clear whether the predictive performance was due to the data in the testing set or the model.  This is especially tricky if we're comparing two methods or models!  How then can we balance this?  The answer is called *cross-validation*, which we'll now describe.\\
-
-% How big should the test set be? And, of particular relevance, how do you deal with the fact that we rarely have ``lots" of data. In that instance, cutting up the data into two subsets seems unwise! That said, too small a test set implies statistical uncertainty around the estimated average test error, making it difficult to claim that algorithm A works better than algorithm B on a given task. Are there alternative to partitioning the data to use all the data to estimate the test error? YES! And, again, the computer is what makes it possible. THe approach is called cross-validation, which we now describe.
-
-\begin{TryItBox*
-Modulate the size and characteristics of your testing and training sets.  How do training and testing error change as you modulate the size of the testing set?  What happens if you break your data into two sets by putting a threshold on your covariate so that all the data below the threshold is training data and the data above is testing data?
-\end{TryItBox*
-
-\subsubsection{Cross Validation*
+#### Cross-Validation
 
 As we explained earlier, least-squares is just one of many ways that we could choose to optimize our model's parameters. In least-squares, we decided that minimizing the discrepancy between our data and our model was the most important objective.  This is by far the most common tack taken, but an interesting alternative to minimizing these discrepancies is to ask that our coefficients are those such that the model is most *robust* to new data.  That is, maybe we're less concerned that the model match the current data really well, and instead that it should match new future data well.
 
 Alternately, when the parameter of interest is not a model parameter, but an analysis or algorithmic parameter, this perspective can be useful.  Such parameters are called *hyperparameters* and are common in many machine learning or analysis algorithms.
 
-But how can we perform such a fitting?  We don't have *new* data, we only have the data we've collected!  The most common way around this is to use the technique of *cross-validation*.  This method builds on the concept of testing and training data partitions in such a way that addresses some of our questions from earlier.
+But how can we perform such a fitting?  We don't have *new* data, we only have the data we've collected!  The most common way around this is to use the technique of **cross-validation** (CV).  This method builds on the concept of testing and training data partitions in such a way that addresses some of our questions from earlier.
 
-% This method says that we should take *part* of our collected data and set it aside, and that we should only perform our calculations and analysis on the remaining data.  This is common in machine learning and is known as creating *testing* and *training* data sets.
-% \\
-% \begin{tcolorbox*{Testing and Training: *
-%     Use the training data to fit our model and the test set to assess our model's accuracy.
-% \end{tcolorbox* 
-
-% But how do we choose this testing and training set?
 In particular, cross-validation will address the concerns that our test or training sets contain outliers or the data are not evenly distributed between the sets along some covariates by going one step further than simply breaking the data into two sets.  Cross-validation says that we should repeatedly break the data into two sets, each time containing different partitions of the data, and assess the accuracy across these repeated partitions.  (You can think of this as bootstrapping the accuracy assessment!)
 
-There are of course many ways to partition your data, but the most common are called $k$-Fold Cross-Validation and *Leave One Out Cross-Validation* (LOOCV).  In $k$-fold CV, one breaks the data set into $k$ equal sized partitions (folds) and sequentially uses each partition as the test set while using the $k-1$ other partitions as the training set.  Often $k=10$ or $k=5$ is used.  The extreme case when $k=N$, the size of the data set, is LOOCV.  This is because we are using all of the data except one point (leaving one out!) and trying to predict that one point.  There are reasons to use or not use LOOCV, but generally, the biggest concern will be how long it takes for the code to run.
+There are of course many ways to partition your data, but the most common are called **$k$-Fold Cross-Validation** and **Leave One Out Cross-Validation** (LOOCV).  In $k$-fold CV, one breaks the data set into $k$ equal sized partitions (folds) and sequentially uses each partition as the test set while using the $k-1$ other partitions as the training set.  Often $k=10$ or $k=5$ is used.  The extreme case when $k=N$, the size of the data set, is LOOCV.  This is because we are using all of the data except one point (leaving one out!) and trying to predict that one point.  There are reasons to use or not use LOOCV, but generally, the biggest concern will be how long it takes for the code to run.
 
 The idea then is that you can use CV to fit a model by performing CV repeatedly as you change model parameters.  So if I am performing regression, I can search the $\beta_0$ and $\beta_1$ space to find where some prediction accuracy (the sum of squared residuals or maximum absolute residual, for example) is maximized.  Alternately, if you have data that you know belong in different groups and are trying to generate a model to predict what group a data point is in, then counting the number of correct predictions can be useful.
 
-We'll discuss cross-validation again later when we talk about model *selection*, not just fitting, but we introduce it here because it is a form of parameter estimation.  It's worth noting that CV does not naturally give intervals of confidence, but you could construct a meaningful range on where you think parameters should be set by considering your accuracy vs. parameter curves.\\
+We'll discuss cross-validation again later when we talk about model *selection*, not just fitting, but we introduce it here because it is a form of parameter estimation.  It's worth noting that CV does not naturally give intervals of confidence, but you could construct a meaningful range on where you think parameters should be set by considering your accuracy vs. parameter curves.
 
-\begin{TryItBox*
-Apply 10-fold cross-validation to your data from Worksheet 2.2.  For each fold, use bootstrapping to estimate the regression coefficients (point estimate and confidence interval).  Do these distributions overlap significantly from fold to fold?
-\end{TryItBox*
+```{admonition} Try It Yourself!
+Apply 10-fold cross-validation to your data from [Worksheet 2.2](./Worksheet_2_2_OLS_LinReg).  For each fold, use bootstrapping to estimate the regression coefficients (point estimate and confidence interval).  Do these distributions overlap significantly from fold to fold?
+```
+
+### Comments on model fitting
+
+Throughout this chapter we have tried to stay as high-level as possible, diving into details only to illustrate useful examples.  However, there are some comments that remain that do not belong in the text above.  These are given here.
+
+#### We'll tackle model selection later
+
+You may have noticed that we did not explore the very interesting question of "what model should I use?"  This was intentional; model selection is just as difficult and unanswerable as the topics discussed here and we feel it deserves its own thoughts.  You will also see that many of the concepts here will rear their heads in that discussion as well, so this chapter will be good to understand in anticipation of that.
+
+#### There are many knobs to turn!
+
+When discussing least-squares, we pointed out that the method of minimizing residuals was just one of many ways to find parameters that fit models to data, and indeed there are many.  In particular, non-linear models provide their own difficulties, and we'll discuss them shortly.
+
+In the context of regression, there have been many good and powerful adjustments to the basic regression scheme that improve the predictive accuracy of those models and also aid in the development of a *sparse* model - a model that has fewer covariates.  We hope to discuss this later, but if you are interested, the most popular adjustment is known as *regularization*, of which the most popular algorithms are known as *LASSO*, *Ridge Regression*, and a synthesis of the two, *Elastic-Net Regression*.  These names are provided for your reference if you want to investigate them.  These methods are particularly useful when the number of covariates, $P$, becomes close to or larger than the number of observations, $N$, in which case any model will be underdetermined.  Unlike OLS linear regression, these algorithms come with *hyperparameters* that need to be tuned; this is most often done with cross-validation.
+
+#### Non-Linear Models
+
+Finally, as alluded to several times, non-linear models provide OLS with some difficulty.  Not only is the calculus of finding their optima not as well-posed as in the linear case, it's also not clear that we should expect homoscedasticity of the errors, since *by definition* of the model, we expect differently sized changes in response at different values of the covariates.
+
+As a result, one powerful suggestion is that if you have a non-linear model you should attempt to linearize it.  That is, if you want to fit an exponential function, take the logarithm; if you think your model is proportional to a square root of your covariate, then you should fit the squared model with OLS linear regression.  In symbols, it can be worse to try and fit
+```{math}
+y = e^{-\beta x}\qquad\qquad\text{and}\qquad\qquad
+y = \sqrt{\alpha x},
+```
+than it is to fit
+```{math}
+\log{y} = -\beta x
+\qquad\qquad\text{and}\qquad\qquad
+y^2 = \alpha x.
+```
+
+````{admonition} Try It Yourself!
+Create simulated data according to the model
+```{math}
+y = (x + \varepsilon)^2 + 2(x + \varepsilon) + 1,
+```
+where you can pick the shape of the noise term $\varepsilon$ (you can make it uniform, normal, Poissonian, etc.).  Plot your data.  Try fitting this model using your linear regression methods by supplying covariates $X$ = $[1, x, x^2]$.  Then try fitting the equivalent model
+```{math}
+    \sqrt{y* = (x + \varepsilon) + 1.}
+```
+Examine the regression coefficients and residual distributions.  What do you notice?
+````
+
+<!--     
 
 
 

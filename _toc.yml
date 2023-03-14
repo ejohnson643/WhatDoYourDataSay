@@ -30,6 +30,8 @@ chapters:
       - file: CourseFiles/Module_2/Worksheet_2_1_Bootstrapping_Solutions
       - file: CourseFiles/Module_2/Worksheet_2_2_OLS_LinReg
       - file: CourseFiles/Module_2/Worksheet_2_2_OLS_LinReg_Solutions
+      - file: CourseFiles/Module_2/Worksheet_2_3_Boot_LinReg
+      - file: CourseFiles/Module_2/Worksheet_2_3_Boot_LinReg_Solutions
       - file: CourseFiles/Module_2/Assignment_2
       - file: CourseFiles/Module_2/Assignment2_Hints
   - file: CourseFiles/Module_3/Module_3

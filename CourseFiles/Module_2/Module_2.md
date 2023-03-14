@@ -1,1 +1,1 @@
-# Module 2
+# Module 2: Parameter Estimation and Model Fitting
