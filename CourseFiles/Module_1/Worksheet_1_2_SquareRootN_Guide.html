@@ -141,6 +141,21 @@ const thebe_selector_output = ".output, .cell_output"
      Rubric
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_AssignmentAttempt.html">
+     How-To: Make an Assignment Attempt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_AssignmentCompletion.html">
+     How-To: Complete Assignments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../HowTo_SelfAssessment.html">
+     How-To: Self-Assessment
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -153,9 +168,14 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Module_0/Module_0.html">
+     Module 0: Python Tutorial
+    </a>
+   </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="Module_1.html">
-     Module 1
+     Module 1: The Basics
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
     <label for="toctree-checkbox-3">
@@ -163,6 +183,11 @@ const thebe_selector_output = ".output, .cell_output"
      </i>
     </label>
     <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="Module1_CourseNotes.html">
+       Module 1 Course Notes
+      </a>
+     </li>
      <li class="toctree-l3">
       <a class="reference internal" href="Worksheet_1_1_CoinFlipping.html">
        Worksheet 1.1: Coin Tossing
@@ -191,6 +216,11 @@ const thebe_selector_output = ".output, .cell_output"
      <li class="toctree-l3">
       <a class="reference internal" href="Worksheet_1_3_EffectOfPriors_Guide.html">
        GUIDE to Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Assignment_1.html">
+       Assignment 1
       </a>
      </li>
     </ul>
@@ -488,8 +518,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The minimum observed number of heads is 12
-The maximum observed number of heads is 38
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The minimum observed number of heads is 13
+The maximum observed number of heads is 37
 The mean number of heads is 25
 The median number of heads is 25
 The variance in the number of heads is 12.5
@@ -581,16 +611,16 @@ The observed variance of the experiment is 12.5
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10 coins 10000 times!
-The expected value is 5.01
+The expected value is 5
 
 Flipping 20 coins 10000 times!
-The expected value is 9.99
+The expected value is 10
 
 Flipping 50 coins 10000 times!
 The expected value is 25
 
 Flipping 100 coins 10000 times!
-The expected value is 50.1
+The expected value is 50
 
 Flipping 200 coins 10000 times!
 The expected value is 100
@@ -651,7 +681,7 @@ Flipping 10000 coins 10000 times!
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 1000 coins 10000 times! (p_heads = 0.1)
-The expected value is 99.6
+The expected value is 100
 
 Flipping 1000 coins 10000 times! (p_heads = 0.2)
 The expected value is 200
@@ -739,9 +769,8 @@ Flipping 50 coins 10000 times!
 Flipping 100 coins 10000 times!
 
 Flipping 200 coins 10000 times!
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 500 coins 10000 times!
+
+Flipping 500 coins 10000 times!
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 1000 coins 10000 times!
@@ -886,7 +915,7 @@ Flipping 500 coins 10000 times!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/0z/q4zqhhxd4kv0r6fzjkg8lzfr0000gn/T/ipykernel_67894/2115058168.py:10: DeprecationWarning: msort is deprecated, use np.sort(a, axis=0) instead
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/0z/q4zqhhxd4kv0r6fzjkg8lzfr0000gn/T/ipykernel_30105/2115058168.py:10: DeprecationWarning: msort is deprecated, use np.sort(a, axis=0) instead
   head_vals = np.msort(list(head_counts.keys()))
 </pre></div>
 </div>
@@ -932,21 +961,21 @@ Flipping 500 coins 10000 times!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5 6]
 The 10th percentile is 44
 44.0
-[0 1 2 3 4 5 6 7 8]
+[0 1 2 3 4 5 6 7 8 9]
 The 25th percentile is 47
 47.0
-[ 0  1  2  3  4  5  6  7  8  9 10 11]
-The 50th percentile is 50
-50.0
-[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13]
+The 50th percentile is 51
+51.0
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15]
 The 75th percentile is 53
 53.0
 [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
-The 90th percentile is 57
-57.0
+The 90th percentile is 56
+56.0
 </pre></div>
 </div>
 </div>
@@ -1023,11 +1052,11 @@ Flipping 500 coins 200 times!
 Flipping 1000 coins 200 times!
 
 Flipping 2000 coins 200 times!
-
-Flipping 5000 coins 200 times!
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 10000 coins 200 times!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 5000 coins 200 times!
+
+Flipping 10000 coins 200 times!
 </pre></div>
 </div>
 </div>
@@ -1084,16 +1113,16 @@ Flipping 5000 coins 200 times!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ],
-       [ 2.  ,  2.  ,  2.25,  2.  ,  3.  ,  2.  ,  3.  ,  2.25,  2.  ],
-       [ 2.25,  3.25,  4.  ,  4.  ,  5.25,  5.  ,  5.  ,  4.  ,  2.  ],
-       [ 4.  ,  6.  ,  6.  ,  6.  ,  7.  ,  7.  ,  7.  ,  5.  ,  4.  ],
-       [ 6.  ,  8.  ,  8.  ,  8.  ,  9.  ,  9.25,  8.  ,  8.  ,  6.  ],
-       [ 8.  , 12.25, 13.  , 16.25, 16.25, 13.25, 15.  , 12.  ,  8.  ],
-       [12.25, 17.  , 19.  , 21.25, 21.  , 21.25, 19.  , 16.25, 12.  ],
-       [18.  , 25.  , 22.25, 30.25, 26.  , 26.75, 29.  , 25.  , 16.25],
-       [29.  , 44.25, 46.5 , 39.25, 46.  , 43.5 , 50.25, 35.  , 32.  ],
-       [41.  , 54.25, 64.75, 64.  , 62.25, 66.5 , 61.25, 53.5 , 35.25]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  2.  ,  1.25,  1.  ],
+       [ 2.  ,  2.  ,  2.  ,  3.  ,  3.  ,  3.  ,  4.  ,  2.  ,  2.  ],
+       [ 3.25,  4.  ,  4.  ,  5.  ,  5.  ,  4.  ,  4.  ,  4.  ,  2.  ],
+       [ 4.  ,  5.  ,  6.  ,  6.  ,  6.  ,  8.  ,  7.  ,  6.  ,  4.  ],
+       [ 6.  ,  8.  ,  7.25,  8.25,  9.  ,  8.  ,  8.  ,  7.  ,  6.  ],
+       [ 8.  , 13.  , 13.  , 15.25, 15.  , 14.25, 13.  , 11.25,  8.  ],
+       [12.25, 16.25, 19.  , 20.  , 25.  , 19.25, 21.  , 17.  , 15.  ],
+       [16.25, 23.  , 27.5 , 29.25, 32.25, 30.  , 29.  , 24.  , 18.  ],
+       [29.25, 38.25, 46.  , 46.  , 48.25, 50.  , 49.25, 38.5 , 27.25],
+       [38.25, 52.5 , 62.  , 71.25, 64.  , 59.5 , 65.5 , 58.5 , 39.  ]])
 </pre></div>
 </div>
 </div>

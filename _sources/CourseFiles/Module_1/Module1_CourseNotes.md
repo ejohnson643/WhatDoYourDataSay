@@ -1,8 +1,8 @@
-# Module 1 Course Notes
+# Module 1: The Basics
 
 Before we can really talk about building and assessing statistical models with data, you will need to be familiar with some basics of probability theory, coding, and simulation.  This module will provide these basics as well as motivate why our framework for confronting data from a statistical viewpoint is justified.  You will quickly see that while some of these basics resemble what you might learn in an introductory statistics textbook, our emphasis will reside much more on the practical and intuitive aspects of probability rather than on developing a series of rules and tests.  In particular, we believe that a modern quantitative thinker knows not just the **theory** of what a probability density function is (for example), but also how to **generate** one from data or simulations, how to **visualize** one, and how to **manipulate** one to make different calculations.
 
-These notes have three sections: the first section will simply link to the Python tutorial that should be completed before/during the reading of this text.  The next two sections will then introduce basic probability concepts, such as probability and frequency distributions, and Bayes Theorem, respectively.  Each section will emphasize **theory, calculation, visualization**, and **simulation** somewhat evenly.  At the end of the chapter will be a reference section summarizing the main takeaways as well as providing some details on technical aspects that are not discussed in the main part of the chapter.\\
+These notes have three sections: the first section will simply link to the Python tutorial that should be completed before/during the reading of this text.  The next two sections will then introduce basic probability concepts, such as probability and frequency distributions, and Bayes Theorem, respectively.  Each section will emphasize **theory, calculation, visualization**, and **simulation** somewhat evenly.  At the end of the chapter will be a reference section summarizing the main takeaways as well as providing some details on technical aspects that are not discussed in the main part of the chapter.
 
 ```{admonition} Big Idea
 Data is *distributional* because of inherent randomness in the physical world.  We can visualize data distributions in our computers and use both theory and simulation to compute interesting quantities using these distributions.
@@ -327,6 +327,7 @@ P(k\text{ Heads in } N\text{ tosses}| p) = P(k|N, p) =  {N\choose k}p^k(1-p)^{N-
 which is the first factor on the right-hand side of Bayes' Theorem.
 
 Then, before we start flipping the coin, we can visualize our prior for the heads probability in {numref}`fig_BayesExample_0_NoInfo`.  As a counter-point, we also consider a prior in which we strongly believe that the coin will be fair, with much less likelihood that it is biased.  This is shown in {numref}`fig_BayesExample_0_Info`.  In this thought experiment, the coin actually is biased to have a heads probability of $p=0.28,$ which is shown in the figures, but of course, we wouldn't know this when we're given the coin.
+
 
 ```{figure} ./Resources/BayesExample_toss0_nonInfoPrior.jpg
 ---
