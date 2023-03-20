@@ -920,346 +920,339 @@ As a result of the work put into understanding this network as a simple model fo
 ### Why thermodynamics?
 
 
-
-<!--     
-
-
-
-
-\subsection{Thermodynamics*
-
 At this point it might not surprise you that thinking about things *probabilistically* is a profound and useful way of attacking problems.  Indeed, we'll see that physicists have been using it successfully for centuries, and that it in fact underpins the entire discipline of thermodynamics (and quantum mechanics, but that's not relevant here), which is often called *statistical mechanics*.  Thermodynamics is a branch of physics that attempts to codify the effects of temperature and heat into a set of principles.
 
 One of the base ideas of thermodynamics is that while  physically most things want to have a minimum energy, due to *thermal* fluctuations (random photons hitting atoms, molecules bouncing and jiggling), there is a non-zero likelihood that a system will have some non-minimal energy.  Physicists have then shown that if you can then *enumerate* all the different states in which the system can exist and their energy levels, then you can predict the *probability* that the system will exist in any particular state.
 
-Now, this might sound a bit ridiculous, if I have even a closed box of air, 1 meter to a side, I have on the order of $10^{25*$ molecules in that box, so enumerating all of the different ways that those molecules can be arrayed in my box should seem rather insurmountable.  More concretely, *Boltzmann's distribution* exactly describes the probability of observing any given state as a function of that state:
-\begin{equation*
-P(\text{state*_i) = \frac{e^{-\frac{E_i*{k_BT*{
-\sum_{\text{All States*, j*e^{-\frac{E_j*{k_BT*
- = \frac{e^{-\frac{E_i*{k_BT*{Z*.
-\end{equation*
+Now, this might sound a bit ridiculous, if I have even a closed box of air, 1 meter to a side, I have on the order of $10^{25}$ molecules in that box, so enumerating all of the different ways that those molecules can be arrayed in my box should seem rather insurmountable.  More concretely, *Boltzmann's distribution* exactly describes the probability of observing any given state as a function of that state:
+```{math}
+P(\text{state}_i) = \frac{e^{-\frac{E_i}{k_BT}}}{
+\sum_{\text{All States}, j}e^{-\frac{E_j}{k_BT}}}
+ = \frac{e^{-\frac{E_i}{k_BT}}}{Z}.
+```
 $Z$ is known as the *partition* function, and is the part of the problem that is impossible: sum all the states and their energies.
 
-However, it is often possible to write down the energies and number of ways that a system can be in a few * particular* states, in which case we can talk about the *relative probabilities* of those states by dividing the two Boltzmann distributions so that $Z$ cancels out.  This is often incredibly useful, as Garcia and Phillips note in the development of their model.  We're not often concerned with the probability distribution across all possible states, but just across a few interesting ones.  Known the relative likelihoods in such as situation is very powerful.  In particular, we can see that 
-\begin{equation*
-\frac{P(\text{state*_i)*{P(\text{state*_j)*
- = \frac{e^{-\frac{E_i*{k_BT*{e^{-\frac{E_j*{k_BT* = e^{-\frac{E_i-E_j*{k_BT*
- = e^{-\frac{\Delta E_{ij*{k_BT*,
-\end{equation*
+However, it is often possible to write down the energies and number of ways that a system can be in a few *particular* states, in which case we can talk about the *relative probabilities* of those states by dividing the two Boltzmann distributions so that $Z$ cancels out.  This is often incredibly useful, as Garcia and Phillips note in the development of their model.  We're not often concerned with the probability distribution across all possible states, but just across a few interesting ones.  Known the relative likelihoods in such as situation is very powerful.  In particular, we can see that 
+```{math}
+\frac{P(\text{state}_i)}{P(\text{state}_j)}
+ = \frac{e^{-\frac{E_i}{k_BT}}}{e^{-\frac{E_j}{k_BT}}} = e^{-\frac{E_i-E_j}{k_BT}}
+ = e^{-\frac{\Delta E_{ij}}{k_BT}},
+```
 so that the relative probability of observing one state versus another is dependent on the *difference in their energies*.
 
 If we consider our two states to be a molecule, say a protein, binding or not binding to another molecule, say DNA, then the relative likelihood of observing the molecules bound together compared to separate is directly connected to the binding energy of those molecules.  In fact, this is often what we really mean when we talk about binding energies - we want to know the relative likelihood of the molecule being unbound versus bound.
 
-In either case, this binding energy is a useful and interesting quantity to know, but is often difficult to measure directly.  This is especially true in live biological systems, where getting a handle on such chemical measurements is confounded by the thousands of different processes occurring simultaneously.  However, in posing a model that is explicitly based on thermodynamics, Garcia and Phillips were able to make *in vivo* estimates of the binding energy of the *lacI* repressor to DNA.
+In either case, this binding energy is a useful and interesting quantity to know, but is often difficult to measure directly.  This is especially true in live biological systems, where getting a handle on such chemical measurements is confounded by the thousands of different processes occurring simultaneously.  However, in posing a model that is explicitly based on thermodynamics, Garcia and Phillips were able to make *in vivo*estimates of the binding energy of the *lacI* repressor to DNA.
 
-\subsection{The Experiment and Image Processing*
+### The experiment and how to analyze images
 
 With this introduction, you are now ready to understand the model and measurements that Garcia and Phillips made.  First, the goal of the paper was twofold: show that a thermodynamic model might describe gene regulation, and then that that model could be used to make estimates of quantities that are normally very hard to measure, like *in vivo* protein numbers.  
 
 This first point is interesting because it's not obvious that gene regulation should be an equilibrium process (as thermodynamics assumes), but it could be that it requires the use of *energy* (via ATP or something similar).  Showing this model's explanatory power was evidence of how the underlying processes work.
 
-Then they used their model to make a variety of predictions, most significantly of the repressor binding energy, $\Delta\varepsilon_{RD*$, and the repressor copy number, $R$.  (The $RD$ stands for *R*epressor-*D*NA to indicate the binding of the repressor to DNA.)  They used other more complicated techniques and results to verify their model fits and found very good agreement.  This suggests that such a model fit and set of experiments might be useful for future measurements of those quantities.
+Then they used their model to make a variety of predictions, most significantly of the repressor binding energy, $\Delta\varepsilon_{RD}$, and the repressor copy number, $R$.  (The $RD$ stands for **R**epressor-**D**NA to indicate the binding of the repressor to DNA.)  They used other more complicated techniques and results to verify their model fits and found very good agreement.  This suggests that such a model fit and set of experiments might be useful for future measurements of those quantities.
 
-\subsubsection{The Model*
+#### The model
+
 Specifically, the model they fit is given in Equation 5 of their paper:
-\begin{equation*
-    \text{Fold Change in Expression* = 
-    \left(
-        1 + \frac{2R*{N_{NS*
-        e^{-\beta\Delta\varepsilon_{RD*
-    \right)^{-1*,
-\end{equation*
-where the *Fold Change in Expression* is the change in fluorescence in the presence of repressors compared to when there are no repressors in the system.  $R$ is the number of repressor proteins, $N_{NS* = 5\times10^6$ is the number of *non-specific* binding sites that the repressor could bind on the DNA that wouldn't impact expression, and $\beta = 1/k_BT$ is a Boltzmann factor.
+```{math}
+\text{Fold Change in Expression} = 
+\left(
+    1 + \frac{2R}{N_{NS}}
+    e^{-\beta\Delta\varepsilon_{RD}}
+\right)^{-1},
+```
+where the *Fold Change in Expression* is the change in fluorescence in the presence of repressors compared to when there are no repressors in the system.  $R$ is the number of repressor proteins, $N_{NS} = 5\times10^6$ is the number of *non-specific* binding sites that the repressor could bind on the DNA that wouldn't impact expression, and $\beta = 1/k_BT$ is a Boltzmann factor.
 
-\subsubsection{The Data*
- The data consist of images of *E. coli* bacteria which have been modified so that the existence of certain proteins causes light at different wavelengths to be emitted.  These images are known as *fluorescence* measurements, and are a common type of data in modern biological experiments.  You will have access to several of these images for several mutant strains that are mentioned in the paper.
- 
- The images you have been given show the bacteria in three *channels*: a YFP channel, an mCherry channel, and a Phase-Contrast channel.  These first two channels are named after the engineered fluorescent proteins that have been genetically inserted into the bacteria.  The YFP (Yellow Fluorescent Protein) have been engineered to be attached to the *lac* operon, so that when those genes are expressed, the cell will fluoresce yellow.  The mCherry (a red fluorescent protein) has been engineered to be expressed in all bacteria, hopefully enabling the cells to be seen compared to the background.  The Phase-Contrast images are not channels corresponding to specific wavelengths, as in the previous channels, but instead look for *phase shifts* in the light to detect objects with different *optical densities*.  As you can see in the images when you open them, this tends to highlight the *edges* of the bacteria, again potentially allowing us to extract them from the background.
- 
- Although this is not known in general, through a complicated calibration experiment, the authors were able to estimate the repressor copy number, $R$ several strains and thus fit the model using fold-change in fluorescence as the response and $R$ as the covariate.
+#### The data
 
-\subsubsection{Image Processing*
-In order to get the fluorescence (number of photons) of each bacteria in the images, one must do some *image processing*.  That is, a picture to a computer is just an array of numbers.  Each pixel location has a number telling the relative number of light energy that that part of the detector saw.  The computer does not automatically know where the bacteria are.  Furthermore, while we can look at the images and point to the bacteria, it is not possible to do this consistently when we have a lot of images.  Thus, we must do some work to help the computer automatically find the bacteria in the images.
+The data consist of images of *E. coli* bacteria which have been modified so that the existence of certain proteins causes light at different wavelengths to be emitted.  These images are known as **fluorescence** measurements, and are a common type of data in modern biological experiments.  You will have access to several of these images for several mutant strains that are mentioned in the paper.
 
-Specifically, we'll use the mCherry images to find where the *E. coli* are using two techniques called *thresholding* and *erosion and dilation*.  The first method looks at the *distribution* of pixels across the image and tries to find a *threshold* where pixels that have more intensity than the threshold are bacteria and those that have less are not.  This is a somewhat noisy operation, so to smooth out the detected regions, we use the *morphological operations* of erosion and dilation.  These "erode" the detected regions to eliminate small noise, then "dilate" the remaining regions to restore their rough shape.  This is shown in Figure \ref{fig:ImgProcPhase*.  The last panel of this figure is titled "Size-Filtered Image" to indicate that there is also a filter applied that removes detected regions that are too small.
+The images you have been given show the bacteria in three *channels*: a YFP channel, an mCherry channel, and a Phase-Contrast channel.  These first two channels are named after the engineered fluorescent proteins that have been genetically inserted into the bacteria.  The YFP (Yellow Fluorescent Protein) have been engineered to be attached to the *lac* operon, so that when those genes are expressed, the cell will fluoresce yellow.  The mCherry (a red fluorescent protein) has been engineered to be expressed in all bacteria, hopefully enabling the cells to be seen compared to the background.  The Phase-Contrast images are not channels corresponding to specific wavelengths, as in the previous channels, but instead look for *phase shifts* in the light to detect objects with different *optical densities*.  As you can see in the images when you open them, this tends to highlight the *edges* of the bacteria, again potentially allowing us to extract them from the background.
 
-Once we have this last panel in Figure \ref{fig:ImgProcPhase*, we can use it to extract the only the YFP values from the YFP images that correspond to a bacterium and not the background.  It's worth noting that this is only *one method* for performing such processing, and in general the specific pipeline will vary from data set to data set.  However, now that you've seen how this works, it may be worth considering this process when you design your experiment.
+Although this is not known in general, through a complicated calibration experiment, the authors were able to estimate the repressor copy number, $R$ several strains and thus fit the model using fold-change in fluorescence as the response and $R$ as the covariate.
+
+#### Image processing
+
+In order to get the fluorescence (number of photons) of each bacteria in the images, one must do some **image processing**.  That is, a picture to a computer is just an array of numbers.  Each pixel location has a number telling the relative number of light energy that that part of the detector saw.  The computer does not automatically know where the bacteria are.  Furthermore, while we can look at the images and point to the bacteria, it is not possible to do this consistently when we have a lot of images.  Thus, we must do some work to help the computer automatically find the bacteria in the images.
+    
+Specifically, we'll use the mCherry images to find where the *E. coli* are using two techniques called **thresholding** and **erosion and dilation**.  The first method looks at the *distribution* of pixels across the image and tries to find a *threshold* where pixels that have more intensity than the threshold are bacteria and those that have less are not.  This is a somewhat noisy operation, so to smooth out the detected regions, we use the **morphological operations** of erosion and dilation.  These "erode" the detected regions to eliminate small noise, then "dilate" the remaining regions to restore their rough shape.  This is shown in {numref}`fig_ImgProcPhase`.  The last panel of this figure is titled "Size-Filtered Image" to indicate that there is also a filter applied that removes detected regions that are too small.
+
+Once we have this last panel in {numref}`fig_ImgProcPhase`, we can use it to extract the only the YFP values from the YFP images that correspond to a bacterium and not the background.  It's worth noting that this is only *one method* for performing such processing, and in general the specific pipeline will vary from data set to data set.  However, now that you've seen how this works, it may be worth considering this process when you design your experiment.
 
 As a final note, in the pipeline code that I've given you, the YFP is extracted using processed mCherry images, not the phase-contrast images.  This is purely practical - I found in my own experimentation that the mCherry gave more reliable results.
 
-\begin{figure*[htbp]
-    \centering
-    \captionsetup{width=0.8\linewidth*
-    \includegraphics[width=\linewidth]{ExampleFullPipeline_Phase.pdf*
-    \caption{Example of simple image processing pipeline using a phase-contrast image.  The top left panel shows the raw image.  The top right panel shows the distribution of pixels in this image along with an automatically detected threshold.  The middle left panel shows the binary image resulting from applying the threshold to the raw image.  The middle right panel shows the result of applying an erosion operation and the bottom left panel shows the result of a subsequent dilation operation.  The bottom right panel filters the detected regions for size, removing those that are too small; in this case, none were removed.*
-    \label{fig:ImgProcPhase*
-\end{figure*
+```{figure} ./Resources/ExampleFullPipeline_Phase.jpg
+---
+name: fig_ImgProcPhase
+alt: Example of simple image processing pipeline using a phase-contrast image.  The top left panel shows the raw image.  The top right panel shows the distribution of pixels in this image along with an automatically detected threshold.  The middle left panel shows the binary image resulting from applying the threshold to the raw image.  The middle right panel shows the result of applying an erosion operation and the bottom left panel shows the result of a subsequent dilation operation.  The bottom right panel filters the detected regions for size, removing those that are too small; in this case, none were removed.
+---
+Example of simple image processing pipeline using a phase-contrast image.  The top left panel shows the raw image.  The top right panel shows the distribution of pixels in this image along with an automatically detected threshold.  The middle left panel shows the binary image resulting from applying the threshold to the raw image.  The middle right panel shows the result of applying an erosion operation and the bottom left panel shows the result of a subsequent dilation operation.  The bottom right panel filters the detected regions for size, removing those that are too small; in this case, none were removed.
+```
 
-\newpage
-\section{Review*
+<!-- \begin{figure}[htbp]
+    \centering
+    \captionsetup{width=0.8\linewidth}
+    \includegraphics[width=\linewidth]{ExampleFullPipeline_Phase.pdf}
+    \caption{Example of simple image processing pipeline using a phase-contrast image.  The top left panel shows the raw image.  The top right panel shows the distribution of pixels in this image along with an automatically detected threshold.  The middle left panel shows the binary image resulting from applying the threshold to the raw image.  The middle right panel shows the result of applying an erosion operation and the bottom left panel shows the result of a subsequent dilation operation.  The bottom right panel filters the detected regions for size, removing those that are too small; in this case, none were removed.}
+    \label{fig:ImgProcPhase}
+\end{figure} -->
+
+## Review
+
 
 So what was the point of this module?  This module was meant to emphasize some of the most fundamental concepts in statistics and science.
 
-% So what was the point of this module? And why should you be reading this? How is this going to help you analyze your data?
-
-% This module conveys some of the most important concepts in statistics and science. 
-
 First, begin quantitative isn't just reporting numbers; being quantitative requires having a fundamental understanding of what the number represents, what assumptions allow that number to be a representation of some part of your data, and how well you even know that number.  We hope that you have started to see how being quantitative involves a deep grappling with uncertainty, and that there are many ways to estimate this uncertainty.
 
-Second, we have introduced the way that you can confront data and models to each other.  While we focused on the nuts and bolts of model fitting, actually doing science involves a back and forth between model generation and model assessment. Furthermore, we have presented model fitting as a specific type of parameter estimation so that the problems posed by model fitting are at the front of your mind when you are fitting your models as well.  Specifically, we want you to ask the same questions when you're calculating a standard deviation that you do when you do linear regression:\\
-\begin{NoteBox*{*
-\begin{itemize*[noitemsep]
-\item How likely am I to observe this estimate?
-\item How confident are you in this estimate?
-\item How much deviation from this estimate should I expect?
-\end{itemize*
-\end{NoteBox*
+Second, we have introduced the way that you can confront data and models to each other.  While we focused on the nuts and bolts of model fitting, actually doing science involves a back and forth between model generation and model assessment. Furthermore, we have presented model fitting as a specific type of parameter estimation so that the problems posed by model fitting are at the front of your mind when you are fitting your models as well.  Specifically, we want you to ask the same questions when you're calculating a standard deviation that you do when you do linear regression:
+
+```{note}
+1. How likely am I to observe this estimate?
+2. How confident are you in this estimate?
+3. How much deviation from this estimate should I expect?
+\end{itemize}
+```
 Within answering these questions, you have to assess questions of likelihoods, expectations, and prior knowledge.  We point out that you can leverage your computer to answer these questions more concretely than theory.
-
-% being quantitative doesn't require reporting a number. Being quantitative requires having some fundamental understanding of what the number encapsulates, what the assumption are that go into allows that number to quantitative represent some feature of your data, and providing an estimate for error bars for your quantitative estimate. This is what being quantitative is all about and we hope that this introduction to parameter estimation, point estimates, and intervals of confidence show you that there are several factors to consider, several options that you have to choose from, and quantitative methods to assess the suitability of each approach. 
-
-% Second, is the idea of confronting data and models to each other. While model fitting was the focus of this module it should be stated that often the conversation involves a cycle between model generation, model fitting, assessment of fit and predictive power, back to model generation, .... etc. This is the process of science. We focused on two aspects of the scientific method in this module: Model fitting and an assessment of the fit and the model's predictive power. Model fitting, I hope you see now, is a kind of parameter estimation problem and there are many approaches to doing this. All the issues that rose within the parameter estimation part of the module must be front of mind when doing model fitting as well. What is the basis of this parameter estimation? What is the spread in my estimate consistent with my data? Do I have prior information that would additionally constrain my parameter estimate? But of course there are additional features of modeling fitting, and statistical modeling in general, that go beyond parameter estimation. Is the model appropriate for the data at hand? Are the assumptions made by the model upheld in the data? Perhaps most importantly, how can we assess a model's capacity through its ability to walk the thin line between over and underfitting. Again, as is the theme of this class, instead of using some classical statistics that requires assuming a host of unfounded facts about your data, you can use your computer, in particular cross-validation, to practically produce quantitative estimates of the model fit and predictive power.
 
 Thirdly, we address the aspect of parameter fitting that extends beyond making models purely descriptive, but also *predictive*, by introducing cross-validation.  This aspect of confronting models to data involves assessing the validity of fitting assumptions as well as whether your data are appropriate for the type of model you're considering.  We demonstrate how computational techniques can be used to practically determine your model's tendencies to over- or under-fit.
 
 Finally, we encourage you to take a step back from the details of the module, and see that unlike in Module 1, you are now beginning to use some of the basics to actually analyze data. In particular, we introduced you to important aspects of statistical thinking, problem solving and navigating quantitative problems by giving you exposure to the multiple approaches often used to analyze data, and new methods to calculate and simulate important quantities. 
 
+### Content summary
 
-\subsection{Content Summary*
+- There are many ways to make **point estimates**
+    - **MLE** seeks to maximize the **likelihood** function.
+    - **MAP** seeks to maximimze the **posterior** function.
+    - If you have the distributional form of the posterior, you can also calculate expected values, medians, or modes.
+- Point estimates are only so useful, we need to have a region of **confidence}.
+    - **Confidence intervals** measure the confidence to which future experiments will enclose the true parameter.
+    - Confidence intervals require *theoretical* calculations
+    - **Credible intervals** measure the region containing a certain percent of the *probability* of the parameter existing.
+    - Credible intervals represent the *current* probability of $\theta$ having a specific value.
+    - **Bootstrapping** allows for empirical calculation of MLEs and confidence intervals.
 
-\begin{itemize*
-\item There are many ways to make *point estimates*
-\begin{itemize*
-    \item *MLE* seeks to maximize the *likelihood* function.
-    \item *MAP* seeks to maximimze the *posterior* function.
-    \item If you have the distributional form of the posterior, you can also calculate expected values, medians, or modes.
-\end{itemize*
-\item Point estimates are only so useful, we need to have a region of *confidence*.
-\begin{itemize*
-    \item *Confidence intervals* measure the confidence to which future experiments will enclose the true parameter.
-    \item Confidence intervals require *theoretical* calculations
-    \item *Credible intervals* measure the region containing a certain percent of the *probability* of the parameter existing.
-    \item Credible intervals represent the *current* probability of $\theta$ having a specific value.
-    \item *Bootstrapping* allows for empirical calculation of MLEs and confidence intervals.
-\end{itemize*
-\item Models have parameters.  These parameters need to be estimated.
-\begin{itemize*
-    \item *Ordinary Least Squares* (OLS) is a framework that suggests that we should choose the parameters that minimize the sum of the squared residuals, $r_i = y_i - f(\vec{x*_i, \Theta)$.
-    \item When we assume the errors are normally distributed, the OLS framework can be posed as a maximum-likelihood problem.
-    \item When our model is linear ($y_i = \vec{x*_i\vec{\beta}$), then we can recover the MLE for $\vec{\beta}$ using equation \ref{eqn:LinRegSoln*.  This is known as *linear regression*.
-    \item We can also use *Bayesian linear regression* to solve this problem with some relaxed constraints and informed priors.
-    \item We can also use bootstrapping to estimate parameters and their confidence intervals.
-\end{itemize*
-\item *Cross-validation* is a method for systematically assessing the predictive power of your model by breaking your data into *training* and *test* sets.
-\begin{itemize*
-    \item Cross-validation is often used to fit *hyperparameters*, which are parameters of the algorithm or analysis, not of the model.
-    \item $k$-fold cross validation involves breaking the data into $k$ sets and using each of the $k$ partitions, or folds, as the test set in turn.
-\end{itemize*
-\end{itemize*
+- Models have parameters.  These parameters need to be estimated.
+    - **Ordinary Least Squares** (OLS) is a framework that suggests that we should choose the parameters that minimize the sum of the squared residuals, $r_i = y_i - f(\vec{x}_i, \Theta)$.
+    - When we assume the errors are normally distributed, the OLS framework can be posed as a maximum-likelihood problem.
+    - When our model is linear ($y_i = \vec{x}_i\vec{\beta}$), then we can recover the MLE for $\vec{\beta}$ using equation {eq}`eqn_LinRegSoln`.  This is known as **linear regression**.
+    - We can also use **Bayesian linear regression** to solve this problem with some relaxed constraints and informed priors.
+    - We can also use bootstrapping to estimate parameters and their confidence intervals.
+- **Cross-validation** is a method for systematically assessing the predictive power of your model by breaking your data into **training** and **test** sets.
+    - Cross-validation is often used to fit **hyperparameters**, which are parameters of the algorithm or analysis, not of the model.
+    - $k$-fold cross validation involves breaking the data into $k$ sets and using each of the $k$ partitions, or folds, as the test set in turn.
 
-\subsection{Learning Goals*
+### Learning goals
 
 In keeping with the overall learning goal structure of this course, the learning goals of this Module can be broken into the following specific actions.
 
 By the end of the module, it is our goal that a student can...
-\begin{itemize*
-\item \hlMVD{Manipulating and Visualizing Data*
-    \begin{itemize*[noitemsep]
-        \item Illustrate estimates and regions of confidence
-        \item Illustrate model fits and uncertainty in those fits
-        \item Illustrate bootstrapped parameters
-        \item Illustrate and annotate plots of model residuals
-    \end{itemize*
-\item \hlPCS{Performing Calculations and Simulations*
-    \begin{itemize*[noitemsep]
-        \item Calculate MLEs and confidence intervals using mathematical formulas
-        \item Calculate MLEs and confidence intervals using *bootstrapping*
-        \item Calculate MAP estimates and credible intervals from computational posterior distributions
-        \item Perform OLS linear regression to get estimates of regression coefficients
-        \item Calculate estimates and confidence intervals of regression coefficients by combining bootstrapping and linear regression
-        \item Use bootstrapped or posterior distributions for parameter to assess the likelihood of deviations from expectation
-        \item Calculate the prediction error of a model
-        \item Implement cross-validation to calculate the prediction error
-        \item Generate estimates of fluorescence from images
-    \end{itemize*
-    
-\item \hlTS{Thinking Statistically*
-    \begin{itemize*[noitemsep]
-        \item Elaborate on the distributional nature of estimates
-        \item Discuss different methods of making estimates and their assumptions
-        \item Discuss different methods for making regions of confidence and their assumptions
-        \item Determine appropriate methods for estimating different quantities and their uncertainties
-        \item Discuss the assumptions and limitations of ordinary least-squares for fitting models
-        \item Interpret figures of model residuals to assess model performance
-    \end{itemize*
-    
-\item \hlNQP{Navigating Quantitative Problems*
-    \begin{itemize*[noitemsep]
-        \item Critique different methods of making estimates and determine an appropriate method for a given data set
-        \item Critique different methods of making regions of confidence and determine an appropriate method for a given data set
-        \item Determine how and when it is appropriate to explore multiple methods for making estimates
-        \item Critique different methods for fitting simple models and determine and appropriate method among them
-        \item Assess the predictive ability and appropriateness of a model for a given dataset
-        \item Compare models using cross-validation
-    \end{itemize*
-\end{itemize*
+- <mark style="background-color: #6b9cee">Manipulating and Visualizing Data</mark>
+    - Illustrate estimates and regions of confidence
+    - Illustrate model fits and uncertainty in those fits
+    - Illustrate bootstrapped parameters
+    - Illustrate and annotate plots of model residuals
+- <mark style="background-color: #e26563">Performing Calculations and Simulations</mark>
+    - Calculate MLEs and confidence intervals using mathematical formulas
+    - Calculate MLEs and confidence intervals using *bootstrapping*
+    - Calculate MAP estimates and credible intervals from computational posterior distributions
+    - Perform OLS linear regression to get estimates of regression coefficients
+    - Calculate estimates and confidence intervals of regression coefficients by combining bootstrapping and linear regression
+    - Use bootstrapped or posterior distributions for parameter to assess the likelihood of deviations from expectation
+    - Calculate the prediction error of a model
+    - Implement cross-validation to calculate the prediction error
+    - Generate estimates of fluorescence from images
 
-\newpage
-\section{Details and Useful Code*
+- <mark style="background-color: #ffda5c">Thinking Statistically</mark>
+    - Elaborate on the distributional nature of estimates
+    - Discuss different methods of making estimates and their assumptions
+    - Discuss different methods for making regions of confidence and their assumptions
+    - Determine appropriate methods for estimating different quantities and their uncertainties
+    - Discuss the assumptions and limitations of ordinary least-squares for fitting models
+    - Interpret figures of model residuals to assess model performance
+
+- <mark style="background-color: #92c57a">Navigating Quantitative Problems</mark>
+    - Critique different methods of making estimates and determine an appropriate method for a given data set
+    - Critique different methods of making regions of confidence and determine an appropriate method for a given data set
+    - Determine how and when it is appropriate to explore multiple methods for making estimates
+    - Critique different methods for fitting simple models and determine and appropriate method among them
+    - Assess the predictive ability and appropriateness of a model for a given dataset
+    - Compare models using cross-validation
+
+## Other details and (potentially) useful code
+
 
 In this section, we will outline some useful details and Python code examples that would have cluttered the main text of the notes.  This section may be a bit more mathematical with less explanation than the rest of the notes, but we will still try and explain the main takeaways without relying on equations or algebra.
 
-\subsection{Derivation of ML Confidence Intervals for Exponential Rate Parameter*
+### Derivation of ML Confidence Intervals for Exponential Rate Parameter
 
-In this subsection we will detail the derivations of the formulas given in Problem 1 of Assignment 2 in which you are asked to calculate the confidence interval for an exponential rate parameter, $\lambda$ in a few different ways.  The work in this subsection is really only for students who are interested in the details and is not at all essential for a complete understanding of this module.  As given in the Assignment, the useful takeaways are the formulas given in Equations \ref{eqn:LConfIntApprox* and \ref{eqn:LConfIntExact*.
+In this subsection we will detail the derivations of the formulas given in Problem 1 of Assignment 2 in which you are asked to calculate the confidence interval for an exponential rate parameter, $\lambda$ in a few different ways.  The work in this subsection is really only for students who are interested in the details and is not at all essential for a complete understanding of this module.  As noted in the Assignment, the useful takeaways are the formulas {eq}`eqn_LConfIntApprox` and {eq}`eqn_LConfIntExact`.
 
-In the Assignment problem, you consider two lists of $N = 1372$ time intervals, $\tau_i$, which seem to be exponentially distributed based on their distributions  (see Assignment 1 solutions for an example).  Furthermore, we believe these intervals are exponentially distributed because it is known that the time intervals between Poisson-distributed events are exponentially distributed, and the best first guess at how bacteria run-and-tumble is that the switching is a Poisson process\footnote{See \href{https://doi.org/10.1038/239500a0*{Berg and Brown* (1972) for experimental evidence or \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1473391/*{Berg and Purcell* (1977) for a detailed discussion of the "Physics of chemoreception"*.  Based on these assumptions then, we write that the *likelihood* of observing any given $\tau_i$ can be written
-\begin{equation*
-P\left(\tau_i|\lambda\right) = \lambda e^{-\lambda \tau_i*,
-\end{equation*
-where $\lambda$ is called the *exponential rate parameter* (it has units of events/time; in this case, $[s^{-1*]$).
+In the Assignment problem, you consider two lists of $N = 1372$ time intervals, $\tau_i$, which seem to be exponentially distributed based on their distributions  (see Assignment 1 solutions for an example).  Furthermore, we believe these intervals are exponentially distributed because it is known that the time intervals between Poisson-distributed events are exponentially distributed, and the best first guess at how bacteria run-and-tumble is that the switching is a Poisson process[^1].  Based on these assumptions then, we write that the *likelihood* of observing any given $\tau_i$ can be written
+```{math}
+P\left(\tau_i\,|\,\lambda\right) = \lambda e^{-\lambda \tau_i},
+```
+where $\lambda$ is called the **exponential rate parameter** (it has units of events/time; in this case, $[s^{-1}]$).
 
 The likelihood then of all the $\tau_i$ can be written as
-\begin{equation*\label{eqn:ExpLikeAllTau*
+```{math}
+:label: eqn_ExpLikeAllTau
 P\left(
     \tau_1, \tau_2, \ldots, \tau_N
-\right) = \prod_{i=1*^N\lambda e^{-\lambda\tau_i*
- = \lambda^N e^{-\lambda\sum_{i=1*^N\tau_i*.
-\end{equation*
-We can find the maximum likelihood estimator (MLE), $\hat{\lambda*$ by taking the logarithm of both sides of \ref{eqn:ExpLikeAllTau* and setting the derivative with respect to $\lambda$ to zero.  We also use $\bar{\tau* = \sum\tau_i/N$ to derive:
-\begin{align*
-\log\left[ P\left(
-    \tau_1, \tau_2, \ldots, \tau_N
-\right)\right] &= N\log{\lambda* - \lambda N\bar{\tau*\\
-\frac{\partial*{\partial\lambda*\left[
-\log\left[ P\left(
-    \tau_1, \tau_2, \ldots, \tau_N
-\right)\right]
-\right] &= \frac{N*{\lambda* - N\bar{\tau*\\
-\frac{\partial*{\partial\lambda*\left[
-    \log[P]
-\right] = 0 \qquad &\Rightarrow \qquad \lambda = \frac{1*{\bar{\tau*,
-\end{align*
-as indicated in the assignment, so that we can use $\hat{\lambda* = 1/\bar{\tau*$ as our MLE for the rate parameter.  However, this doesn't tell us anything about how $\hat{\lambda*$ is distributed, and therefore about our confidence interval for this estimate.  To determine that we'll have to do a little work.\\
+\right) = \prod_{i=1}^N\lambda e^{-\lambda\tau_i}
+ = \lambda^N e^{-\lambda\sum_{i=1}^N\tau_i}.
+```
+We can find the maximum likelihood estimator (MLE), $\hat{\lambda}$ by taking the logarithm of both sides of {eq}`eqn_ExpLikeAllTau` and setting the derivative with respect to $\lambda$ to zero.  We also use $\bar{\tau} = \sum\tau_i/N$ to derive:
+```{math}
+\begin{align}
+    \log\left[ P\left(
+        \tau_1, \tau_2, \ldots, \tau_N
+    \right)\right] &= N\log{\lambda} - \lambda N\bar{\tau}\\
+    \frac{\partial}{\partial\lambda}\left[
+    \log\left[ P\left(
+        \tau_1, \tau_2, \ldots, \tau_N
+    \right)\right]
+    \right] &= \frac{N}{\lambda} - N\bar{\tau}\\
+    \frac{\partial}{\partial\lambda}\left[
+        \log[P]
+    \right] = 0 \qquad &\Rightarrow \qquad \lambda = \frac{1}{\bar{\tau}},
+\end{align}
+```
+as indicated in the assignment, so that we can use $\hat{\lambda} = 1/\bar{\tau}$ as our MLE for the rate parameter.  However, this doesn't tell us anything about how $\hat{\lambda}$ is distributed, and therefore about our confidence interval for this estimate.  To determine that we'll have to do a little work.
 
-\begin{mybox*{MLE of Rate Parameter*
+````{admonition} MLE of Rate Parameter
 The MLE for the rate parameter of an exponential distribution is given by
-\begin{equation*
-    \hat{\lambda* = \frac{1*{\sum_{i=1*^N\tau_i*
-\end{equation*
-\end{mybox*
+    ```{math}
+        \hat{\lambda} = \frac{1}{\sum_{i=1}^N\tau_i}
+    ```
+````
 
-Our first method proposed in 1.a.i. of the assignment is obviously wrong, but we will make use of its logic to get going on the approximate method given in 1.a.ii \footnote{For more details, consider the post \href{https://stats.stackexchange.com/questions/399809/95-confidence-interval-of-lambda-for-x-1-x-n-iid-exponential-with-rate?newreg=6579dec0b6a54b808a0b9cae6020c137*{here*.*.  In particular, the logic of 1.a.i. says that for a confidence level of $\alpha$, the confidence interval of a normally-distributed quantity, $X$, (like the mean of i.i.d. random variables) is given by [$L$, $U$], where we define $L$ and $U$ as
-\begin{equation*
+Our first method proposed in 1.1.1 of the assignment is obviously wrong, but we will make use of its logic to get going on the approximate method given in 1.1.2[^2].  In particular, the logic of 1.1.1 says that for a confidence level of $\alpha$, the confidence interval of a normally-distributed quantity, $X$, (like the mean of i.i.d. random variables) is given by [$L$, $U$], where we define $L$ and $U$ as
+```{math}
 1 - \alpha = P\left(
     L\leq X\leq U
 \right) = P\left(
-    \mu + z_{\alpha/2*\sigma\leq X\leq \mu+z_{1 - \alpha/2*\sigma
+    \mu + z_{\alpha/2}\sigma\leq X\leq \mu+z_{1 - \alpha/2}\sigma
 \right),
-\end{equation*
-where $z_{p*$ is the $p^{\text{th*$ percentile of the standard normal distribution, $\mu$ is the mean of $X$'s distribution, and $\sigma$ is its standard deviation.  We can also write this as
-\begin{equation*
+```
+where $z_{p}$ is the $p^{\text{th}}$ percentile of the standard normal distribution, $\mu$ is the mean of $X$'s distribution, and $\sigma$ is its standard deviation.  We can also write this as
+```{math}
 1 - \alpha = P\left(
-    z_{\alpha/2*\leq \frac{X - \mu}{\sigma} \leq z_{1-\alpha/2*
+    z_{\alpha/2}\leq \frac{X - \mu}{\sigma} \leq z_{1-\alpha/2}
 \right).
-\end{equation*
-If we were actually considering a mean, $\bar{\tau*$, then the CLT tells us that $\sigma = \sigma_{\tau*/\sqrt{N*$ so that we have
-\begin{equation*
+```
+If we were actually considering a mean, $\bar{\tau}$, then the CLT tells us that $\sigma = \sigma_{\tau}/\sqrt{N}$ so that we have
+```
 1 - \alpha = P\left(
-    z_{\alpha/2*\leq \frac{\bar{\tau* - \mu}{\sigma_{\tau*/\sqrt{N* \leq z_{1-\alpha/2*
+    z_{\alpha/2}\leq \frac{\bar{\tau} - \mu}{\sigma_{\tau}/\sqrt{N}} \leq z_{1-\alpha/2}
 \right).
-\end{equation*
-In the case of an exponential distribution, we have $\mu = 1/\lambda$ and $\text{Var*[\tau] = 1/\lambda^2$ so that this equation becomes
-\begin{align*
-1 - \alpha &= P\left(
-    z_{\alpha/2*\leq \sqrt{N*\frac{1/\hat{\lambda* - 1/\lambda*{1/\lambda* \leq z_{1-\alpha/2*
-\right)\\
-&= P\left(
-    \frac{z_{\alpha/2*{\sqrt{N*\leq \frac{\lambda*{\hat{\lambda* -  1\leq \frac{z_{1-\alpha/2*{\sqrt{N*
-\right)\\
-&= P\left(
-    \hat{\lambda*\left(1 + \frac{z_{\alpha/2*{\sqrt{N*\right)\leq \lambda \leq \hat{\lambda*\left(1 + \frac{z_{1-\alpha/2*{\sqrt{N*\right)
-\right).
-\end{align*
-This is the formula given in the assignment.  Of course, this formula rests on the CLT and therefore only applies when $N$ is ``big enough" -- it's approximate.  To make it exact will take a bit more work.  \\
+```
+In the case of an exponential distribution, we have $\mu = 1/\lambda$ and $\text{Var}[\tau] = 1/\lambda^2$ so that this equation becomes
+```{math}
+\begin{align}
+    1 - \alpha &= P\left(
+        z_{\alpha/2}\leq \sqrt{N}\frac{1/\hat{\lambda} - 1/\lambda}{1/\lambda} \leq z_{1-\alpha/2}
+    \right)\\
+    &= P\left(
+        \frac{z_{\alpha/2}}{\sqrt{N}}\leq \frac{\lambda}{\hat{\lambda}} -  1\leq \frac{z_{1-\alpha/2}}{\sqrt{N}}
+    \right)\\
+    &= P\left(
+        \hat{\lambda}\left(1 + \frac{z_{\alpha/2}}{\sqrt{N}}\right)\leq \lambda \leq \hat{\lambda}\left(1 + \frac{z_{1-\alpha/2}}{\sqrt{N}}\right)
+    \right).
+\end{align}
+```
+This is the formula given in the assignment.  Of course, this formula rests on the CLT and therefore only applies when $N$ is "big enough" -- it's approximate.  To make it exact will take a bit more work.
 
-\begin{mybox*{Approximate Confidence Interval for Rate Parameter*
+````{admonition} Approximate Confidence Interval for Rate Parameter
 An approximation to the confidence interval for an exponential rate parameter is
-\begin{equation*
+    ```{math}
+    :label: eqn_LConfIntApprox
     \left[ 
-        \hat{\lambda*\left(1 + \frac{z_{\alpha/2*{\sqrt{N*\right), \quad \hat{\lambda*\left(1 + \frac{z_{1-\alpha/2*{\sqrt{N*\right)
-    \right]\label{eqn:LConfIntApprox*
-\end{equation*
-\end{mybox*
+        \hat{\lambda}\left(1 + \frac{z_{\alpha/2}}{\sqrt{N}}\right), \quad \hat{\lambda}\left(1 + \frac{z_{1-\alpha/2}}{\sqrt{N}}\right)
+    \right]\label{eqn:LConfIntApprox}
+    ```
+````
 
-As noted \href{https://people.missouristate.edu/songfengzheng/Teaching/MTH541/Lecture\%20notes/CI.pdf*{here*, coming up with a formula for the exact confidence interval will require that we make the somewhat odd observation that if a random variable $X$ is exponentially distributed with some rate $\lambda$, then the random variable $Y = 2\lambda X$ is distributed like a $\chi^2$ distribution with 2 degrees of freedom (this is what is noted in problem 1.b.iv.).  More formally, if $X$ is distributed according to $f(x)$ and $y = Y(x)$, then the distribution for $Y$ can be found as
-\[
-g(y) = f(x(y))\frac{\partial x*{\partial y*.
-\]
-In our case, $f(x) = \lambda e^{-\lambda x*$, $y(x) = 2\lambda x\Rightarrow x(y) = Y/2\lambda$, and $\frac{\partial x*{\partial y* = 1/2\lambda$.  Putting all this together gives
-\[
-g(y) = \lambda e^{-\lambda \left(\frac{Y*{2\lambda*\right)*\frac{1*{2\lambda* = \frac{1*{2*e^{-\frac{Y*{2*,
-\]
+As noted [here](https://people.missouristate.edu/songfengzheng/Teaching/MTH541/Lecture\%20notes/CI.pdf), coming up with a formula for the exact confidence interval will require that we make the somewhat odd observation that if a random variable $X$ is exponentially distributed with some rate $\lambda$, then the random variable $Y = 2\lambda X$ is distributed like a $\chi^2$ distribution with 2 degrees of freedom (this is what is noted in problem 1.b.iv.).  More formally, if $X$ is distributed according to $f(x)$ and $y = Y(x)$, then the distribution for $Y$ can be found as
+```{math}
+g(y) = f(x(y))\frac{\partial x}{\partial y}.
+```
+In our case, $f(x) = \lambda e^{-\lambda x}$, $y(x) = 2\lambda x\Rightarrow x(y) = Y/2\lambda$, and $\frac{\partial x}{\partial y} = 1/2\lambda$.  Putting all this together gives
+```{math}
+g(y) = \lambda e^{-\lambda \left(\frac{Y}{2\lambda}\right)}\frac{1}{2\lambda} = \frac{1}{2}e^{-\frac{Y}{2}},
+```
 which is the formula for a $\chi^2$ distribution with 2 degrees of freedom (denoted $\chi^2_2$).  
 
 This might have seemed esoteric, but knowing this lets us write the following interval for $Y$ (and therefore $X$):
-\begin{equation*
+```{math}
 1 - \alpha = P\left(
     \chi_2^2\left(\alpha/2\right)\leq
     Y \leq \chi_2^2\left(1 - \alpha/2\right)
 \right),
-\end{equation*
-where $\chi^2_{\nu*(p)$ is the $p^{\text{th*$ percentile of a $\chi^2$ distribution with $\nu$ degrees of freedom.  We're almost there, now let's set $X = \tau$, our time interval, and note that if each $Y_i\sim\chi^2_2$ then the sum of $Y_i = N\bar{Y*$ is distributed according to $\chi^2_{2N*$ (this is can be shown for $\chi^2$-distributed variables) so that we can re-write the above equation as
-\begin{align*
-1 - \alpha &= P\left(
-    \chi_{2N*^2\left(\alpha/2\right)\leq
-    N\bar{Y* \leq \chi_{2N*^2\left(1 - \alpha/2\right)
-\right)\\
-&= P\left(
-    \chi_{2N*^2\left(\alpha/2\right)\leq
-    2\lambda N\bar{\tau* \leq \chi_{2N*^2\left(1 - \alpha/2\right)
-\right)\\
-&= P\left(
-    \frac{\chi_{2N*^2\left(\alpha/2\right)*{2N\bar{\tau*\leq \lambda \leq
-    \frac{\chi_{2N*^2\left(1-\alpha/2\right)*{2N\bar{\tau*
-\right),
-\end{align*
-which is the formula in the Assignment.\\
+```
+where $\chi^2_{\nu}(p)$ is the $p^{\text{th}}$ percentile of a $\chi^2$ distribution with $\nu$ degrees of freedom.  We're almost there, now let's set $X = \tau$, our time interval, and note that if each $Y_i\sim\chi^2_2$ then the sum of $Y_i = N\bar{Y}$ is distributed according to $\chi^2_{2N}$ (this is can be shown for $\chi^2$-distributed variables) so that we can re-write the above equation as
+```{math}
+\begin{align}
+    1 - \alpha &= P\left(
+        \chi_{2N}^2\left(\alpha/2\right)\leq
+        N\bar{Y} \leq \chi_{2N}^2\left(1 - \alpha/2\right)
+    \right)\\
+    &= P\left(
+        \chi_{2N}^2\left(\alpha/2\right)\leq
+        2\lambda N\bar{\tau} \leq \chi_{2N}^2\left(1 - \alpha/2\right)
+    \right)\\
+    &= P\left(
+        \frac{\chi_{2N}^2\left(\alpha/2\right)}{2N\bar{\tau}}\leq \lambda \leq
+        \frac{\chi_{2N}^2\left(1-\alpha/2\right)}{2N\bar{\tau}}
+    \right),
+\end{align}
+```
+which is the formula in the Assignment.
 
-\begin{mybox*{(Exact) Confidence Interval for Rate Parameter*
+````{admonition} (Exact) Confidence Interval for Rate Parameter
 An approximation to the confidence interval for an exponential rate parameter is
-\begin{equation*
+    ```{math}
+    :label: eqn_LConfIntExact
     \left[
-        \frac{\chi_{2N*^2\left(\alpha/2\right)*{2N \bar{\tau*, \quad \frac{\chi_{2N*^2\left(1-\alpha/2\right)*{2N\bar{\tau*
-    \right]\label{eqn:LConfIntExact*
-\end{equation*
-\end{mybox*
+        \frac{\chi_{2N}^2\left(\alpha/2\right)}{2N \bar{\tau}}, \quad \frac{\chi_{2N}^2\left(1-\alpha/2\right)}{2N\bar{\tau}}
+    \right]\label{eqn:LConfIntExact}
+    ```
+````
 
-As an example of the differences between these assumptions, consider Figure \ref{fig:LambdBoot_2Samp*, where many estimates, $\hat{\lambda*$ were made using $N=5$ and $N=100$ randomly selected samples from our lists of intervals, $\tau^+$ and $\tau^-$.  When $N=5$ there is a significant discrepancy between the normal and $\chi^2$ fits, with the $\chi^2$ fit being much closer to the actual data than the normal distributions.  When we increase the amount of data that goes into the sample to $N=100$, the discrepancy between the $\chi^2$ and normal distributions disappears, so that the fits have essentially the same shape.
+As an example of the differences between these assumptions, consider {numref}`fig_LambdBoot_2Samp`, where many estimates, $\hat{\lambda}$ were made using $N=5$ and $N=100$ randomly selected samples from our lists of intervals, $\tau^+$ and $\tau^-$.  When $N=5$ there is a significant discrepancy between the normal and $\chi^2$ fits, with the $\chi^2$ fit being much closer to the actual data than the normal distributions.  When we increase the amount of data that goes into the sample to $N=100$, the discrepancy between the $\chi^2$ and normal distributions disappears, so that the fits have essentially the same shape.
 
-\begin{figure*[htbp]
-\centering
-\captionsetup{width=0.8\linewidth*
-\includegraphics[width=\linewidth]{Mod2_Notes_Addendum_LambdaBootstrapped_2SampSizes.pdf*
-\caption{Distributions of bootstrapped estimates $\hat{\lambda*$ are shown.  In the top panel, $N=5$ samples are used in each bootstrapped estimate, and $N=100$ are used in the bottom panel.  Fits to normal and $\chi^2$ distributions are shown as dashed and dotted lines, respectively, for each distribution, using the parameterizations described in Equations \ref{eqn:LConfIntApprox* and \ref{eqn:LConfIntExact*.*
-\label{fig:LambdBoot_2Samp*
-\end{figure*
+```{figure} ./Resources/Mod2_Notes_Addendum_LambdaBootstrapped_2SampSizes.jpg
+---
+name: fig_LambdBoot_2Samp
+alt: Distributions of bootstrapped estimates $\hat{\lambda}$ are shown.  In the top panel, $N=5$ samples are used in each bootstrapped estimate, and $N=100$ are used in the bottom panel.  Fits to normal and $\chi^2$ distributions are shown as dashed and dotted lines, respectively, for each distribution, using the parameterizations described in Equations {eq}`eqn_LConfIntApprox` and {eq}`eqn_LConfIntExact`.
+---
+Distributions of bootstrapped estimates $\hat{\lambda}$ are shown.  In the top panel, $N=5$ samples are used in each bootstrapped estimate, and $N=100$ are used in the bottom panel.  Fits to normal and $\chi^2$ distributions are shown as dashed and dotted lines, respectively, for each distribution, using the parameterizations described in Equations {eq}`eqn_LConfIntApprox` and {eq}`eqn_LConfIntExact`.
+```
+<!-- 
+\begin{figure}[htbp]
+    \centering
+    \captionsetup{width=0.8\linewidth}
+    \includegraphics[width=\linewidth]{Mod2_Notes_Addendum_LambdaBootstrapped_2SampSizes.pdf}
+    \caption{Distributions of bootstrapped estimates $\hat{\lambda}$ are shown.  In the top panel, $N=5$ samples are used in each bootstrapped estimate, and $N=100$ are used in the bottom panel.  Fits to normal and $\chi^2$ distributions are shown as dashed and dotted lines, respectively, for each distribution, using the parameterizations described in Equations \ref{eqn:LConfIntApprox} and \ref{eqn:LConfIntExact}.}
+    \label{fig:LambdBoot_2Samp}
+\end{figure} -->
 
-\subsection{Bayesian Estimation of Mean and Standard Deviation of Normally Distributed R.V.s*
+### Bayesian estimation of mean and standard deviation of normally distributed R.V.s
 
-In this subsection we want to provide some code that will demonstrate how we can use Bayes' Theorem to estimate the mean *and standard deviation* of a set of normally distributed random variables.  That is, we'll show the code behind Figures \ref{fig:BayesMAPEst* and \ref{fig:BayesMAPEst2*.
+In this subsection we want to provide some code that will demonstrate how we can use Bayes' Theorem to estimate the mean *and standard deviation* of a set of normally distributed random variables.  That is, we'll show the code behind {numref}`fig_BayesMAPEst` and {numref}`fig_BayesMAPEst2`.
 
 Recall that Bayes' Theorem consists of three important parts:
-\begin{equation*
-P(PARAM| DATA) \propto P(DATA|PARAM)\times P(PARAM),
-\end{equation*
-where the left-hand side is the *posterior*, $P(DATA|PARAM)$ is the *likelihood*, and $P(PARAM)$ is the *prior*.  The likelihood function will generally be similar to that used in a ML estimation, and the crucial difference that Bayes' affords us is the application of priors to create an *updating procedure*.  That is, to generate the quantity we want, the posterior, we need to have a prior and likelihood and we need to multiply them together. However, for those of you encountering this formulation for the first time, actually executing this ``multiplication" can be hard to wrap your head around. 
+```{math}
+P(PARAM\,|\, DATA) \propto P(DATA\,|\,PARAM)\times P(PARAM),
+```
+where the left-hand side is the **posterior**, $P(DATA\,|\,PARAM)$ is the **likelihood**, and $P(PARAM)$ is the **prior**.  The likelihood function will generally be similar to that used in a ML estimation, and the crucial difference that Bayes' affords us is the application of priors to create an *updating procedure}.  That is, to generate the quantity we want, the posterior, we need to have a prior and likelihood and we need to multiply them together. However, for those of you encountering this formulation for the first time, actually executing this "multiplication" can be hard to wrap your head around.
+
 The key to keeping everything in order both in your head and in the code is to recall that your analysis is centered on estimating the *parameter*.  This is different from your normal use of a likelihood function where you consider yourself *given* a parameter value and you input your data to get the numbers.  In this formulation, we consider ourselves *given* the data and we will treat the parameter as our variable input.  
 
 In the code, this means that all of our operations and plots will be *functions of the parameter*.  As a result, I like to recommend that the first step of implementing a Bayesian analysis is to establish a *grid* of parameter values over which your estimation will be performed (over which you'll calculate the prior, likelihood, and posterior distributions).
 
-As an example, let's consider the \href{https://northwestern.box.com/s/30rs60j73xwkwjzhzqqrpi8d2z0l2hu0*{abalones data set* from Assignment 2.  We're going to use the whole weight of the adult abalones as our data and we want to get an estimate for the mean and standard deviation.  Code for loading this data is below:
-\begin{py3code*
+As an example, let's consider the [abalones data set](https://github.com/ejohnson643/WhatDoYourDataSay/blob/main/CourseFiles/Module_2/Resources/abalones.csv) from Assignment 2.  We're going to use the whole weight of the adult abalones as our data and we want to get an estimate for the mean and standard deviation.  Code for loading this data is below:
+```{code-block}
 from collections import Counter
 import numpy as np
 import pandas as pd
@@ -1271,43 +1264,45 @@ names = ['Sex', 'Length', 'Diameter', 'Height', 'Whole Weight', 'Shucked Weight'
 abalones = pd.read_csv("abalones.csv", names=names)
 
 weight = abalones['Whole Weight'][abalones['Sex'] != 'I'].values*200
-\end{py3code*
-As noted \href{http://archive.ics.uci.edu/ml/datasets/Abalone*{here*, the continuous variables were scaled, so to return to units of grams, we multiply by 200.  Once this has been done, we can determine that there are 2,835 samples in \vrb{weight*, ranging from 3.1g to 565.1g.  Examining the distribution of \vrb{weight*, it seems unlikely that the mean is at the ends of this range, so let's set up a grid for the mean that goes from 100 to 400 grams.  The following code creates a uniformly spaced grid of 1201 points from 100 to 400 (4 grid points per integer).
-\begin{py3code*
+```
+As noted [here](http://archive.ics.uci.edu/ml/datasets/Abalone), the continuous variables were scaled, so to return to units of grams, we multiply by 200.  Once this has been done, we can determine that there are 2,835 samples in `weight`, ranging from 3.1g to 565.1g.  Examining the distribution of `weight`, it seems unlikely that the mean is at the ends of this range, so let's set up a grid for the mean that goes from 100 to 400 grams.  The following code creates a uniformly spaced grid of 1201 points from 100 to 400 (4 grid points per integer).
+```{code-block}
 muGrid = np.linspace(100, 400, 1201)
-\end{py3code*
+```
 
 Now that we have the values over which we will be implementing Bayes' Theorem, we need to generate the prior and likelihood distributions.  We'll begin by creating a prior distribution.
 
-First, let's consider a prior distribution for the mean, $\mu$, that doesn't have any knowledge about $\mu$, so it says that all possible values are equally likely (i.e. it is *flat*).  We can calculate this by making a grid of ones the same size as \vrb{muGrid* and normalizing.  Note that normalizing means that the area under the curve is 1, so that if we think of our function as being 1201 rectangles with width $\Delta x = 0.25$, then we need to set the height of those rectangles so that the total area is 1.  In general, if you have a uniformly-spaced grid, you can normalize quickly by dividing by the sum of the $y$-coordinates and then dividing again by $\Delta x$, your grid spacing.
-\begin{py3code*
+First, let's consider a prior distribution for the mean, $\mu$, that doesn't have any knowledge about $\mu$, so it says that all possible values are equally likely (i.e. it is *flat*).  We can calculate this by making a grid of ones the same size as `muGrid` and normalizing.  Note that normalizing means that the area under the curve is 1, so that if we think of our function as being 1201 rectangles with width $\Delta x = 0.25$, then we need to set the height of those rectangles so that the total area is 1.  In general, if you have a uniformly-spaced grid, you can normalize quickly by dividing by the sum of the $y$-coordinates and then dividing again by $\Delta x$, your grid spacing.
+```{code-block}
 flatPrior = np.ones_like(muGrid)
 flatPrior = flatPrior / (np.sum(flatPrior) * np.mean(np.diff(muGrid)))
-\end{py3code*
-This array now approximates the uniform probability density at each point in \vrb{muGrid*.  To make sure that you have properly normalized, you can check that \vrb{np.sum(flatPrior) * dx* = 1.\\ 
+```
+This array now approximates the uniform probability density at each point in `muGrid`.  To make sure that you have properly normalized, you can check that `np.sum(flatPrior) * dx` = 1.\\ 
 
-\begin{NoteBox*{Normalization*
-*Note:* In other places, we have advocated for normalizing by simply dividing by the $y$-coordinates without considering $\Delta x$.  This is also ok, but is subtly different than the code above as it is not representing probability *density*, but a cumulative probability of being in the bin $[x-\Delta x/2, x + \Delta x/2]$.  Since all computational distributions are discrete, the effect of this is that these quantities differ by the constant factor $\Delta x$ (assuming a uniformly spaced grid), which will be important depending on what calculations you want to do with the arrays.  In particular, if you are calculating moments, you need probabilities and not densities, so \vrb{flatPrior* would need to be multiplied by $\Delta x = 0.25$ for those calculations.
-\end{NoteBox*
+```{admonition} Normalization
+In other places, we have advocated for normalizing by simply dividing by the $y$-coordinates without considering $\Delta x$.  This is also ok, but is subtly different than the code above as it is not representing probability *density*, but a cumulative probability of being in the bin $[x-\Delta x/2, x + \Delta x/2]$.  Since all computational distributions are discrete, the effect of this is that these quantities differ by the constant factor $\Delta x$ (assuming a uniformly spaced grid), which will be important depending on what calculations you want to do with the arrays.  In particular, if you are calculating moments, you need probabilities and not densities, so `flatPrior` would need to be multiplied by $\Delta x = 0.25$ for those calculations.
+```
 
-As a comparison, let's also consider a prior based on a (fictional) study that suggests that here  
+As a comparison, let's also consider a prior based on a (fictional) study that suggests that here...
 
-\subsection{Conjugate Priors and Post of Exp Rate*
+### Conjugate Priors and Post of Exp Rate
 
 Problem 1 of the assignment with code?
 
-\subsection{Building your own OLS Linear Regression*
+### Building your own OLS Linear Regression
 
 Implement the XTXXy formula.
 
-\subsection{Code for Bayesian OLS Linear Regression*
+### Code for Bayesian OLS Linear Regression
 
 Show what the calculation looks like in Python
 
-\subsection{Error bars on predictions*
+### Error bars on predictions
 
 Code for different ways of showing error
 
 Show error in *predictions*
 
-\end{document* -->
+[^1]: See [Berg and Brown](https://doi.org/10.1038/239500a0) (1972) for experimental evidence or [Berg and Purcell](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1473391/) (1977) for a detailed discussion of the "Physics of chemoreception"
+
+[^2]: For more details, consider the post [here](https://stats.stackexchange.com/questions/399809/95-confidence-interval-of-lambda-for-x-1-x-n-iid-exponential-with-rate?newreg=6579dec0b6a54b808a0b9cae6020c137).
