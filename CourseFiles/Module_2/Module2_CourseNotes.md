@@ -1120,12 +1120,13 @@ We can find the maximum likelihood estimator (MLE), $\hat{\lambda}$ by taking th
 ```
 as indicated in the assignment, so that we can use $\hat{\lambda} = 1/\bar{\tau}$ as our MLE for the rate parameter.  However, this doesn't tell us anything about how $\hat{\lambda}$ is distributed, and therefore about our confidence interval for this estimate.  To determine that we'll have to do a little work.
 
-````{admonition} MLE of Rate Parameter
+```{admonition} MLE of Rate Parameter
 The MLE for the rate parameter of an exponential distribution is given by
-    ```{math}
-        \hat{\lambda} = \frac{1}{\sum_{i=1}^N\tau_i}
-    ```
-````
+\begin{equation}
+    \hat{\lambda} = \frac{1}{\sum_{i=1}^N\tau_i}
+\end{equation}
+```
+
 
 Our first method proposed in 1.1.1 of the assignment is obviously wrong, but we will make use of its logic to get going on the approximate method given in 1.1.2[^2].  In particular, the logic of 1.1.1 says that for a confidence level of $\alpha$, the confidence interval of a normally-distributed quantity, $X$, (like the mean of i.i.d. random variables) is given by [$L$, $U$], where we define $L$ and $U$ as
 ```{math}
@@ -1142,7 +1143,7 @@ where $z_{p}$ is the $p^{\text{th}}$ percentile of the standard normal distribut
 \right).
 ```
 If we were actually considering a mean, $\bar{\tau}$, then the CLT tells us that $\sigma = \sigma_{\tau}/\sqrt{N}$ so that we have
-```
+```{math}
 1 - \alpha = P\left(
     z_{\alpha/2}\leq \frac{\bar{\tau} - \mu}{\sigma_{\tau}/\sqrt{N}} \leq z_{1-\alpha/2}
 \right).
@@ -1165,12 +1166,12 @@ This is the formula given in the assignment.  Of course, this formula rests on t
 
 ````{admonition} Approximate Confidence Interval for Rate Parameter
 An approximation to the confidence interval for an exponential rate parameter is
-    ```{math}
-    :label: eqn_LConfIntApprox
-    \left[ 
-        \hat{\lambda}\left(1 + \frac{z_{\alpha/2}}{\sqrt{N}}\right), \quad \hat{\lambda}\left(1 + \frac{z_{1-\alpha/2}}{\sqrt{N}}\right)
-    \right]\label{eqn:LConfIntApprox}
-    ```
+```{math}
+:label: eqn_LConfIntApprox
+\left[ 
+    \hat{\lambda}\left(1 + \frac{z_{\alpha/2}}{\sqrt{N}}\right), \quad \hat{\lambda}\left(1 + \frac{z_{1-\alpha/2}}{\sqrt{N}}\right)
+\right]\label{eqn:LConfIntApprox}
+```
 ````
 
 As noted [here](https://people.missouristate.edu/songfengzheng/Teaching/MTH541/Lecture\%20notes/CI.pdf), coming up with a formula for the exact confidence interval will require that we make the somewhat odd observation that if a random variable $X$ is exponentially distributed with some rate $\lambda$, then the random variable $Y = 2\lambda X$ is distributed like a $\chi^2$ distribution with 2 degrees of freedom (this is what is noted in problem 1.b.iv.).  More formally, if $X$ is distributed according to $f(x)$ and $y = Y(x)$, then the distribution for $Y$ can be found as
@@ -1211,12 +1212,12 @@ which is the formula in the Assignment.
 
 ````{admonition} (Exact) Confidence Interval for Rate Parameter
 An approximation to the confidence interval for an exponential rate parameter is
-    ```{math}
-    :label: eqn_LConfIntExact
-    \left[
-        \frac{\chi_{2N}^2\left(\alpha/2\right)}{2N \bar{\tau}}, \quad \frac{\chi_{2N}^2\left(1-\alpha/2\right)}{2N\bar{\tau}}
-    \right]\label{eqn:LConfIntExact}
-    ```
+```{math}
+:label: eqn_LConfIntExact
+\left[
+    \frac{\chi_{2N}^2\left(\alpha/2\right)}{2N \bar{\tau}}, \quad \frac{\chi_{2N}^2\left(1-\alpha/2\right)}{2N\bar{\tau}}
+\right]\label{eqn:LConfIntExact}
+```
 ````
 
 As an example of the differences between these assumptions, consider {numref}`fig_LambdBoot_2Samp`, where many estimates, $\hat{\lambda}$ were made using $N=5$ and $N=100$ randomly selected samples from our lists of intervals, $\tau^+$ and $\tau^-$.  When $N=5$ there is a significant discrepancy between the normal and $\chi^2$ fits, with the $\chi^2$ fit being much closer to the actual data than the normal distributions.  When we increase the amount of data that goes into the sample to $N=100$, the discrepancy between the $\chi^2$ and normal distributions disappears, so that the fits have essentially the same shape.
@@ -1277,7 +1278,7 @@ First, let's consider a prior distribution for the mean, $\mu$, that doesn't hav
 flatPrior = np.ones_like(muGrid)
 flatPrior = flatPrior / (np.sum(flatPrior) * np.mean(np.diff(muGrid)))
 ```
-This array now approximates the uniform probability density at each point in `muGrid`.  To make sure that you have properly normalized, you can check that `np.sum(flatPrior) * dx` = 1.\\ 
+This array now approximates the uniform probability density at each point in `muGrid`.  To make sure that you have properly normalized, you can check that `np.sum(flatPrior) * dx` = 1.
 
 ```{admonition} Normalization
 In other places, we have advocated for normalizing by simply dividing by the $y$-coordinates without considering $\Delta x$.  This is also ok, but is subtly different than the code above as it is not representing probability *density*, but a cumulative probability of being in the bin $[x-\Delta x/2, x + \Delta x/2]$.  Since all computational distributions are discrete, the effect of this is that these quantities differ by the constant factor $\Delta x$ (assuming a uniformly spaced grid), which will be important depending on what calculations you want to do with the arrays.  In particular, if you are calculating moments, you need probabilities and not densities, so `flatPrior` would need to be multiplied by $\Delta x = 0.25$ for those calculations.
