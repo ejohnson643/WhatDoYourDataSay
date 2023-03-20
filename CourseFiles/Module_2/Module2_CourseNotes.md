@@ -746,7 +746,7 @@ The formula for the confidence interval for a regression coefficient is
 ```{math}
 :label: eqn_LinRegCoeffConfInt
 \left[
-    \hat{\beta}_j \pm t_{\alpha/2, N-2*\hat{s*_{\beta_j*
+    \hat{\beta}_j \pm t_{\alpha/2, N-2}\hat{s}_{\beta_j}
 \right],
 ```
 where 
@@ -754,7 +754,7 @@ where
 \hat{s}_{\beta_j} = \sqrt{
         \frac{1}{N-2}
         \frac{\sum_{i=1}^Nr_i^2}{
-        \sum_{i=1}^N(x_{i, j}-\bar{x}_j)^2}
+        \sum_{i=1}^N(x_{i, j}-\bar{x}_j)^2}}
 ```
 is the [**standard error**](https://stats.stackexchange.com/questions/44838/how-are-the-standard-errors-of-coefficients-calculated-in-a-regression/44841#44841) in the $j^{\text{th}}$ regression coefficient.  $t_{p, \nu}$ is the $p^{\text{th}}$ percentile of the Student's $t$ distribution with $\nu$ degrees of freedom (`scipy.stats.t.ppf(p, nu)`).  This is a result of the fact that regression coefficients (under OLS assumptions) are $t$-distributed, which is probably not obvious to you.  It's worth noting that ML confidence intervals are often written as `Estimate` $\pm$ `Percentile` $\times$ `Standard Error`, but you shouldn't assume this form unless you know that you can.  In the case of regression coefficients, the *standard error*, is given by the formula above for $\hat{s}_{\beta_j}$.
 
@@ -866,80 +866,65 @@ where you can pick the shape of the noise term $\varepsilon$ (you can make it un
 Examine the regression coefficients and residual distributions.  What do you notice?
 ````
 
-<!--     
+## Real data! A thermodynamic model of gene regulation
 
-
-
-\subsection{Comments on Model Fitting*
-Throughout this chapter we have tried to stay as high-level as possible, diving into details only to illustrate useful examples.  However, there are some comments that remain that do not belong in the text above.  These are given here.
-
-\subsubsection{Model Selection is For Later!*
-You may have noticed that we did not explore the very interesting question of ``what model should I use?"  This was intentional; model selection is just as difficult and unanswerable as the topics discussed here and we feel it deserves its own thoughts.  You will also see that many of the concepts here will rear their heads in that discussion as well, so this chapter will be good to understand in anticipation of that.
-
-\subsubsection{Many Adjustments; For Later*
-When discussing least-squares, we pointed out that the method of minimizing residuals was just one of many ways to fit models, and indeed there are many.  In particular, non-linear models provide their own difficulties, and we'll discuss them shortly.
-
-In the context of regression, there have been many good and powerful adjustments to the basic regression scheme that improve the predictive accuracy of those models and also aid in the development of a *sparse* model - a model that has fewer covariates.  We hope to discuss this later, but if you are interested, the most popular adjustment is known as *regularization*, of which the most popular algorithms are known as *LASSO*, *Ridge Regression*, and a synthesis of the two, *Elastic-Net Regression*.  These names are provided for your reference if you want to investigate them.  These methods are particularly useful when the number of covariates, $P$, becomes close to or larger than the number of observations, $N$, in which case any model will be underdetermined.  Unlike OLS linear regression, these algorithms come with *hyperparameters* that need to be tuned; this is most often done with cross-validation.
-
-\subsubsection{Non-Linear Models*
-Finally, as alluded to several times, non-linear models provide OLS with some difficulty.  Not only is the calculus of finding their optima not as well-posed as in the linear case, it's also not clear that we should expect homoscedasticity of the errors, since *by definition* of the model, we expect differently sized changes in response at different values of the covariates.
-
-As a result, the suggestion is that if you have a non-linear model you should attempt to linearize it.  That is, if you want to fit an exponential function, take the logarithm; if you think your model is proportional to a square root of your covariate, then you should fit the squared model with OLS linear regression.  In symbols, it is worse to try and fit
-\[
-    y = e^{-\beta x*\qquad\qquad\text{and*\qquad\qquad
-    y = \sqrt{\alpha x*,
-\]
-than it is to fit
-\[
-    \log{y* = -\beta x
-    \qquad\qquad\text{and*\qquad\qquad
-    y^2 = \alpha x.
-\]\\
-
-\begin{TryItBox*
-    Create simulated data according to the model
-    \[
-        y = (x + \varepsilon)^2 + 2(x + \varepsilon) + 1,
-    \]
-    where you can pick the shape of the noise term $\varepsilon$.  Plot your data.  Try fitting this model using your linear regression methods by supplying covariates $X$ = $[1, x, x^2]$.  Then try fitting the equivalent model
-    \[
-        \sqrt{y* = (x + \varepsilon) + 1.
-    \]
-    Examine the regression coefficients and residual distributions.  What do you notice?
-\end{TryItBox*
-
-\section{Garcia and Phillips: Real Data!*
-For the assignment that accompanies this text, there is a data set, which is a part of the data used in \href{https://northwestern.box.com/s/vza4uqo86xhcsy8wqnzxn5afeoj0rvyn*{this paper* by Garcia and Phillips.  In this paper, Garcia and Phillips generated a *thermodynamic model* of a famous *gene regulatory network*: the network around the **lac* operon*.  This model was exceptional for a few reasons, but among the most interesting applications was that the  model could be used to estimate some quantities that are generally very hard to measure: the actual *number* of certain proteins in a given cell and the *binding energies* of certain proteins to DNA.
+For the assignment that accompanies this text, there is a data set, which is a part of the data used in [this paper](https://doi.org/10.1073/pnas.1015616108) by Garcia and Phillips.  In this paper, Garcia and Phillips generated a [**thermodynamic model**](https://en.wikipedia.org/wiki/Equation_of_state) of a famous [**gene regulatory network**](https://en.wikipedia.org/wiki/Gene_regulatory_network): the network around the [***lac* operon**](https://en.wikipedia.org/wiki/Lac_operon).  This model was exceptional for a few reasons, but among the most interesting applications was that the  model could be used to estimate some quantities that are generally very hard to measure: the actual *number* of certain proteins in a given cell and the *binding energies* of certain proteins to DNA.
 
 To understand why this is interesting and how they made and fit their model, we'll give a little background on gene regulatory networks, the *lac* operon specifically, and thermodynamical models.  Then we'll discuss the data and how they used it in the paper.
 
-\subsection{Biology: Gene Regulatory Networks*
-The *Central Dogma of Biology* is a framework for how information is propagated from DNA to proteins.  The general principle is that DNA is *transcribed* into messenger RNA (mRNA), and that RNA is *translated* into proteins.  It's shown as a cartoon in Figure \ref{fig:CentralDogma*.
+### What is a gene regulatory network?
 
-Of course, reality is not so neat, and there are actually arrows between each of the three components (DNA, RNA, and proteins) in every possible direction.  That is, not only can RNA molecules generate proteins via translation, but they can also interact with DNA to affect transcription.  Similarly, proteins don't just run off to never come back to the nucleus of the cell, they often directly regulate transcription and translation.  As a result, biologists refer to the set of interacting DNA, RNA, and proteins as a *genetic regulatory network* (GRN).  This name more aptly describes the biology in which a *network* of agents *regulate* the expression of one or more *genes*.
+The ["Central Dogma of Biology"](https://en.wikipedia.org/wiki/Central_dogma_of_molecular_biology) is a framework for how information is propagated from DNA to proteins.  The general principle is that DNA is **transcribed** into messenger RNA (mRNA), and then that RNA is **translated** into proteins.  It's shown as a cartoon in {numref}`fig_CentralDogma`.
 
-\begin{figure*[htbp]
+Of course, reality is not so neat, and there are actually arrows between each of the three components (DNA, RNA, and proteins) in every possible direction.  That is, not only can RNA molecules generate proteins via translation, but they can also interact with DNA to affect transcription.  Similarly, proteins don't just run off to never come back to the nucleus of the cell, they often directly regulate transcription and translation, both of their own encoding genes as well as many others!  As a result, biologists refer to the set of interacting DNA, RNA, and proteins as a **genetic regulatory network** (GRN).  This name more aptly describes the biology in which a *network* of agents *regulate* the expression of one or more *genes*.
+
+```{figure} ./Resources/CentralDogmaImage_Adjusted.png
+---
+name: fig_CentralDogma
+alt: Illustration of the "Central Dogma of Biology," showing as a cartoon with arrows how DNA is transcribed into mRNA, which is then translated into proteins.  Image courtesy of [Khan Academy](https://www.khanacademy.org/science/high-school-biology/hs-molecular-genetics/hs-rna-and-protein-synthesis/a/intro-to-gene-expression-central-dogma).
+---
+Illustration of the "Central Dogma of Biology," showing as a cartoon with arrows how DNA is transcribed into mRNA, which is then translated into proteins.  Image courtesy of [Khan Academy](https://www.khanacademy.org/science/high-school-biology/hs-molecular-genetics/hs-rna-and-protein-synthesis/a/intro-to-gene-expression-central-dogma).
+```
+
+<!-- \begin{figure*[htbp]
 \centering
 \includegraphics[width=\linewidth]{CentralDogmaImage_Adjusted.png*
 \caption{Illustration of the Central Dogma.  Courtesy of \href{https://www.khanacademy.org/science/high-school-biology/hs-molecular-genetics/hs-rna-and-protein-synthesis/a/intro-to-gene-expression-central-dogma*{Khan Academy*
 \label{fig:CentralDogma*
-\end{figure*
+\end{figure* -->
 
-The *lac* operon GRN refers then to the set of proteins and chemicals that regulate the set of genes known as the *lac* operon.  The *lac* operon, as shown in Figure \ref{fig:LacOperon*,  is a stretch of DNA in *E. coli* that consists of a promoter binding site, an RNA polymerase (RNAP) binding site, a repressor binding site called an *operator*, and three gene coding regions for the genes *lacZ*, *lacY*, and *lacA*.  Based on the growth curves studied by \href{https://northwestern.box.com/s/vza4uqo86xhcsy8wqnzxn5afeoj0rvyn*{Jacob and Monod*, it was noted that *E. coli* bacteria, when placed in an environment with two food sources, glucose and lactose, first consume the glucose, then the lactose.  This suggested that there is some sort of environmental control over when the bacteria would manufacture the enzymes needed for processing lactose.
+The *lac* GRN refers then to the set of proteins and chemicals that regulate the set of genes known as the *lac* operon.  The *lac* operon, as shown in {numref}`fig_LacOperon`,  is a stretch of DNA in *E. coli* that consists of a promoter binding site, an RNA polymerase (RNAP) binding site, a repressor binding site called an *operator*, and three protein-coding regions for the genes *lacZ*, *lacY*, and *lacA*.  Based on the growth curves studied by [Jacob and Monod](https://en.wikipedia.org/wiki/Monod_equation), it was noted that *E. coli* bacteria, when placed in an environment with two food sources, glucose and lactose, first consume the glucose, then the lactose.  This suggested that there is some sort of environmental control over when the bacteria would manufacture the enzymes needed for processing lactose.
 
-\begin{figure*[htbp]
+```{figure} ./Resources/Lac_operon.png
+---
+name: fig_LacOperon
+alt: Diagram of the region of DNA in *E. coli* known as the *lac* operon.  The *lac* operon consists of a promoter binding site, a polymerase binding site, an inhibitor binding site, and three protein coding regions. When glucose is not available to the bacteria, but lactose is, then cAMP, the promoter protein facilitates the production of lactase.  When lactose is unavailable, then the repressor physically inhibits the ability of polymerase to create lactase, even when glucose is not present. Image courtesy of [Wikipedia](https://en.wikipedia.org/wiki/Lac_operon).
+---
+Diagram of the *lac* operon in each of its four states. Image courtesy of [Wikipedia](https://en.wikipedia.org/wiki/Lac_operon).
+```
+
+<!-- \begin{figure*[htbp]
 \centering
 \captionsetup{width=0.8\linewidth*
 \includegraphics[width=\linewidth]{Lac_operon.png*
 \caption{Diagram of the *lac* operon in each of its four states. Image courtesy of \href{https://en.wikipedia.org/wiki/Lac_operon*{Wikipedia*.*
 \label{fig:LacOperon*
-\end{figure*
+\end{figure* -->
 
-This is indeed the case; the bacteria does not waste energy maintaining or creating enzymes for a food source when there is a much easier to consume resource, glucose, around.  The effect becomes pronounced when only lactose is available, in which case many *lac* genes are expressed, or when there is a lot of glucose and no lactose, in which case almost *no* *lac* genes are transcribed.  
+This is indeed the case: the bacteria does not waste energy maintaining or creating enzymes for a food source when there is a much easier to consume resource, glucose, around.  The effect becomes pronounced when only lactose is available, in which case many *lac* genes are expressed, or when there is a lot of glucose and no lactose, in which case almost no *lac* genes are transcribed.  
 
-This system has been extensively studied - it is probably one of the best understood regulatory networks we know of.  It has been shown that when lactose is unavailable, a protein, known as a *repressor* binds to the DNA on the operator region, *physically blocking* RNAP, which transcribes the DNA into mRNA, from binding.  Because this protein stops expression, it is called a repressor.  On the other hand, when there is low glucose, another protein, called a *promoter* because it promotes the expression of the gene, binds to the DNA.  This protein, which in this case is named CAP, makes it *easier* for RNAP to bind, thus increasing expression. In this way, the bacteria have direct mechanisms that control *transcription* and not just protein activity as was initially thought.
+This system has been extensively studied - it is probably one of the best understood regulatory networks we know of.  It has been shown that when lactose is unavailable, a protein, known as a **repressor** binds to the DNA on the operator region, *physically blocking* RNAP, which transcribes the DNA into mRNA, from binding.  Because this protein inhibits (or *represses*) expression, it is called a repressor.  On the other hand, when there is low glucose, another protein called cAMP binds to the DNA in such a manner that it *facilitates* RNAP to bind and make the lac genes.  As a result, cAMP is called a **promoter** in this context. The discovery of these proteins and their effects on transcription were very important because it was not always understood that organisms can modulate *transcription* in addition to translation.
 
-As a result of the work put into understanding this network as a simple model for all GRNs, this network is often taught in biology courses as an introduction to the topic.  It is likely for a similar reason that Garcia and Phillips chose it to model in their paper.  To understand why they needed a simple network to model, we'll first talk a bit about thermodynamics, whose principles they used to generate their model.
+As a result of the work put into understanding this network as a simple model for all GRNs, this network is often taught in biology courses as an introduction to the topic.  It is likely for a similar reason that Garcia and Phillips chose it to model in their paper.  The simplicity of the network also served to demonstrate the efficacy of applying thermodynamics to the analysis of GRNs, which was previously never attempted. Before fully diving into their data and analysis, we'll quickly think for a moment about thermodynamics and what it can bring to the study of living cells.
+
+### Why thermodynamics?
+
+
+
+<!--     
+
+
+
 
 \subsection{Thermodynamics*
 
