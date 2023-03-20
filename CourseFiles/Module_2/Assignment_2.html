@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Assignment 2: Hints and Guidance" href="Assignment2_Hints.html" />
-    <link rel="prev" title="Module 2: Parameter Estimation and Model Fitting" href="Module2_CourseNotes.html" />
+    <link rel="prev" title="SOLUTIONS to Worksheet 2.3: Bootstrapping linear regression" href="Worksheet_2_3_Boot_LinReg_Solutions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -230,7 +232,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="Module_2.html">
-     Module 2
+     Module 2: Parameter Estimation and Model Fitting
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
     <label for="toctree-checkbox-4">
@@ -241,6 +243,36 @@ const thebe_selector_output = ".output, .cell_output"
      <li class="toctree-l3">
       <a class="reference internal" href="Module2_CourseNotes.html">
        Module 2: Parameter Estimation and Model Fitting
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_1_Bootstrapping.html">
+       Worksheet 2.1: An introdution to bootstrapping
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_1_Bootstrapping_Solutions.html">
+       SOLUTIONS to Worksheet 2.1: Bootstrapping
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_2_OLS_LinReg.html">
+       Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_2_OLS_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg.html">
+       Worksheet 2.3: Bootstrapping linear regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.3: Bootstrapping linear regression
       </a>
      </li>
      <li class="toctree-l3 current active">
@@ -437,12 +469,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives:
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -454,6 +510,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives:
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -463,6 +532,126 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="assignment-2">
 <h1>Assignment 2<a class="headerlink" href="#assignment-2" title="Permalink to this headline">#</a></h1>
+<p style="text-align: center;">Written by Eric Johnson and Madhav Mani</p>
+<p style="text-align: center;">Most recently compiled on March 14, 2023</p>
+<hr class="docutils" />
+<p><strong>Assignment Due Dates</strong> (Fall 2020):</p>
+<ul class="simple">
+<li><p>The <em>Assignment Attempt</em> is due on October 16, 2020 at 11:59PM CST</p></li>
+<li><p>The <em>Complete Assignment</em> is due on October 23, 2020 at 11:59PM CST</p></li>
+</ul>
+<hr class="docutils" />
+<p>Please follow the guidelines for assignment <a class="reference internal" href="../HowTo_AssignmentAttempt.html"><span class="doc std std-doc">attempts</span></a> and <a class="reference internal" href="../HowTo_AssignmentCompletion.html"><span class="doc std std-doc">completion</span></a>. In particular, the attempt must be a Jupyter notebook or PDF that clearly enumerates the problem attempts, and the completed assignment must be code <em>and</em> a PDF containing completed solutions. Please use complete sentences in your solutions. All figures should have labeled axes, legends, and appropriate annotations.</p>
+<p>Please read the <em>entire assignment</em> before getting too deep into any one problem so that you can properly allocate your time and questions.</p>
+<section id="learning-objectives">
+<h2>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
+<p>The module learning objectives assessed in this assignment are that a student will be able to:</p>
+<ul class="simple">
+<li><p><mark style="background-color: #e26563">PCS-1</mark>: Calculate estimates and intervals (E&amp;I) using theoretical formulas.</p></li>
+<li><p><mark style="background-color: #e26563">PCS-2</mark>: Calculate E&amp;I using bootstrapping.</p></li>
+<li><p><mark style="background-color: #e26563">PCS-3</mark>: Perform OLS linear regression.</p></li>
+<li><p><mark style="background-color: #e26563">PCS-4</mark>: Perform cross-validation to estimate model error.</p></li>
+<li><p><mark style="background-color: #ffda5c">TS-1</mark>: Understand and discuss methods for making parameter E&amp;I.</p></li>
+<li><p><mark style="background-color: #ffda5c">TS-2</mark>: Understand and discuss OLS assumptions in model fitting.</p></li>
+<li><p><mark style="background-color: #6b9cee">MVD</mark>: Illustrate uncertainty in E&amp;I from data.</p></li>
+<li><p><mark style="background-color: #92c57a">NQP-1</mark>: Compare and critique different methods for calculating E&amp;I and determine optimal methods for your data.</p></li>
+<li><p><mark style="background-color: #92c57a">NQP-2</mark>: Assess whether a given model is under- or over-fit and describe how to improve the model or fitting method.</p></li>
+</ul>
+<p>You can learn more about where to study and practice these skills in the <a class="reference internal" href="Module_2.html"><span class="doc std std-doc">curriculum alignment table</span></a>.</p>
+<hr class="docutils" />
+<ol>
+<li><p><strong>Poisson Rate Estimation:</strong> Consider the bacterial chemotaxis data from the first assignment <a class="reference external" href="https://github.com/ejohnson643/WhatDoYourDataSay/blob/main/CourseFiles/Module_2/Resources/omega.txt">here</a>.  Generate lists of the time intervals, <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span>, that the bacteria spent rotating in the positive and negative directions, respectively.  Feel free to use your work from Assignment 1 or the Assignment 1 Solutions (with proper attribution!).</p>
+<p>In Assignment 1, you examined the distributions of <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span> and calculated some summary statistics.  In particular, the bonus problem 1.5 noted that both <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span> are <em>exponentially distributed</em> with a rate parameter, <span class="math notranslate nohighlight">\(\lambda\)</span>.  In 1.6 you explored the posterior distribution for <span class="math notranslate nohighlight">\(\lambda\)</span> under the assumption that <span class="math notranslate nohighlight">\(\tau\)</span> are exponentially distributed, and started to think about whether <span class="math notranslate nohighlight">\(\lambda=0.2\)</span> was consistent with the data.  After reading the course notes and watching the video lectures, you should now see that this is a <em>parameter estimation</em> problem, which we will now perform more carefully.</p>
+<p>Specifically, in this problem you will examine three different methods for estimating <span class="math notranslate nohighlight">\(\lambda\)</span>: maximum likelihood estimation, Bayesian estimation, and bootstrapping.  You will examine how these estimates depend on the number of samples in the data, and how the different estimates relate to each other.</p>
+<ol>
+<li><p><strong>Maximum Likelihood Estimation and Confidence Intervals:</strong> As pointed out in the notes and worksheets, MLEs and Confidence Intervals involve analytically manipulating theoretical models.  In this problem, we will examine three different sets of assumptions, each a refinement on the last, to underscore what this theoretical process actually looks like in practice.</p>
+<p>In terms of the actual maximum likelihood point estimator, it can be shown that using <span class="math notranslate nohighlight">\(\lambda = \hat{\lambda}\)</span> from the following equation</p>
+<div class="math notranslate nohighlight">
+\[\hat{\lambda} = \frac{N}{\sum_{i=1}^N\tau_i} = \frac{1}{\bar{\tau}}\]</div>
+<p>maximizes the likelihood function for exponentially distributed data, <span class="math notranslate nohighlight">\(\tau_i\)</span>.  That is, if we have exponentially distributed intervals <span class="math notranslate nohighlight">\(\tau_i\)</span>, then setting <span class="math notranslate nohighlight">\(\lambda = \hat{\lambda}\)</span> provides the model that has the highest likelihood of observing the data.</p>
+<p>Calculate <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> for both sets of intervals: <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span>.</p>
+<p>To complete the estimation, we need to also give a confidence interval for <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span>.  In the following sub-problems, you’re going to explore how getting the theory correct can be tricky and can lead to more or less consistent results.  (Throughout this problem you can assume that we want a 95% confidence interval, that is, <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>.)</p>
+<ol>
+<li><p><mark style="background-color: #e26563">PCS-1</mark>, <mark style="background-color: #ffda5c">TS-1</mark>, <mark style="background-color: #92c57a">NQP-1</mark> If you didn’t know anything about exponential distributions or confidence intervals, you may have seen that sometimes people give intervals as <code class="docutils literal notranslate"><span class="pre">mean</span></code> <span class="math notranslate nohighlight">\(\pm\)</span> <code class="docutils literal notranslate"><span class="pre">stddev</span></code>.  Will this work for our estimate of the rate parameter, <span class="math notranslate nohighlight">\(\lambda\)</span>?  Try it out: calculate</p>
+<div class="math notranslate nohighlight">
+\[I = \frac{1}{\bar{\tau}\pm \sqrt{\text{Var}[\tau]}}\]</div>
+<p>for both sets of intervals <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span>.  Describe these intervals.  Are they reasonable?  Are the respective MLEs, <span class="math notranslate nohighlight">\(\hat{\lambda}^+\)</span> and <span class="math notranslate nohighlight">\(\hat{\lambda}^-\)</span> in the intervals?</p>
+</li>
+<li><p><mark style="background-color: #e26563">PCS-1</mark>, <mark style="background-color: #ffda5c">TS-1</mark>, <mark style="background-color: #92c57a">NQP-1</mark> If you do some more reading, you might find that the formula for a confidence interval is often given as</p>
+<div class="math notranslate nohighlight" id="equation-eqn-normconfint">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eqn-normconfint" title="Permalink to this equation">#</a></span>\[\texttt{mean} \pm\,\,z_{\alpha/2} \times\texttt{stderror},\]</div>
+<p>where the <em>standard error</em> is given as <code class="docutils literal notranslate"><span class="pre">stderror</span></code><span class="math notranslate nohighlight">\(=\)</span><code class="docutils literal notranslate"><span class="pre">stddev</span></code><span class="math notranslate nohighlight">\( / \sqrt{N}\)</span>, and <span class="math notranslate nohighlight">\(z_{\alpha/2}\)</span> is the <span class="math notranslate nohighlight">\(p^{th}\)</span> <em>percentile</em> of the standard normal distribution.  You can calculate percentiles of a normal distribution using <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm.ppf(p)</span></code>, we have <code class="docutils literal notranslate"><span class="pre">mean</span></code> <span class="math notranslate nohighlight">\(=\hat{\lambda}\)</span>, so we just need <code class="docutils literal notranslate"><span class="pre">stddev</span></code> to complete the formula.  You may be tempted to use the standard deviation from the data as in the previous problem, but a quick Wikipedia search shows that the variance of exponentially distributed variables is <span class="math notranslate nohighlight">\(1/\lambda^2\)</span>, so that maybe we can use <span class="math notranslate nohighlight">\(\hat{\lambda} = \)</span><code class="docutils literal notranslate"><span class="pre">stddev</span></code>.  Thus the interval now becomes</p>
+<div class="math notranslate nohighlight" id="equation-eqn-approxconfint">
+<span class="eqno">(27)<a class="headerlink" href="#equation-eqn-approxconfint" title="Permalink to this equation">#</a></span>\[I = \left[
+    \hat{\lambda} + z_{\alpha/2}\frac{\hat{\lambda}}{\sqrt{N}},\qquad
+    \hat{\lambda} + z_{1-\alpha/2}\frac{\hat{\lambda}}{\sqrt{N}}
+\right]\]</div>
+<p>Use this formula to calculate confidence intervals for <span class="math notranslate nohighlight">\(\lambda\)</span> for both sets of intervals, <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span>.  Discuss these intervals.  Are they reasonable?  Is <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> in the respective interval?  Importantly, does it make sense for the confidence interval to be symmetric?</p>
+</li>
+<li><p><mark style="background-color: #e26563">PCS-1</mark>, <mark style="background-color: #ffda5c">TS-1</mark>, <mark style="background-color: #92c57a">NQP-1</mark> It turns out that the confidence interval formula (Equation <a class="reference internal" href="#equation-eqn-normconfint">(26)</a>) you just implemented is actually only the formula for confidence intervals of <em>normally-distributed</em> random variables!  However, you can do a good amount of manipulation, as shown <a class="reference external" href="https://people.missouristate.edu/songfengzheng/Teaching/MTH541/Lecture%5C%20notes/CI.pdf">here</a>, <a class="reference external" href="https://stats.stackexchange.com/questions/399809/95-confidence-interval-of-lambda-for-x-1-x-n-iid-exponential-with-rate?newreg=6579dec0b6a54b808a0b9cae6020c137">here</a>, and of course, <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_distribution#Confidence_intervals">here</a>, that <span class="math notranslate nohighlight">\(\lambda\)</span> is actually distributed according to a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution (pronounced “chi-squared”, where “chi” rhymes with “sky”).   As a result, we can write the confidence interval <em>exactly</em> as</p>
+<div class="math notranslate nohighlight" id="equation-eqn-exactconfint">
+<span class="eqno">(28)<a class="headerlink" href="#equation-eqn-exactconfint" title="Permalink to this equation">#</a></span>\[\left[
+    \frac{\chi^2_{2N}(\alpha / 2)}{2N\bar{\tau}},\quad
+    \frac{\chi^2_{2N}(1 - \alpha / 2)}{2N\bar{\tau}}
+\right],\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi^2_{k}(p)\)</span> is the <span class="math notranslate nohighlight">\(p^{\text{th}}\)</span> percentile of the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(k\)</span> degrees of freedom.  In Python, you can calculate this using <code class="docutils literal notranslate"><span class="pre">scipy.stats.chi2.ppf(p,</span> <span class="pre">df=k)</span></code>.</p>
+<p>Use this formula to calculate confidence intervals for <span class="math notranslate nohighlight">\(\lambda\)</span> for both sets of intervals, <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span>.  Discuss these intervals.  Are they reasonable?  Is <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> in the respective interval?  Importantly, how do they compare to the approximate intervals from the previous problem?  Does it seem that a normal approximation is “good enough”?  Are these intervals symmetric?</p>
+</li>
+<li><p><mark style="background-color: #e26563">PCS-1</mark>, <mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-1</mark>  Rather than leaving the last question vague and qualitative, let’s be precise and explore how good of an approximation Equation <a class="reference internal" href="#equation-eqn-approxconfint">(27)</a> provides compared to the exact answer in Equation <a class="reference internal" href="#equation-eqn-exactconfint">(28)</a>.  To do this, randomly select <span class="math notranslate nohighlight">\(N\)</span> intervals from either list, <span class="math notranslate nohighlight">\(\tau^+\)</span> or <span class="math notranslate nohighlight">\(\tau^-\)</span>, calculate <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> and the exact and approximate confidence intervals.  Using an appropriate set of values for <span class="math notranslate nohighlight">\(N\)</span>, generate figures that show both how the size of the confidence interval depends on <span class="math notranslate nohighlight">\(N\)</span> and how the approximate and exact intervals differ from each other.  Can you determine how many samples are needed before the intervals are indistinguishable?</p></li>
+</ol>
+</li>
+<li><p><strong>Visualizing Confidence Intervals:</strong> To further unpack the differences in the confidence interval formulas, let’s try and visualize the problem more directly.</p>
+<ol class="simple">
+<li><p><mark style="background-color: #e26563">PCS-1</mark> Randomly draw <span class="math notranslate nohighlight">\(N=100\)</span> intervals from one of the lists (<span class="math notranslate nohighlight">\(\tau^+\)</span> or <span class="math notranslate nohighlight">\(\tau^-\)</span>) and estimate the rate parameter <span class="math notranslate nohighlight">\(\lambda\)</span> (calculate a point estimate <em>and</em> and interval!).  Save this estimate as <code class="docutils literal notranslate"><span class="pre">lHat0</span></code> and <code class="docutils literal notranslate"><span class="pre">lConfInt0</span></code>.  Use the <em>exact</em> confidence interval formula in Equation <a class="reference internal" href="#equation-eqn-exactconfint">(28)</a>.</p></li>
+<li><p><mark style="background-color: #e26563">PCS-1,2</mark>, <mark style="background-color: #ffda5c">TS-1</mark> Repeat the previous problem <span class="math notranslate nohighlight">\(N_{exp}\)</span> times, where <span class="math notranslate nohighlight">\(N_{exp}\)</span> is a large number of your choosing.  Show the distribution of estimates, <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> and describe its shape.  Where is it centered?  On <code class="docutils literal notranslate"><span class="pre">\lHat0</span></code>?  On the value calculated in 1.a?</p></li>
+<li><p><mark style="background-color: #e26563">PCS</mark>, <mark style="background-color: #ffda5c">TS-1</mark> Equation <a class="reference internal" href="#equation-eqn-approxconfint">(27)</a> suggested that <span class="math notranslate nohighlight">\(\lambda\)</span> is normally distributed.  Overlay a plot of a normal distribution with mean, <span class="math notranslate nohighlight">\(\mu = \hat{\lambda}\)</span>, and standard deviation <span class="math notranslate nohighlight">\(\sigma = \hat{\lambda}/\sqrt{N}\)</span>, where these can be calculated using all the intervals.  Qualitatively discuss how well the distribution of estimates match this curve.</p></li>
+</ol>
+<p>4.<mark style="background-color: #e26563">PCS-2</mark>, <mark style="background-color: #ffda5c">TS-1</mark> The exact confidence interval (Equation <a class="reference internal" href="#equation-eqn-exactconfint">(28)</a>) used the fact that <span class="math notranslate nohighlight">\(\lambda\)</span> is <span class="math notranslate nohighlight">\(\chi^2\)</span>-distributed.  Use <code class="docutils literal notranslate"><span class="pre">scipy.stats.chi2.pdf(xCoords,</span> <span class="pre">df=2*N,</span> <span class="pre">scale=1/(2*N*tauBar))</span></code> to overlay a plot of this distribution. Qualitatively discuss how well the distribution of estimates match this curve.</p>
+<ol class="simple">
+<li><p><mark style="background-color: #ffda5c">TS-1</mark> , <mark style="background-color: #6b9cee">MVD</mark>  Indicate where <code class="docutils literal notranslate"><span class="pre">lHat0</span></code> and <code class="docutils literal notranslate"><span class="pre">lConfInt0</span></code> fall on the distribution.  Determine the fraction of the <span class="math notranslate nohighlight">\(N_{exp}\)</span> estimates that fall in <code class="docutils literal notranslate"><span class="pre">lConfInt0</span></code>.  Discuss this fraction - does it make sense to you?  (If needed, run your code several times to convince yourself!)</p></li>
+<li><p><mark style="background-color: #ffda5c">TS-1</mark> , <mark style="background-color: #6b9cee">MVD</mark>  Recreate your figure using (empirical) CDFs of the estimates and the theoretical curves.  Show the <span class="math notranslate nohighlight">\(\alpha/2^{\text{th}}\)</span> and <span class="math notranslate nohighlight">\((1-\alpha/2)^{\text{th}}\)</span> percentiles of the <span class="math notranslate nohighlight">\(N_{exp}\)</span> estimates, the median of the estimates, <code class="docutils literal notranslate"><span class="pre">lHat0</span></code> and <code class="docutils literal notranslate"><span class="pre">lConfInt0</span></code>.  Comment on any new insights from this figure.</p></li>
+</ol>
+</li>
+<li><p><strong>Maximum A Posteriori Estimation and Credible Intervals:</strong> We’ll now explore how you can make MAP estimates of the rate parameter, <span class="math notranslate nohighlight">\(\lambda\)</span>, using Bayes’ Theorem.  While in the notes and worksheets we emphasize an empirical approach to this problem, here you’ll explore how you can implement a more theoretical approach as well.</p>
+<p>In particular, it can be shown that if we use a <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a> to describe our prior expectation for <span class="math notranslate nohighlight">\(\lambda\)</span>, that we can then <em>exactly</em> write the posterior distribution as a mathematical formula.  In general, prior distributions that allow for this analytic manipulation are called <strong>conjugate priors</strong>.</p>
+<p>A gamma distribution has the form</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{G}\left(
+    x\,|\,a, b
+\right) = \frac{b^ax^{a-1}}{\Gamma(a)}e^{-bx},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Gamma(a) = (a-1)! = (a-1)\cdot(a-2)\cdot(a-3)\cdots2\cdot1\)</span>.  <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are known as <em>shape</em> and <em>rate</em> parameters, respectively.</p>
+<p>For exponentially distributed random variables, <span class="math notranslate nohighlight">\(\tau_i\)</span>, the likelihood of those data given a specific rate can be written</p>
+<div class="math notranslate nohighlight">
+\[P(\tau_i|\lambda) = \prod_{i=1}^N \lambda e^{-\lambda \tau_i} = \lambda^Ne^{\sum_{i=1}^N\tau_i}.\]</div>
+<p>Putting the gamma prior and likelihood function into Bayes’ Theorem, we can rearrange and normalize to find that the posterior function for <span class="math notranslate nohighlight">\(\lambda\)</span> given the data is also a gamma function!</p>
+<div class="math notranslate nohighlight" id="equation-eqn-lambdapost">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eqn-lambdapost" title="Permalink to this equation">#</a></span>\[P\left(\lambda|\tau_i, a, b\right) =
+\mathcal{G}\left(\lambda|\alpha, \beta\right) = 
+\frac{\beta^{\alpha}\lambda^{\alpha-1}}{\Gamma(\alpha)}e^{-\lambda\beta},\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\alpha = N + a\qquad\text{and}\qquad\beta = N\bar{\tau} + b.\]</div>
+<p>So if we then choose different <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> to describe a prior, we can update <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> and use <code class="docutils literal notranslate"><span class="pre">scipy.stats.gamma(alpha,</span> <span class="pre">scale=1/beta)</span></code> to manipulate the posterior in Python.  You will explore this process on your own in the following sub-problems.</p>
+<ol>
+<li><p><mark style="background-color: #6b9cee">MVD</mark> Set <span class="math notranslate nohighlight">\(a_1 = b_1 = 0.01\)</span> and <span class="math notranslate nohighlight">\(a_2 = b_2 = 2\)</span> and plot the <em>prior</em> distributions corresponding to these parameters.  Describe these curves qualitatively.</p></li>
+<li><p><mark style="background-color: #e26563">PCS-1</mark>, <mark style="background-color: #ffda5c">TS-2</mark>, <mark style="background-color: #6b9cee">MVD</mark> Using <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(b_1\)</span>, and then <span class="math notranslate nohighlight">\(a_2\)</span>, <span class="math notranslate nohighlight">\(b_2\)</span>, use Equation <a class="reference internal" href="#equation-eqn-lambdapost">(29)</a> to plot posterior PDFs and CDFs for <span class="math notranslate nohighlight">\(\lambda^+\)</span> and <span class="math notranslate nohighlight">\(\lambda^-\)</span> (using the two lists <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau_-\)</span>, respectively).  Calculate and annotate the mean, median, and mode on these plots.  Compare these values with the MLEs from earlier in the problem.</p></li>
+<li><p><mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-1</mark> The mean of a gamma distribution can be calculated as the ratio of the shape to the rate parameters (<span class="math notranslate nohighlight">\(a/b\)</span>), or in the case of our exponentially distributed data and a gamma prior, we get that the posterior mean is</p>
+<div class="math notranslate nohighlight">
+\[\mu_{\lambda} = \frac{a + N}{b + N\bar{\tau}}\]</div>
+<p>As in 1.1.4, show how the mean changes as you change the number of samples.  Assess whether the choice of prior impacts the mean.  Annotate the MLE <span class="math notranslate nohighlight">\(\hat{\lambda} = 1/\bar{\tau}\)</span>.  Do the MLE and posterior mean agree?</p>
+</li>
+<li><p><mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-1</mark> Using <code class="docutils literal notranslate"><span class="pre">scipy.stats.gamma.ppf</span></code>, annotate the median, <span class="math notranslate nohighlight">\(\alpha/2^{\text{th}}\)</span>, and <span class="math notranslate nohighlight">\((1-\alpha/2)^{\text{th}}\)</span> percentiles.  How many data points do you need to add before the MLE is inside the credible interval specified by these percentiles?</p></li>
+</ol>
+</li>
+<li><p><mark style="background-color: #e26563">PCS-2</mark>, <mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-1</mark>  Use bootstrapping to estimate the <em>variance</em> of each of the sets of intervals <span class="math notranslate nohighlight">\(\tau^+\)</span> and <span class="math notranslate nohighlight">\(\tau^-\)</span>.  You should report a point estimate and a confidence interval.  You are free to choose how many bootstrap resamplings to do, how to make the point estimate, and what confidence level you want to report, but you should clearly indicate your decisions.</p></li>
+</ol>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="simple">
+<li></li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -492,11 +681,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Module2_CourseNotes.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Worksheet_2_3_Boot_LinReg_Solutions.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Module 2: Parameter Estimation and Model Fitting</p>
+            <p class="prev-next-title">SOLUTIONS to Worksheet 2.3: Bootstrapping linear regression</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Assignment2_Hints.html" title="next page">

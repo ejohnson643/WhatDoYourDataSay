@@ -1,1 +1,3 @@
 # Modules
+
+*What Do Your Data Say?* is organized into four content modules and one introductory (or prerequisite) module on programming in Python. Each module contains a set of course notes, an assignment, and some worksheets organized on themes in probability and data science, with applications to real biological data sets. The course is intended for advanced learners who may or may not have experience with Python, data science, or biology, and is organized around [practicing skills](./CurriculumAlignmentTables) used in those fields, regardless of the student's background.  For an example of how this course has been conducted in the past, consider the examples in the [Syllabus](../intro).
