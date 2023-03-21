@@ -1,0 +1,62 @@
+Traceback (most recent call last):
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/site-packages/nbclient/client.py", line 1265, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/asyncio/base_events.py", line 650, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/contextlib.py", line 222, in __aexit__
+    await self.gen.athrow(typ, value, traceback)
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/site-packages/nbclient/client.py", line 648, in async_setup_kernel
+    yield
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/site-packages/nbclient/client.py", line 703, in async_execute
+    await self.async_execute_cell(
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/site-packages/nbclient/client.py", line 1021, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/WDYDS/lib/python3.11/site-packages/nbclient/client.py", line 915, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from collections import Counter
+from copy import deepcopy
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy.optimize import curve_fit
+import scipy.stats as st
+import seaborn as sns
+
+plt.close('all')
+sns.set(color_codes=True)
+matplotlib.rc("font", size=20)
+matplotlib.rc("xtick", labelsize=20)
+matplotlib.rc("ytick", labelsize=20)
+matplotlib.rc("axes", labelsize=24)
+matplotlib.rc("axes", titlesize=28)
+matplotlib.rc("legend", fontsize=14)
+matplotlib.rc("figure", titlesize=24)
+
+from Problem2_4_ImageProcessingPackage import *
+
+cmap = sns.color_palette()
+
+%matplotlib inline
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 12[0m
+[1;32m     10[0m plt[38;5;241m.[39mclose([38;5;124m'[39m[38;5;124mall[39m[38;5;124m'[39m)
+[1;32m     11[0m sns[38;5;241m.[39mset(color_codes[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[0;32m---> 12[0m [43mmatplotlib[49m[38;5;241m.[39mrc([38;5;124m"[39m[38;5;124mfont[39m[38;5;124m"[39m, size[38;5;241m=[39m[38;5;241m20[39m)
+[1;32m     13[0m matplotlib[38;5;241m.[39mrc([38;5;124m"[39m[38;5;124mxtick[39m[38;5;124m"[39m, labelsize[38;5;241m=[39m[38;5;241m20[39m)
+[1;32m     14[0m matplotlib[38;5;241m.[39mrc([38;5;124m"[39m[38;5;124mytick[39m[38;5;124m"[39m, labelsize[38;5;241m=[39m[38;5;241m20[39m)
+
+[0;31mNameError[0m: name 'matplotlib' is not defined
+NameError: name 'matplotlib' is not defined
+

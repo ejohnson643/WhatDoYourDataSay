@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Assignment 2" href="Assignment_2.html" />
-    <link rel="prev" title="SOLUTIONS to Worksheet 2.1: Bootstrapping" href="Worksheet_2_1_Bootstrapping_Solutions.html" />
+    <link rel="next" title="Guide to Worksheet 2.2: An introduction to OLS linear regression" href="Worksheet_2_2_OLS_LinReg_Solutions.html" />
+    <link rel="prev" title="GUIDE to Worksheet 2.1" href="Worksheet_2_1_Bootstrapping_Solutions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -230,7 +232,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="Module_2.html">
-     Module 2
+     Module 2: Parameter Estimation and Model Fitting
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
     <label for="toctree-checkbox-4">
@@ -250,12 +252,27 @@ const thebe_selector_output = ".output, .cell_output"
      </li>
      <li class="toctree-l3">
       <a class="reference internal" href="Worksheet_2_1_Bootstrapping_Solutions.html">
-       SOLUTIONS to Worksheet 2.1: Bootstrapping
+       GUIDE to Worksheet 2.1
       </a>
      </li>
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
        Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_2_OLS_LinReg_Solutions.html">
+       Guide to Worksheet 2.2: An introduction to OLS linear regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg.html">
+       Worksheet 2.3: Bootstrapping linear regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.3: Bootstrapping linear regression
       </a>
      </li>
      <li class="toctree-l3">
@@ -478,6 +495,54 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="worksheet-2-2-ols-linear-regression">
 <h1>Worksheet 2.2: OLS Linear Regression<a class="headerlink" href="#worksheet-2-2-ols-linear-regression" title="Permalink to this headline">#</a></h1>
+<p>Welcome to the second worksheet of Module 2! The worksheets are designed to work in parallel to the course notes and lectures. They are not intended to be summary assessments at the end of a module, but as <strong>necessary content</strong> that you consume on your way to the assignments (and eventually attacking your own data!). As a result, if there are parts of the worksheet that you don’t understand or are having trouble with, make sure to <strong>ask for help!</strong></p>
+<p>This worksheet will really be a nuts and bolts tutorial on linear regression in Python.  There are quite a few linear regression functions - most of the main quantitative and statistical packages have one, so we’ll be looking at the following functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.stats.lingress</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">statsmodels.api.OLS</span></code></p></li>
+</ul>
+<div class="admonition-worksheet-goals admonition">
+<p class="admonition-title">Worksheet Goals</p>
+<p>By the end of this worksheet, you will have practiced the following skills:</p>
+<ul class="simple">
+<li><p><mark style="background-color: #e26563">PCS-3</mark> Performing OLS linear regression in Python.</p></li>
+<li><p><mark style="background-color: #ffda5c">TS-2</mark> Discussing the assumptions of OLS regression.</p></li>
+<li><p><mark style="background-color: #6b9cee">MVD</mark> Illustrating uncertainty in estimates.</p></li>
+<li><p><mark style="background-color: #92c57a">NQP-2</mark> Assessing the quality of a model’s fit to data and how it can be improved.</p></li>
+</ul>
+</div>
+<p>Now, you may be wondering, isn’t there a “right” function to use for linear regression? Not really. The reason there are different functions is because each have different abilities. The goal here is to expose you to more than one of them so you start to see that you have options, and in order to navigate those options you have to be willing to explore and have a sense of what you want to do with the analysis. This step, from running someone elses code to do some “standard” analysis of your data, to navigating your own analyses and coding is such a powerful transition. Making this transition means that you are closer to really understanding what analysis has been, can be, done, what you think is interesting, and finally “What do your data say?”!</p>
+<p>Recall that you can install new packages using the <a class="reference external" href="https://docs.anaconda.com/anaconda/navigator/tutorials/manage-packages/#installing-a-package">Anaconda Navigator</a> or via the command line by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">myPackageThatIWantToInstall</span></code>.  For this worksheet, you will likely have to install <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, which is under the package <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, and <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>, which can be found with the same name.</p>
+<ol>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">help</span></code> function to look at the documentation for each of the 4 functions above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>What does “look at” mean in this context? I typically first try to understand into the conceptual aspects. What is this function essentially trying to do? This is usually indicated in a sentence or two at the very top of the documentation.  The idea is that there’s no point getting into function details before knowing what it’s doing!</p>
+<p>Then, I look into what the function requires as inputs and what it can return as an output. This often helps you understand how the function is working and can alert you to keywords that might be useful for tailoring functions to your specific needs.</p>
+</div>
+</li>
+<li><p>Create some fake linear data.  That is, create two lists of numbers <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> that may or may not be linearly related.  Make sure they are not identical and also not completely unrelated or the results will not be that interesting.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This may seem trivial, but the ability to perform a <em>controlled experiment</em> is maybe the most important tool in all of coding, data analysis, and perhaps science. The real power of doing science in a computer is that before analysing real data with all its complexities, we can create a toy version of the problem. So, for example, if you wish to run a linear regression on your real data, first generate some fake data where you can control everything about the stochastic process that generates it. Test your code on the synthetic data by asking whether you can recover the desired properties. This is a good check that: a) your code is doing what you think it is, b) you have a solid sanity check against which to compare your data.</p>
+</div>
+</li>
+<li><p>Run each of the above functions and examine their output.  Answer the following for each function:</p>
+<ul class="simple">
+<li><p>How can you extract the regression coefficients?</p></li>
+<li><p>How can you get the residuals?</p></li>
+<li><p>Which methods report “error” estimates in the coefficients?</p></li>
+<li><p>How easy is this method to use?</p></li>
+<li><p>Does this method fit the intercept (<span class="math notranslate nohighlight">\(\beta_0\)</span>)?</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These are all crucial questions to answer when you start comparing tools for your analyses. It is important to be able to navigate yourself through the conceptual and coding landscape by noting details and differences between packages and tools.</p>
+</div>
+</li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -511,13 +576,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">SOLUTIONS to Worksheet 2.1: Bootstrapping</p>
+            <p class="prev-next-title">GUIDE to Worksheet 2.1</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Assignment_2.html" title="next page">
+    <a class='right-next' id="next-link" href="Worksheet_2_2_OLS_LinReg_Solutions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assignment 2</p>
+        <p class="prev-next-title">Guide to Worksheet 2.2: An introduction to OLS linear regression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -63,9 +63,114 @@ Similar to an experimental lab course, we hope that the majority of your time in
 
 ## Grading and Late Work Policy
 
-## Schedule
+As noted, we intend to use a mix of grading strategies that are centered on standards based assessment of student performance.  What this means is that we hope to have the majority of the assessment based on the [overarching course rubric](./CourseFiles/Rubric)
 
-## Modules
+### Grading
+
+For the self-assessments, we will provide more detailed guidance on what constitutes proficient performance on each part of the assignments.  Student performance on attempts and completed assignments will be converted into a letter grade as indicated [here](./CourseFiles/HowTo_AssignmentAttempt) and [here](./CourseFiles/HowTo_AssignmentCompletion), respectively.  Self-assessments are free points if you complete them.  The midterm will also be graded according to a more detailed rubric that we will release after the exam.
+
+The final grade will then be a combination of roughly 70% assignments (35% attempts, 35% completion), 10% self-assessments, and 20% midterm exam.
+
+### Late Work
+
+We know that the likelihood that students will need to turn in work late is much higher than in the past, so we promise to be as flexible as possible with requests for extensions.  In particular, we will not be asking why you need an extension.  However, in order to allow as many students as possible to stay on schedule, we're going to work under the following system:
+
+- Students can receive a 24-hour extension on any assignment, no questions asked.
+- For extensions of more than 24 hours, you can either:
+    - Write us an email stating that you promise to honestly complete the work on your own.
+    - Have the assignment removed from your grade.  That is, we simply won't include it in your final grade calculation.  It will be as if the assignment had never existed - not that you will receive 0% or 100% marks.
+
+We ask that you engage with this policy in good faith; we really think this content is good and practical and we have put a lot of work into making sure that all the parts of this course are useful for your future studies and research.
+
+### Collaboration
+
+**You are responsible for generating your own work.**  If you cannot complete an assignment because of time or knowledge, we have provided a framework that should allow you to finish the course while always doing your own work.  There is literally **no benefit** to turning in work that is not your own: you will not have learned the material, and we will have a misplaced sense of how you are doing and will not be able to support you.  We are not going to police this - the world is already difficult enough - we simply state this as our expectation.
+
+With this in mind, **we strongly encourage collaboration**, with the caveat that you should always feel that you have ownership over what you are turning in.  If you must turn in work that depends on code that you did not write yourself, either from the notes, assignment hints, worksheets, office hours, or your classmates, **credit your sources**.  This is academically honest and it lets us know what to judge from what you turn in.
+
+In order to strategize your time and learning, we recommend that you try to work on your own to complete assignments, and use your classmates to brainstorm and strategize solutions for the *attempt*.
+
+## Course Calendar
+
+We hope to adhere to the following schedule, although the exact due dates may change as needed! The calendar is modified from the previous time we taught the course. The dates are manifestly incorrect but the cadence is one which we wish to follow again.
+
+![A calendar outlining the tenative schedule for WDYDS Spring 2022.](./CourseFiles/CourseCalendar_Spring2022.png)
+
+## Module Overview
+### Module Zero: Python Tutorial
+
+To bring you up to speed, we provide a custom [Python tutorial](https://ejohnson643.github.io/PythonTutorial/docs/intro.html) for the course.  At the end of the tutorial, take the Python assessment quiz, which is a no-grade quiz that will help you assess if you need more Python practice.
+
+### Module One: The Basics
+
+The big idea of this module is that we can visualize data distributionally in our computers and use theory or simulation to do computation of interesting quantities. 
+
+The main questions considered are:
+
+- How to think about data probabilistically?
+- How can we represent probabilistic information with a computer?
+- How can we make calculations and bring theory to life in our computer?
+
+Topics covered:
+
+- Coin Flipping
+- Theory and code for PDFs, CDFs, and empirical distributions
+- The Central Limit Theorem
+- Bayes Theorem
+
+ 
+### Module Two: Parameter Estimation and Model Fitting
+
+The big idea here is that certain values of model parameters are more consistent with our data than others, but sometimes our data aren't enough to constrain those parameters very well. 
+
+The main questions considered are:
+
+- Given a model, how can we get the most “consistent” parameters with our data?
+- How can we measure our “confidence” in those parameter estimates?
+
+Topics covered:
+
+- Parameter Estimation:
+    - Maximum Likelihood Estimators
+    - Maximum A Posteriori Estimators
+    - Intervals of "Confidence"
+- Bootstrapping
+- Least-Squares Regression
+- Hyperparameter Estimation
+
+ 
+### Module Three: Empirical Hypothesis Testing
+
+The big idea here is that we can empirically assess the likelihood that data are consistent with a model.
+
+The main questions considered are:
+
+- How do I know my data is consistent with a model?
+- How can I compare two data sets?
+
+Topics covered:
+
+- Generating, Simulating, and Falsifying Hypotheses Computationally
+- Comparing Distributions
+- Information Theory
+
+ 
+### Module Four: Model Selection and Dimensionality Reduction
+
+The big idea here is that we can generate models and differentiate between them in a data-driven manner.
+
+The main questions considered are:
+
+- How can we find better or worse models within a set of potential models?  
+- How can we generate models that balance within-sample and out-of-sample accuracy?  
+- How can we generate intelligible models?
+- What even is a better or worse model?
+
+Topics covered:
+
+- Bayesian Model Selection
+- Dimensionality Reduction
+- Cross-Validation
 
 
 ```{tableofcontents}

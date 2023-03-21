@@ -1,0 +1,2203 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Assignment 2 Question 4 &#8212; What Do Your Data Say?</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/PCA_Animation_WDYDS.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">What Do Your Data Say?</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    What Do Your Data Say?
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../Resources.html">
+   Course Resources
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../AboutUs.html">
+     About Us
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../CurriculumAlignmentTables.html">
+     Curriculum Alignment Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Rubric.html">
+     Rubric
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../HowTo_AssignmentAttempt.html">
+     How-To: Make an Assignment Attempt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../HowTo_AssignmentCompletion.html">
+     How-To: Complete Assignments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../HowTo_SelfAssessment.html">
+     How-To: Self-Assessment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../Modules.html">
+   Modules
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Module_0/Module_0.html">
+     Module 0: Python Tutorial
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../Module_1/Module_1.html">
+     Module 1: The Basics
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Module1_CourseNotes.html">
+       Module 1: The Basics
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Worksheet_1_1_CoinFlipping.html">
+       Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Worksheet_1_1_CoinFlipping_Solutions.html">
+       SOLUTIONS to Worksheet 1.1: Coin Tossing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Worksheet_1_2_SquareRootN.html">
+       Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Worksheet_1_2_SquareRootN_Guide.html">
+       GUIDE to Worksheet 1.2: The Spread in Distributions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Worksheet_1_3_EffectOfPriors.html">
+       Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Worksheet_1_3_EffectOfPriors_Guide.html">
+       GUIDE to Worksheet 1.3: Bayes’ Theorem and the Effect of Priors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Assignment_1.html">
+       Assignment 1
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Module_1/Assignment1_Hints.html">
+       Assignment 1: Hints and guidance
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../Module_2.html">
+     Module 2: Parameter Estimation and Model Fitting
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Module2_CourseNotes.html">
+       Module 2: Parameter Estimation and Model Fitting
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Worksheet_2_1_Bootstrapping.html">
+       Worksheet 2.1: An introdution to bootstrapping
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Worksheet_2_1_Bootstrapping_Solutions.html">
+       SOLUTIONS to Worksheet 2.1: Bootstrapping
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Worksheet_2_2_OLS_LinReg.html">
+       Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Worksheet_2_2_OLS_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Worksheet_2_3_Boot_LinReg.html">
+       Worksheet 2.3: Bootstrapping linear regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Worksheet_2_3_Boot_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.3: Bootstrapping linear regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Assignment_2.html">
+       Assignment 2
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../Assignment2_Hints.html">
+       Assignment 2: Hints and Guidance
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Module_3/Module_3.html">
+     Module 3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Module_4/Module_4.html">
+     Module 4
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ejohnson643/WhatDoYourDataSay/main?urlpath=tree/CourseFiles/CourseFiles/Module_2/Resources/Assignment2_Fall2020_Q4_Help.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ejohnson643/WhatDoYourDataSay/issues/new?title=Issue%20on%20page%20%2FCourseFiles/Module_2/Resources/Assignment2_Fall2020_Q4_Help.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/CourseFiles/Module_2/Resources/Assignment2_Fall2020_Q4_Help.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a">
+   4.a.
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Assignment 2 Question 4</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a">
+   4.a.
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;font&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;xtick&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;ytick&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;axes&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;axes&quot;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;legend&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">Problem2_4_ImageProcessingPackage</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;font&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;xtick&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;ytick&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;matplotlib&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_eCDF</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">padFactor</span><span class="o">=</span><span class="mf">0.02</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an empirical CDF for input data X.  Pads CDF for plotting.</span>
+<span class="sd">    </span>
+<span class="sd">    Created by Eric Johnson</span>
+<span class="sd">    Edited on October 12, 2020</span>
+<span class="sd">    </span>
+<span class="sd">    This is a function I put together because I was making a lot of eCDFs</span>
+<span class="sd">    and I wanted to sometimes pad them for plotting.</span>
+<span class="sd">    </span>
+<span class="sd">    Inputs</span>
+<span class="sd">    ======</span>
+<span class="sd">    X           (array-like) Data whose eCDF is to be calculated.</span>
+<span class="sd">    extend      (bool) Keyword indicating whether to add values to the </span>
+<span class="sd">                eCDF outside of the observed range while storing a 0 and</span>
+<span class="sd">                1 as the eCDF quantiles.  This creates a slightly longer</span>
+<span class="sd">                list that may be preferable for plotting.</span>
+<span class="sd">    padFactor   (float) The fraction of the total range to extend the </span>
+<span class="sd">                values to.  If extend=False, this does nothing.</span>
+<span class="sd">                </span>
+<span class="sd">    Outputs</span>
+<span class="sd">    =======</span>
+<span class="sd">    vals        (np.ndarray) Array of observed values in &#39;X&#39;.  The values</span>
+<span class="sd">                are sorted from smallest to largest.  This array will </span>
+<span class="sd">                contain the number of unique elements in &#39;X&#39; numbers. If</span>
+<span class="sd">                extend=True, it will contain a smaller and larger value,</span>
+<span class="sd">                corresponding to CDF = 0 and 1, respectively.</span>
+<span class="sd">    CDF         (np.ndarray) Array of quantiles indicating what fraction </span>
+<span class="sd">                of the data have been observed to be less than or equal</span>
+<span class="sd">                to the corresponding value in &#39;vals&#39;.  This array will </span>
+<span class="sd">                contain the number of unique elements in &#39;X&#39; numbers. If</span>
+<span class="sd">                extend=True, it will contain a smaller and larger value,</span>
+<span class="sd">                corresponding to CDF = 0 and 1, respectively.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">msort</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    <span class="n">CDF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="n">counts</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">])</span>
+    
+    <span class="n">pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">padFactor</span><span class="o">*</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="n">CDF</span> <span class="o">=</span> <span class="n">CDF</span> <span class="o">/</span> <span class="n">CDF</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">extend</span><span class="p">:</span>
+        <span class="n">vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">pad</span><span class="p">]</span> <span class="o">+</span> 
+                         <span class="nb">list</span><span class="p">(</span><span class="n">vals</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span> <span class="o">+</span>
+                        <span class="p">[</span><span class="n">vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pad</span><span class="p">])</span>
+        <span class="n">CDF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">CDF</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        
+    <span class="k">return</span> <span class="n">vals</span><span class="p">,</span> <span class="n">CDF</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="assignment-2-question-4">
+<h1>Assignment 2 Question 4<a class="headerlink" href="#assignment-2-question-4" title="Permalink to this headline">#</a></h1>
+<p>As explained in the course notes, in <a class="reference external" href="https://www.dropbox.com/s/9inxgf59wd0322h/Garcia2011c.pdf?dl=0">this 2011 paper</a> by Garcia and Phillips, the authors develop a model based on the principles of thermodynamics in order to measure the number of LacI repressors present in different strains of \textit{E. coli}, as well as the binding energy of those repressors.  In Figure S8 of their paper, they show how given estimates for the number of repressors, <span class="math notranslate nohighlight">\(R\)</span>, they can use their model, given in Equation 5 of the paper:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-435458bd-ea43-4222-b24e-c0c4f3db7344">
+<span class="eqno">()<a class="headerlink" href="#equation-435458bd-ea43-4222-b24e-c0c4f3db7344" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \text{Fold Change in YFP Fluorescence} = \left(
+        1 + \frac{2R}{N_{NS}}e^{-\beta\Delta\varepsilon_{RD}}
+    \right)^{-1}
+\end{equation}\]</div>
+<p>to generate an estimate for the binding energy of those repressors, <span class="math notranslate nohighlight">\(\Delta\varepsilon_{RD}\)</span>.  As given in the notes and the paper, <span class="math notranslate nohighlight">\(N_{NS} = 5\times10^6\)</span>, is the number of Non-Specific DNA binding sites for repressors and RNA Polymerase, and <span class="math notranslate nohighlight">\(\beta = 1/k_BT\)</span> is a shorthand factor that  contains the Boltzmann constant.</p>
+<section id="a">
+<h2>4.a.<a class="headerlink" href="#a" title="Permalink to this headline">#</a></h2>
+<p>You may or may not be surprised to learn that a common experimental technique for measuring cellular activity is to <em>take pictures</em> of cells at specific wavelengths of light.  This measures activity because the cells have been modified so that specific proteins fluoresce at specific wavelengths.  What this looks like then is the images in <a class="reference external" href="https://www.dropbox.com/sh/twqgn2md9ktsuiy/AACc84ApoZ6fvdwqcu4KgjC_a?dl=0">this folder</a>.  In each of these images, a specific strain of bacteria has been imaged at a couple wavelengths (a yellow one and a red one), and the idea is that the amount of light (number of photons) measured at those wavelengths directly corresponds to how much of a desired protein (LacI) exists in the cells or their environment.</p>
+<p>Using the functions in the script <a class="reference external" href="https://www.dropbox.com/s/wiexvtu7395cpbn/Problem2_4_ImageProcessingPackage.py?dl=0">here</a>, you will assemble lists of the YFP fluorescence of the cells in <a class="reference external" href="https://www.dropbox.com/sh/twqgn2md9ktsuiy/AACc84ApoZ6fvdwqcu4KgjC_a?dl=0">these <code class="docutils literal notranslate"><span class="pre">tif</span></code> images</a>.  In this folder, there are 7 strains of \textit{E. coli} that have various mutations to the lacI repressor.  The <code class="docutils literal notranslate"><span class="pre">Auto</span></code> strain is the “wild-type” control, and the <code class="docutils literal notranslate"><span class="pre">Delta</span></code> strain is one in which the lacI repressor has been knocked-out (it has no lacI repressors at all).</p>
+<p>Recall that you can import functions from any Python script using the command <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">myFile</span> <span class="pre">import</span> <span class="pre">*</span></code>, where <code class="docutils literal notranslate"><span class="pre">myFile</span></code> is whatever you named the file in the link above.  In this notebook, I’ll walk you through how the functions in that script can be used to extract the YFP fluorescence from the images.</p>
+<p>First, let’s look at the functions available in our script.  Using the <code class="docutils literal notranslate"><span class="pre">help(function)</span></code> syntax we uncover the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">strainFileFinder</span></code>: This function appears to be a bookkeeping/helper function that <em>finds</em> the images we want in a file structure.  Writing such functions can be useful sometimes when working across many directories or with many experimental conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">channelPlotter</span></code>: This function takes in file paths to <code class="docutils literal notranslate"><span class="pre">.tif</span></code> images and plots them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">channelPixelDistPlotter</span></code>: This function takes in an image file path and plots the <em>distribution</em> of pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getYFP_Image</span></code>: This is the first function that does some heavy lifting.  Specifically, this function takes in a YFP image and an mCherry or Phase-Contrast image and extracts the YFP fluorescence of the detected cells.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getYFP_AllStrains</span></code>: This function applies <code class="docutils literal notranslate"><span class="pre">getYFP_Image</span></code> recursively to all the sets of images in the directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calcFoldChange</span></code>: This function uses the extracted output from <code class="docutils literal notranslate"><span class="pre">getYFP_AllStrains</span></code> to determine the <em>fold-change</em> in expression for each of the strains.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">saveFigure</span></code>: This is another utility function for saving figures quickly in a couple different file formats.</p></li>
+</ul>
+<p>As a demonstration, I will show how each of these functions gets used in a manner similar to the example at the bottom of the <code class="docutils literal notranslate"><span class="pre">Problem2_4_ImageProcessingPackage.py</span></code> file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## First let&#39;s look at the &#39;Auto&#39; strain, which is an image where there</span>
+<span class="c1">## are no YFP-tagged proteins.</span>
+<span class="n">YFPPaths</span><span class="p">,</span> <span class="n">mChrPaths</span><span class="p">,</span> <span class="n">PhasePaths</span> <span class="o">=</span> <span class="n">strainFileFinder</span><span class="p">(</span><span class="s1">&#39;Auto&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The YFP file paths are:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">YFPPaths</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The mCherry file paths are:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">mChrPaths</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The Phase-Contrast file paths are:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">PhasePaths</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The YFP file paths are:
+	Phillips_Garcia_Data/laci_full_set/Auto/YFP_regulated_1.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/YFP_regulated_2.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/YFP_regulated_3.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/YFP_regulated_4.tif
+
+The mCherry file paths are:
+	Phillips_Garcia_Data/laci_full_set/Auto/mCherry_constitutive_1.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/mCherry_constitutive_2.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/mCherry_constitutive_3.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/mCherry_constitutive_4.tif
+
+The Phase-Contrast file paths are:
+	Phillips_Garcia_Data/laci_full_set/Auto/Phase_1.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/Phase_2.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/Phase_3.tif
+	Phillips_Garcia_Data/laci_full_set/Auto/Phase_4.tif
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## After this, let&#39;s test these plotting utilities, let&#39;s load the &#39;Delta&#39; strain as well.</span>
+<span class="n">YFPDeltaPaths</span><span class="p">,</span> <span class="n">mChrDeltaPaths</span><span class="p">,</span> <span class="n">PhaseDeltaPaths</span> <span class="o">=</span> <span class="n">strainFileFinder</span><span class="p">(</span><span class="s1">&#39;Delta&#39;</span><span class="p">)</span>
+
+<span class="c1">## Let&#39;s look at the mCherry images from the Delta strain</span>
+<span class="n">channelPlotter</span><span class="p">(</span><span class="n">mChrDeltaPaths</span><span class="p">);</span>
+
+<span class="c1">## Then the YFP images from the Auto strain</span>
+<span class="n">channelPlotter</span><span class="p">(</span><span class="n">YFPPaths</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/Assignment2_Fall2020_Q4_Help_6_0.png" src="../../../_images/Assignment2_Fall2020_Q4_Help_6_0.png" />
+<img alt="../../../_images/Assignment2_Fall2020_Q4_Help_6_1.png" src="../../../_images/Assignment2_Fall2020_Q4_Help_6_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Then let&#39;s try the distribution plotter.</span>
+<span class="c1">## NOTICE that the LOG-TRANSFORMED distribution shows the tail of </span>
+<span class="c1">## the distribution much more clearly!</span>
+
+<span class="c1">## YFP of the Delta strain</span>
+<span class="n">channelPixelDistPlotter</span><span class="p">(</span><span class="n">YFPDeltaPaths</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="c1">## mCherry of the Auto strain</span>
+<span class="n">channelPixelDistPlotter</span><span class="p">(</span><span class="n">mChrPaths</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/EricJohnson/opt/anaconda3/envs/QBioCourse/lib/python3.9/site-packages/seaborn/distributions.py:2557: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+/Users/EricJohnson/opt/anaconda3/envs/QBioCourse/lib/python3.9/site-packages/seaborn/distributions.py:2557: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<img alt="../../../_images/Assignment2_Fall2020_Q4_Help_7_1.png" src="../../../_images/Assignment2_Fall2020_Q4_Help_7_1.png" />
+<img alt="../../../_images/Assignment2_Fall2020_Q4_Help_7_2.png" src="../../../_images/Assignment2_Fall2020_Q4_Help_7_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Finally, let&#39;s try processing some images.</span>
+
+<span class="c1">## We need to load the images as arrays from the path.</span>
+<span class="c1">## Using the first YFP and mCherry image from the delta strain.</span>
+<span class="n">YFPImg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">YFPDeltaPaths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">mChrImg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">mChrDeltaPaths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="p">[</span><span class="n">YFPMean</span><span class="p">,</span> <span class="n">blobs</span><span class="p">,</span> <span class="n">labelImg</span><span class="p">,</span> <span class="n">fig_h</span><span class="p">]</span> <span class="o">=</span> <span class="n">getYFP_Image</span><span class="p">(</span><span class="n">YFPImg</span><span class="p">,</span> <span class="n">mChrImg</span><span class="p">,</span> 
+                                                 <span class="s2">&quot;mCherry&quot;</span><span class="p">,</span> 
+                                                 <span class="n">show_plots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;YFPMean = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">YFPMean</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Looking at the &#39;blobs&#39;... What are they??</span><span class="se">\n\n</span><span class="s2">blobs = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blobs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/EricJohnson/opt/anaconda3/envs/QBioCourse/lib/python3.9/site-packages/seaborn/distributions.py:2557: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>YFPMean = 
+626.6381787048607
+
+Looking at the &#39;blobs&#39;... What are they??
+
+blobs = 
+[&lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4ca0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4d30&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4d00&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4c70&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4cd0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4d60&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4d90&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4dc0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4df0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4e20&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4e50&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4e80&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4eb0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4ee0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4f10&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4f40&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4f70&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4fa0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bb4fd0&gt;, &lt;skimage.measure._regionprops.RegionProperties object at 0x7fc672bbe040&gt;]
+</pre></div>
+</div>
+<img alt="../../../_images/Assignment2_Fall2020_Q4_Help_8_3.png" src="../../../_images/Assignment2_Fall2020_Q4_Help_8_3.png" />
+</div>
+</div>
+<p>Let’s unpack what just happened.  This function took in two images, a YFP image and an mCherry image.  The mCherry image was then thresholded (picking a threshold by looking at the distribution), and this binarized image had some other stuff happen to it until we get the bottom right panel, where we see white blobs that look like the correspond to the bacteria in the original image (top left).  We then use the locations of these blobs to get the YFP values  <em>from the YFP image</em>.  From this we get a mean YFP value for the image, but we also get a list of <code class="docutils literal notranslate"><span class="pre">skimage.measure.region_props</span></code> objects that we have called <code class="docutils literal notranslate"><span class="pre">blobs</span></code>.  This is because we can use <strong>segmentation</strong> to find each <em>unique</em> blob that is separated from the others.  The properties of these “blobs” are stored in these objects, and include things such as the area, centroid, and label of the individual regions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="kn">import</span> <span class="n">regionprops_table</span>
+
+<span class="c1">## This is a function that can be useful for aggregating certain region properties</span>
+<span class="n">blobprops</span> <span class="o">=</span> <span class="n">regionprops_table</span><span class="p">(</span><span class="n">labelImg</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="s1">&#39;bbox&#39;</span><span class="p">,</span> <span class="s1">&#39;centroid&#39;</span><span class="p">,</span>
+                                                    <span class="s1">&#39;extent&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">])</span>
+
+<span class="c1">## Converting to a Pandas data frame for visualization.</span>
+<span class="n">blobDF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">blobprops</span><span class="p">)</span>
+<span class="n">blobDF</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Blob Number&quot;</span>
+
+<span class="n">blobDF</span>
+
+<span class="c1">## If we plot the **LABEL IMAGE** we see each of the bacteria in </span>
+<span class="c1">## a different color because each has a different *label*.  </span>
+<span class="c1">## I&#39;ve used a custom colormap so you can see more easily.</span>
+<span class="n">myCmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">cubehelix_palette</span><span class="p">(</span><span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">labelImg</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">myCmap</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fc67314c3a0&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/Assignment2_Fall2020_Q4_Help_10_1.png" src="../../../_images/Assignment2_Fall2020_Q4_Help_10_1.png" />
+</div>
+</div>
+<p>Now that we’ve seen how this works, we can use <code class="docutils literal notranslate"><span class="pre">getYFP_AllStrains</span></code> to get all the info from all the strains.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">strainInfo</span> <span class="o">=</span> <span class="n">getYFP_AllStrains</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking at strain &#39;Auto&#39;...
+Finding files...
+
+	Replicate 0 has mean YFP = 120.27
+
+	Replicate 1 has mean YFP = 122.57
+
+	Replicate 2 has mean YFP = 123.31
+
+	Replicate 3 has mean YFP = 122.78
+
+Looking at strain &#39;Delta&#39;...
+Finding files...
+
+	Replicate 0 has mean YFP = 626.64
+
+	Replicate 1 has mean YFP = 655.76
+
+	Replicate 2 has mean YFP = 629.05
+
+Looking at strain &#39;HG104&#39;...
+Finding files...
+
+	Replicate 0 has mean YFP = 208.63
+
+	Replicate 1 has mean YFP = 218.52
+
+	Replicate 2 has mean YFP = 242.12
+
+	Replicate 3 has mean YFP = 217.83
+
+Looking at strain &#39;RBS1&#39;...
+Finding files...
+
+	Replicate 0 has mean YFP = 129.39
+
+	Replicate 1 has mean YFP = 130.12
+
+	Replicate 2 has mean YFP = 127.7
+
+	Replicate 3 has mean YFP = 129.67
+
+Looking at strain &#39;RBS1027&#39;...
+Finding files...
+
+	Replicate 0 has mean YFP = 134.77
+
+	Replicate 1 has mean YFP = 136.37
+
+	Replicate 2 has mean YFP = 137.37
+
+	Replicate 3 has mean YFP = 135.02
+
+Looking at strain &#39;RBS1147&#39;...
+Finding files...
+
+	Replicate 0 has mean YFP = 165.45
+
+	Replicate 1 has mean YFP = 161.22
+
+	Replicate 2 has mean YFP = 170.27
+
+	Replicate 3 has mean YFP = 161.58
+
+Looking at strain &#39;RBS446&#39;...
+Finding files...
+
+	Replicate 0 has mean YFP = 151.48
+
+	Replicate 1 has mean YFP = 144.1
+
+	Replicate 2 has mean YFP = 140.87
+
+	Replicate 3 has mean YFP = 175.26
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want to look at the histogram of YFP values, so let’s actually extract each blob’s YFP value.  <code class="docutils literal notranslate"><span class="pre">strainInfo</span></code> is a nested set of dictionaries keyed by <code class="docutils literal notranslate"><span class="pre">strain</span></code>:<code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">number</span></code>.  So if we want to get the blobs from the second image of the ‘Delta’ strain, we would use <code class="docutils literal notranslate"><span class="pre">strainInfo['Delta'][1]['blobs']</span></code>.  To get all the YFP, we’ll loop through each layer of the dict.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YFPDict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1">## Set up our output dictionary</span>
+<span class="k">for</span> <span class="n">strain</span> <span class="ow">in</span> <span class="n">strainInfo</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Extracting YFP from </span><span class="si">{</span><span class="n">strain</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    
+    <span class="c1">## Skip fields that aren&#39;t strains</span>
+    <span class="k">if</span> <span class="n">strain</span> <span class="o">==</span> <span class="s1">&#39;Background&#39;</span><span class="p">:</span>
+        <span class="k">continue</span>
+    
+    <span class="c1">## Set up each strain&#39;s YFP list.</span>
+    <span class="c1">## We use a list because we don&#39;t know how many cells there will be.</span>
+    <span class="n">YFPDict</span><span class="p">[</span><span class="n">strain</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">imgNo</span> <span class="ow">in</span> <span class="n">strainInfo</span><span class="p">[</span><span class="n">strain</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracting YFP from image number </span><span class="si">{</span><span class="n">imgNo</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">blob</span> <span class="ow">in</span> <span class="n">strainInfo</span><span class="p">[</span><span class="n">strain</span><span class="p">][</span><span class="n">imgNo</span><span class="p">][</span><span class="s1">&#39;blobs&#39;</span><span class="p">]:</span>
+            <span class="c1">## Save the cell&#39;s YFP</span>
+            <span class="n">YFPDict</span><span class="p">[</span><span class="n">strain</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">blob</span><span class="o">.</span><span class="n">YFP</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting YFP from Background.
+
+Extracting YFP from Auto.
+Extracting YFP from image number 0.
+Extracting YFP from image number 1.
+Extracting YFP from image number 2.
+Extracting YFP from image number 3.
+
+Extracting YFP from Delta.
+Extracting YFP from image number 0.
+Extracting YFP from image number 1.
+Extracting YFP from image number 2.
+
+Extracting YFP from HG104.
+Extracting YFP from image number 0.
+Extracting YFP from image number 1.
+Extracting YFP from image number 2.
+Extracting YFP from image number 3.
+
+Extracting YFP from RBS1.
+Extracting YFP from image number 0.
+Extracting YFP from image number 1.
+Extracting YFP from image number 2.
+Extracting YFP from image number 3.
+
+Extracting YFP from RBS1027.
+Extracting YFP from image number 0.
+Extracting YFP from image number 1.
+Extracting YFP from image number 2.
+Extracting YFP from image number 3.
+
+Extracting YFP from RBS1147.
+Extracting YFP from image number 0.
+Extracting YFP from image number 1.
+Extracting YFP from image number 2.
+Extracting YFP from image number 3.
+
+Extracting YFP from RBS446.
+Extracting YFP from image number 0.
+Extracting YFP from image number 1.
+Extracting YFP from image number 2.
+Extracting YFP from image number 3.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newStrainInfo</span> <span class="o">=</span> <span class="n">strainInfo</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1">## Make a copy...</span>
+<span class="n">newStrainInfo</span> <span class="o">=</span> <span class="n">calcFoldChange</span><span class="p">(</span><span class="n">newStrainInfo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average YFP with no repressors is 519.08
+The average YFP background is 118.06
+
+The average YFP in HG104 is 221.77
+The fold change expression of YFP is 0.1998
+
+The average YFP in RBS1 is 129.22
+The fold change expression of YFP is 0.021486
+
+The average YFP in RBS1027 is 135.88
+The fold change expression of YFP is 0.034325
+
+The average YFP in RBS1147 is 164.63
+The fold change expression of YFP is 0.089707
+
+The average YFP in RBS446 is 152.93
+The fold change expression of YFP is 0.067161
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">strainInfo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Background&#39;: array([[114, 126, 122, ..., 120, 119, 121],
+        [113, 128, 121, ..., 118, 119, 119],
+        [114, 126, 120, ..., 118, 118, 118],
+        ...,
+        [111, 126, 119, ..., 116, 116, 117],
+        [108, 124, 118, ..., 118, 118, 117],
+        [111, 127, 120, ..., 117, 114, 118]], dtype=uint16),
+ &#39;Auto&#39;: {0: {&#39;YFPMean&#39;: 120.26698972241964,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce2e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcec70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcee50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcee20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67313e1f0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 122.56736602892938,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcefd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce3d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce4f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67d00&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 123.30803232260286,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671bd8520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67730&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67130&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67c40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134ac0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 122.78100466305514,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134af0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134760&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134bb0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731347c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731347f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731346a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 1],
+          [0, 0, 0, ..., 1, 1, 1],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])}},
+ &#39;Delta&#39;: {0: {&#39;YFPMean&#39;: 626.6381787048607,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134e20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134d90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134df0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134e50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134dc0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134a60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134be0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134970&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134b50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731348e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134d30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db670a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db673a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db671f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db674c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db67430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db67910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db67070&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 655.7551036738566,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb4f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbe80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbd90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb2b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb5e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb760&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb730&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 629.0509067817944,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb790&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb7f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb9d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb880&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb6a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb6d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbb20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb5b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb3d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb940&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb490&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb370&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba60&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])}},
+ &#39;HG104&#39;: {0: {&#39;YFPMean&#39;: 208.63076430873784,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134cd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134880&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134d00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134940&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce3a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 218.51755236689056,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbbb0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbaf0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb4c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbb50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672f12040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672f12ca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672f12310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f3ad60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f3af10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5be0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5190&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 242.1205408481638,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef9190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef9730&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87790&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87a30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87ac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e875b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e878b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e873a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87850&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87f70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e871f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e877f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e878e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87fa0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e879d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87760&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87400&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 217.82933023515395,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671bf27c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef99d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef91c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284dee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284df10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284db20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284dd00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284dc70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284d970&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672800af0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672800070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75a90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75d90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75a60&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 221.77454693973655,
+  &#39;FoldChange&#39;: 0.19979506886489193},
+ &#39;RBS1&#39;: {0: {&#39;YFPMean&#39;: 129.39069168808118,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bceee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a620d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67313ecd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbbe0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbb80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75d30&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 130.11595165909142,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75e50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75c70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75280&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75b50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75ac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db755e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db751f0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 2, 2, 2],
+          [0, 0, 0, ..., 2, 2, 2],
+          [0, 0, 0, ..., 2, 2, 2],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 127.6954445708825,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75370&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75f40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75eb0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 129.6672540342137,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866250&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db755b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26be0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26100&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 129.2173354880672,
+  &#39;FoldChange&#39;: 0.02148630785217727},
+ &#39;RBS1027&#39;: {0: {&#39;YFPMean&#39;: 134.7658156480233,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26fd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67332e6a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67332e6d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67332e700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6733085e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6733085b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6733084c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320df10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320df70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320dd30&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 136.37317615295177,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134130&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26ca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26a90&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 137.36551675324773,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e688b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68730&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68f40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68400&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68640&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68fd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68cd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68d00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68d30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68850&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e684f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e685e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e687f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e687c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68490&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e684c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68790&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 135.02291904884044,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671be4c10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26c40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e1c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e190&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 135.8818569007658,
+  &#39;FoldChange&#39;: 0.03432531344885638},
+ &#39;RBS1147&#39;: {0: {&#39;YFPMean&#39;: 165.44787427864304,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68c70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68b50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68a60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68ca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e689a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68a30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e680a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e689d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68250&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68280&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e681f0&gt;],
+   &#39;Img&#39;: array([[1, 1, 1, ..., 0, 0, 0],
+          [1, 1, 1, ..., 0, 0, 0],
+          [1, 1, 1, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 161.22151869269507,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0640&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed03d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed02b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed07c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0d60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0d90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed09d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed09a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 170.26906825327725,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68ac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0370&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed00a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed04f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0880&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0850&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0250&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed08b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0700&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 161.58016291164208,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320db80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68af0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68bb0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75640&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672da0e80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0be0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 164.62965603406437,
+  &#39;FoldChange&#39;: 0.08970710774564651},
+ &#39;RBS446&#39;: {0: {&#39;YFPMean&#39;: 151.47853938109773,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68c10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0e20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0df0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0fd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0580&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 144.0991422052136,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672da0dc0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0d00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0940&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0970&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0280&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 140.86863640527062,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cd30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560c310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560ce50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560ce80&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 175.25812118775676,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cb50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560c670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cc40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560ca90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560c610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6755ff9a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 152.92610979483467,
+  &#39;FoldChange&#39;: 0.06716056818765916}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newStrainInfo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Background&#39;: array([[114, 126, 122, ..., 120, 119, 121],
+        [113, 128, 121, ..., 118, 119, 119],
+        [114, 126, 120, ..., 118, 118, 118],
+        ...,
+        [111, 126, 119, ..., 116, 116, 117],
+        [108, 124, 118, ..., 118, 118, 117],
+        [111, 127, 120, ..., 117, 114, 118]], dtype=uint16),
+ &#39;Auto&#39;: {0: {&#39;YFPMean&#39;: 120.26698972241964,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce2e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcec70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcee50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcee20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67313e1f0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 122.56736602892938,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bcefd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce3d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce4f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67d00&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 123.30803232260286,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671bd8520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67730&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67130&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67c40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a67b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134ac0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 122.78100466305514,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134af0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134760&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134bb0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731347c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731347f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731346a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 1],
+          [0, 0, 0, ..., 1, 1, 1],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])}},
+ &#39;Delta&#39;: {0: {&#39;YFPMean&#39;: 626.6381787048607,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134e20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134d90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134df0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134e50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134dc0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134a60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134be0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134970&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134b50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6731348e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134d30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db670a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db673a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db671f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db674c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db67430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db67910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db67070&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 655.7551036738566,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb4f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbe80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbd90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb2b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb5e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb760&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb730&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 629.0509067817944,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb790&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb7f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb9d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb880&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb6a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb6d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbb20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb5b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb3d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb940&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb490&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb370&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba60&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])}},
+ &#39;HG104&#39;: {0: {&#39;YFPMean&#39;: 208.63076430873784,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134cd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134880&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134d00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134940&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bce3a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 218.51755236689056,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbbb0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbaf0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bb4c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbb50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672f12040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672f12ca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672f12310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f3ad60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f3af10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5be0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671fa5190&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 242.1205408481638,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef9190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef9730&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87790&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87a30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87ac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e875b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e878b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e873a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87850&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87f70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e871f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e877f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e878e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87fa0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e879d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87760&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e87400&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 217.82933023515395,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671bf27c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef99d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ef91c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284dee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284df10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284db20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284dd00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284dc70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67284d970&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672800af0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672800070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75a90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75d90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75a60&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 221.77454693973655,
+  &#39;FoldChange&#39;: 0.19979506886489193},
+ &#39;RBS1&#39;: {0: {&#39;YFPMean&#39;: 129.39069168808118,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc675bceee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672a620d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67313ecd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bba90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbbe0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66e3bbb80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75d30&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 130.11595165909142,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75e50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75c70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75280&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75b50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75ac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db755e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db751f0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 2, 2, 2],
+          [0, 0, 0, ..., 2, 2, 2],
+          [0, 0, 0, ..., 2, 2, 2],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 127.6954445708825,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75370&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75f40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75eb0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 129.6672540342137,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672866250&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db755b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26be0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26100&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 129.2173354880672,
+  &#39;FoldChange&#39;: 0.02148630785217727},
+ &#39;RBS1027&#39;: {0: {&#39;YFPMean&#39;: 134.7658156480233,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26fd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67332e6a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67332e6d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67332e700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673308040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6733085e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6733085b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6733084c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320df10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320df70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320dd30&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 136.37317615295177,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc673134130&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26ca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26a90&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 137.36551675324773,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e688b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68730&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68f40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68400&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68640&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68fd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68cd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68d00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68d30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68850&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e684f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e685e0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68580&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e687f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e687c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68520&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68490&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e684c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68700&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68790&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 135.02291904884044,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc671be4c10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc671f26c40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e1c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67318e190&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 135.8818569007658,
+  &#39;FoldChange&#39;: 0.03432531344885638},
+ &#39;RBS1147&#39;: {0: {&#39;YFPMean&#39;: 165.44787427864304,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68c70&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68b50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68a60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68ca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e689a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68a30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e680a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e689d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68250&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68280&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e681f0&gt;],
+   &#39;Img&#39;: array([[1, 1, 1, ..., 0, 0, 0],
+          [1, 1, 1, ..., 0, 0, 0],
+          [1, 1, 1, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 161.22151869269507,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0640&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0b20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0430&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0550&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0340&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed03d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0190&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed02b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0ee0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed07c0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0d60&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0d90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0b80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0460&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0a00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed09d0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed09a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 170.26906825327725,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68ac0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0160&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0370&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed00a0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0820&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed04f0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0880&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0850&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0250&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed08b0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0040&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0910&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0700&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 161.58016291164208,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc67320db80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68af0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68bb0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75640&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75070&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc66db75220&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672da0e80&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0be0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 164.62965603406437,
+  &#39;FoldChange&#39;: 0.08970710774564651},
+ &#39;RBS446&#39;: {0: {&#39;YFPMean&#39;: 151.47853938109773,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672e68c10&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0e20&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0df0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0fd0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0580&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  1: {&#39;YFPMean&#39;: 144.0991422052136,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc672da0dc0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0d00&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0940&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0970&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc672ed0280&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  2: {&#39;YFPMean&#39;: 140.86863640527062,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cd30&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560c310&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560ce50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cca0&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560ce80&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  3: {&#39;YFPMean&#39;: 175.25812118775676,
+   &#39;blobs&#39;: [&lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cb50&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560c670&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560cc40&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560ca90&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc67560c610&gt;,
+    &lt;skimage.measure._regionprops.RegionProperties at 0x7fc6755ff9a0&gt;],
+   &#39;Img&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          ...,
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0],
+          [0, 0, 0, ..., 0, 0, 0]])},
+  &#39;YFPMean&#39;: 152.92610979483467,
+  &#39;FoldChange&#39;: 0.06716056818765916},
+ &#39;deltaMean&#39;: 519.0839245698611}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newStrainInfo</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;Background&#39;, &#39;Auto&#39;, &#39;Delta&#39;, &#39;HG104&#39;, &#39;RBS1&#39;, &#39;RBS1027&#39;, &#39;RBS1147&#39;, &#39;RBS446&#39;, &#39;deltaMean&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./CourseFiles/Module_2/Resources"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Eric Johnson<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

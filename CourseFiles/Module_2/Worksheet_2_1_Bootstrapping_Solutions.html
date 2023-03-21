@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>SOLUTIONS to Worksheet 2.1: Bootstrapping &#8212; What Do Your Data Say?</title>
+    <title>GUIDE to Worksheet 2.1 &#8212; What Do Your Data Say?</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,9 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Assignment 2" href="Assignment_2.html" />
+    <link rel="next" title="Worksheet 2.2: OLS Linear Regression" href="Worksheet_2_2_OLS_LinReg.html" />
     <link rel="prev" title="Worksheet 2.1: An introdution to bootstrapping" href="Worksheet_2_1_Bootstrapping.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -230,7 +232,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="Module_2.html">
-     Module 2
+     Module 2: Parameter Estimation and Model Fitting
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
     <label for="toctree-checkbox-4">
@@ -250,7 +252,27 @@ const thebe_selector_output = ".output, .cell_output"
      </li>
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
-       SOLUTIONS to Worksheet 2.1: Bootstrapping
+       GUIDE to Worksheet 2.1
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_2_OLS_LinReg.html">
+       Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_2_OLS_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg.html">
+       Worksheet 2.3: Bootstrapping linear regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.3: Bootstrapping linear regression
       </a>
      </li>
      <li class="toctree-l3">
@@ -476,23 +498,170 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   1.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   4.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   5.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   6.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   7.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   8.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   9.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   10.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   11.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   12.
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>SOLUTIONS to Worksheet 2.1: Bootstrapping</h1>
+                <h1>GUIDE to Worksheet 2.1</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   1.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   4.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   5.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   6.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   7.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   8.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   9.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   10.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   11.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   12.
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -500,8 +669,494 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="solutions-to-worksheet-2-1-bootstrapping">
-<h1>SOLUTIONS to Worksheet 2.1: Bootstrapping<a class="headerlink" href="#solutions-to-worksheet-2-1-bootstrapping" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="guide-to-worksheet-2-1">
+<h1>GUIDE to Worksheet 2.1<a class="headerlink" href="#guide-to-worksheet-2-1" title="Permalink to this headline">#</a></h1>
+<p>This notebook is meant to provide hints and guidance on how to complete Worksheet 2.1: An introduction to bootstrapping.  It will not necessarily answer every part of every problem, but it will get you to the interesting points of the worksheet.</p>
+<p>Also, these guides may be useful for you as you are building up your coding toolkit to see different ways to execute different tasks in Python. I am not necessarily showing the most efficient or elegant code, but trying to illustrate different ways to do things.  You should always use the code you feel you can understand best.</p>
+<hr class="docutils" />
+<p>First, let’s take care of our imported modules.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h2>1.<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">np.random.randn</span></code> generate a list of <span class="math notranslate nohighlight">\(N=100\)</span>  random numbers distributed according to the <strong>standard normal distribution</strong> (mean,<span class="math notranslate nohighlight">\(\mu = 0\)</span> and variance, <span class="math notranslate nohighlight">\(\sigma^2 = 1\)</span>).  Save these numbers as a variable called <code class="docutils literal notranslate"><span class="pre">realData1</span></code>. Calculate the mean using <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> and the 95% confidence interval using the formula</p>
+<div class="amsmath math notranslate nohighlight" id="equation-954c074c-bb29-45ad-ae19-751741a7b191">
+<span class="eqno">(29)<a class="headerlink" href="#equation-954c074c-bb29-45ad-ae19-751741a7b191" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left[
+\mu\pm z_{\alpha/2} \frac{\sigma}{\sqrt{N}}
+\right],
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the sample mean, <span class="math notranslate nohighlight">\(\sigma\)</span> is the sample standard deviation, <span class="math notranslate nohighlight">\(N\)</span> is the number of samples, and <span class="math notranslate nohighlight">\(z_{p}\)</span> is the <span class="math notranslate nohighlight">\(p^{\text{th}}\)</span> percentile of the standard normal distribution (<code class="docutils literal notranslate"><span class="pre">scipy.stats.norm.ppf</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>  <span class="c1">## Set the seed for reproducibility. The 12 is chosen arbitrarily.</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">realData1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1">## What is the shape of this? Print it out!</span>
+
+<span class="n">realMean1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">realData1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean of realData1 is </span><span class="si">{</span><span class="n">realMean1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">realStd1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">realData1</span><span class="p">)</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.95</span>
+<span class="n">z_alpha</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">## We use alpha / 2 because we want to cut off</span>
+                                 <span class="c1">## an equal area from both sides of the normal distribution.</span>
+
+<span class="n">realCI1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">realMean1</span> <span class="o">+</span> <span class="n">z_alpha</span> <span class="o">*</span> <span class="n">realStd1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">),</span>
+                    <span class="n">realMean1</span> <span class="o">-</span> <span class="n">z_alpha</span> <span class="o">*</span> <span class="n">realStd1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The confidence interval for this mean is (</span><span class="si">{</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean of realData1 is -0.144
+The confidence interval for this mean is (-0.349, 0.061)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>2.<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p><strong>In a new cell</strong> generate <span class="math notranslate nohighlight">\(N_{EXP} = 200\)</span> new sets of <span class="math notranslate nohighlight">\(N=100\)</span> normally distributed numbers.  Calculate their means.  Based on your understanding of a confidence interval, how many of these means would you expect to lie in the confidence interval you generated in problem 2?  How many of the means actually lie in your confidence interval?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_Exp</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="n">bigData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N_Exp</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>  <span class="c1">## What is the shape of this array?</span>
+
+<span class="n">manyMeans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bigData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">## Check that we get 200 means!</span>
+
+<span class="n">isInCI</span> <span class="o">=</span> <span class="p">(</span><span class="n">manyMeans</span> <span class="o">&gt;=</span> <span class="n">realCI1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">manyMeans</span> <span class="o">&lt;=</span> <span class="n">realCI1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">fracInCI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">isInCI</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_Exp</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fracInCI</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> of the newly simulated means lie in realCI1!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.00% of the newly simulated means lie in realCI1!
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a far cry from 95%! This is because confidence intervals are a statement concerning the likelihood that the true mean lies in the interval, not the likelihood that future means will fall in a certain range.</p>
+</section>
+<section id="id3">
+<h2>3.<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>Using your <span class="math notranslate nohighlight">\(N_{EXP}=200\)</span> new sets of <span class="math notranslate nohighlight">\(N=100\)</span> normally distributed numbers, calculate <span class="math notranslate nohighlight">\(N_{EXP}=200\)</span> confidence intervals.  In how many confidence intervals did your original mean (the mean of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>) lie?</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">z_alpha</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">([[</span><span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]])</span>  <span class="c1">## We&#39;re going to vectorize this process</span>
+
+<span class="n">manyMeans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bigData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">manyStds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">bigData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">manyCIs</span> <span class="o">=</span> <span class="n">manyMeans</span> <span class="o">+</span> <span class="n">z_alpha</span> <span class="o">*</span> <span class="n">manyStds</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">isInCIs</span> <span class="o">=</span> <span class="p">(</span><span class="n">manyCIs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">realMean1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">manyCIs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">realMean1</span><span class="p">)</span>
+<span class="n">fracInCIs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">isInCIs</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_Exp</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fracInCIs</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> of the newly simulated CIs contain realMean1!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.50% of the newly simulated CIs contain realMean1!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h2>4.<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>Repeat the above, with <span class="math notranslate nohighlight">\(N_{EXP} = 10000\)</span>.  Then try <span class="math notranslate nohighlight">\(N = 5000\)</span>.  What can you deduce about confidence intervals?  (Hint: try <a class="reference external" href="https://towardsdatascience.com/random-seeds-and-reproducibility-933da79446e3">changing the seed</a> in step 1 and running everything again.)</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># np.random.seed(12)  ## Set the seed for reproducibility. The 12 is chosen arbitrarily.</span>
+
+<span class="c1"># N = 5000</span>
+<span class="c1"># realData1 = np.random.randn(N)  ## What is the shape of this? Print it out!</span>
+
+<span class="c1"># realMean1 = np.mean(realData1)</span>
+<span class="c1"># print(f&quot;The mean of realData1 is {realMean1:.3f}&quot;)</span>
+
+<span class="c1"># realStd1 = np.std(realData1)</span>
+
+<span class="c1"># alpha = 1 - 0.95</span>
+<span class="c1"># z_alpha = st.norm.ppf(alpha / 2) ## We use alpha / 2 because we want to cut off</span>
+<span class="c1">#                                  ## an equal area from both sides of the normal distribution.</span>
+
+<span class="c1"># realCI1 = np.array([realMean1 + z_alpha * realStd1 / np.sqrt(N),</span>
+<span class="c1">#                     realMean1 - z_alpha * realStd1 / np.sqrt(N)])</span>
+
+<span class="c1"># print(f&quot;The confidence interval for this mean is ({realCI1[0]:.3f}, {realCI1[1]:.3f})&quot;)</span>
+
+<span class="c1"># N_Exp = 10000</span>
+
+<span class="c1"># bigData = np.random.randn(N_Exp, N)  ## What is the shape of this array?</span>
+
+<span class="c1"># manyMeans = np.mean(bigData, axis=1) ## Check that we get 200 means!</span>
+
+<span class="c1"># isInCI = (manyMeans &gt;= realCI1[0]) &amp; (manyMeans &lt;= realCI1[1])</span>
+<span class="c1"># fracInCI = np.sum(isInCI) / N_Exp</span>
+
+<span class="c1"># print(f&quot;{fracInCI:.2%} of the newly simulated means lie in realCI1!&quot;)</span>
+
+<span class="c1"># alpha = 0.05</span>
+<span class="c1"># z_alpha = st.norm.ppf([[alpha / 2, 1 - alpha / 2]])  ## We&#39;re going to vectorize this process</span>
+
+<span class="c1"># manyMeans = np.mean(bigData, axis=1, keepdims=True)</span>
+<span class="c1"># manyStds = np.std(bigData, axis=1, keepdims=True)</span>
+
+<span class="c1"># manyCIs = manyMeans + z_alpha * manyStds / np.sqrt(N)</span>
+
+<span class="c1"># isInCIs = (manyCIs[:, 0] &lt; realMean1) &amp; (manyCIs[:, 1] &gt; realMean1)</span>
+<span class="c1"># fracInCIs = np.sum(isInCIs) / N_Exp</span>
+
+<span class="c1"># print(f&quot;{fracInCIs:.2%} of the newly simulated CIs contain realMean1!&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>5.<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>The true mean of the underlying distribution is <span class="math notranslate nohighlight">\(\mu=0\)</span> because the data <em>actually come</em> from a standard normal distribution.  In how many of your confidence intervals does <span class="math notranslate nohighlight">\(\mu = 0\)</span> lie?  (Rerun your code a few times to check that your result is “stable”.)</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">muTrue</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">muInCI1</span> <span class="o">=</span> <span class="p">(</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">muTrue</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">muTrue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It is </span><span class="si">{</span><span class="n">muInCI1</span><span class="si">}</span><span class="s2"> that muTrue = 0 is in realCI1!&quot;</span><span class="p">)</span>
+
+<span class="n">muInCIs</span> <span class="o">=</span> <span class="p">(</span><span class="n">manyCIs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">muTrue</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">manyCIs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">muTrue</span><span class="p">)</span>
+<span class="n">fracMuInCIs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">muInCIs</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_Exp</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fracMuInCIs</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> of the newly simulated CIs contain muTrue!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It is True that muTrue = 0 is in realCI1!
+93.00% of the newly simulated CIs contain muTrue!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>6.<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>Type <code class="docutils literal notranslate"><span class="pre">help(np.random.choice)</span></code> into a Jupyter cell and read the documentation for this function.  In particular, note the keyword arguments and describe them to yourself.  Try using the function on a few test cases of your own design to see if it works the way you want.</p>
+<hr class="docutils" />
+<p>Using this documentation, we can see that the method has one positional argument, <code class="docutils literal notranslate"><span class="pre">a</span></code>, and three keyword arguments, <code class="docutils literal notranslate"><span class="pre">size</span></code>, <code class="docutils literal notranslate"><span class="pre">replace</span></code>, and <code class="docutils literal notranslate"><span class="pre">p</span></code>. The key argument for us will be <code class="docutils literal notranslate"><span class="pre">replace</span></code>, which allows us to generate samples from the input array <code class="docutils literal notranslate"><span class="pre">a</span></code> either with or without replacement. (As a reminder, when we use the phrase “replacement” we’re thinking about drawing samples like marbles from a bag and we’re specifying whether we’re putting the marble back into the bag after each draw - whether we’re <em>replacing</em> the marble or not. <em>With replacement</em> means we’re putting the marbles back, so that we have the possibility of drawing the same marble multiple times.)</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function choice:
+
+choice(...) method of numpy.random.mtrand.RandomState instance
+    choice(a, size=None, replace=True, p=None)
+    
+    Generates a random sample from a given 1-D array
+    
+    .. versionadded:: 1.7.0
+    
+    .. note::
+        New code should use the `~numpy.random.Generator.choice`
+        method of a `~numpy.random.Generator` instance instead;
+        please see the :ref:`random-quick-start`.
+    
+    Parameters
+    ----------
+    a : 1-D array-like or int
+        If an ndarray, a random sample is generated from its elements.
+        If an int, the random sample is generated as if it were ``np.arange(a)``
+    size : int or tuple of ints, optional
+        Output shape.  If the given shape is, e.g., ``(m, n, k)``, then
+        ``m * n * k`` samples are drawn.  Default is None, in which case a
+        single value is returned.
+    replace : boolean, optional
+        Whether the sample is with or without replacement. Default is True,
+        meaning that a value of ``a`` can be selected multiple times.
+    p : 1-D array-like, optional
+        The probabilities associated with each entry in a.
+        If not given, the sample assumes a uniform distribution over all
+        entries in ``a``.
+    
+    Returns
+    -------
+    samples : single item or ndarray
+        The generated random samples
+    
+    Raises
+    ------
+    ValueError
+        If a is an int and less than zero, if a or p are not 1-dimensional,
+        if a is an array-like of size 0, if p is not a vector of
+        probabilities, if a and p have different lengths, or if
+        replace=False and the sample size is greater than the population
+        size
+    
+    See Also
+    --------
+    randint, shuffle, permutation
+    random.Generator.choice: which should be used in new code
+    
+    Notes
+    -----
+    Setting user-specified probabilities through ``p`` uses a more general but less
+    efficient sampler than the default. The general sampler produces a different sample
+    than the optimized sampler even if each element of ``p`` is 1 / len(a).
+    
+    Sampling random rows from a 2-D array is not possible with this function,
+    but is possible with `Generator.choice` through its ``axis`` keyword.
+    
+    Examples
+    --------
+    Generate a uniform random sample from np.arange(5) of size 3:
+    
+    &gt;&gt;&gt; np.random.choice(5, 3)
+    array([0, 3, 4]) # random
+    &gt;&gt;&gt; #This is equivalent to np.random.randint(0,5,3)
+    
+    Generate a non-uniform random sample from np.arange(5) of size 3:
+    
+    &gt;&gt;&gt; np.random.choice(5, 3, p=[0.1, 0, 0.3, 0.6, 0])
+    array([3, 3, 0]) # random
+    
+    Generate a uniform random sample from np.arange(5) of size 3 without
+    replacement:
+    
+    &gt;&gt;&gt; np.random.choice(5, 3, replace=False)
+    array([3,1,0]) # random
+    &gt;&gt;&gt; #This is equivalent to np.random.permutation(np.arange(5))[:3]
+    
+    Generate a non-uniform random sample from np.arange(5) of size
+    3 without replacement:
+    
+    &gt;&gt;&gt; np.random.choice(5, 3, replace=False, p=[0.1, 0, 0.3, 0.6, 0])
+    array([2, 3, 0]) # random
+    
+    Any of the above can be repeated with an arbitrary array-like
+    instead of just integers. For instance:
+    
+    &gt;&gt;&gt; aa_milne_arr = [&#39;pooh&#39;, &#39;rabbit&#39;, &#39;piglet&#39;, &#39;Christopher&#39;]
+    &gt;&gt;&gt; np.random.choice(aa_milne_arr, 5, p=[0.5, 0.1, 0.1, 0.3])
+    array([&#39;pooh&#39;, &#39;pooh&#39;, &#39;pooh&#39;, &#39;Christopher&#39;, &#39;piglet&#39;], # random
+          dtype=&#39;&lt;U11&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>7.<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p>Re-sample <code class="docutils literal notranslate"><span class="pre">randData1</span></code> <em>with replacement</em> <span class="math notranslate nohighlight">\(N_{Boot} = 200\)</span> times.  Calculate the mean of each of these re-samplings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_boot</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="n">bootData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">realData1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N_boot</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">bootMeans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bootData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h2>8.<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<p>Before writing any more code, write down what you think the <em>mean</em> of your bootstrapped means is.</p>
+<hr class="docutils" />
+<p>I’m going to hazard a guess that the mean is close to zero.</p>
+</section>
+<section id="id9">
+<h2>9.<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<p>Calculate the mean of your bootstrapped means.  How does it compare to the mean of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>?  What does the <em>distribution</em> of these resampled means look like?</p>
+<hr class="docutils" />
+<p>We can see from the figure that my guess was wrong! Instead, it seems that the mean of the bootstraps is close to that of <code class="docutils literal notranslate"><span class="pre">realData1</span></code>, which in hindsight makes sense since our resampling comes from <code class="docutils literal notranslate"><span class="pre">realData1</span></code>! We can see that this distribution is roughly unimodal and symmetric about this mean.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allBootMean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">allBootMean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean of Bootstraps = </span><span class="si">{</span><span class="n">allBootMean</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">realMean1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;realMean1 = </span><span class="si">{</span><span class="n">realMean1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Mean of Bootstrapped Sample&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_2_1_Bootstrapping_Solutions_19_0.png" src="../../_images/Worksheet_2_1_Bootstrapping_Solutions_19_0.png" />
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>10.<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<p>Consider your array of <span class="math notranslate nohighlight">\(N_{Exp} = 200\)</span> means generated from independent “experiments”.  How does the distribution of these means compare to the distribution of resampled means?</p>
+<hr class="docutils" />
+<p>Now we can see that the simulated means are distributed around the true mean of zero, but the bootstrapped means are offset to be around the mean of the first simulation, <code class="docutils literal notranslate"><span class="pre">realData1</span></code>.  However, the shape of these distributions are similar! In particular, they appear to have similar widths.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allBootMean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">)</span>
+
+<span class="n">cblind</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">manyMeans</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">allBootMean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean of Bootstraps = </span><span class="si">{</span><span class="n">allBootMean</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">manyMeans</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean of Simulations = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">manyMeans</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">realMean1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;realMean1 = </span><span class="si">{</span><span class="n">realMean1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Mean of Bootstrapped Sample&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Worksheet_2_1_Bootstrapping_Solutions_21_0.png" src="../../_images/Worksheet_2_1_Bootstrapping_Solutions_21_0.png" />
+</div>
+</div>
+</section>
+<section id="id11">
+<h2>11.<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<p>Calculate the <span class="math notranslate nohighlight">\(2.5^{\text{th}}\)</span> and <span class="math notranslate nohighlight">\(97.5^{\text{th}}\)</span> percentiles of the resampled means.  How do they compare to the confidence interval generated in Problem 1?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bootCI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The 95% interval for the bootstrapped means is (</span><span class="si">{</span><span class="n">bootCI</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bootCI</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The confidence interval for this mean is (</span><span class="si">{</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The 95% interval for the bootstrapped means is (-0.351, 0.041)
+The confidence interval for this mean is (-0.349, 0.061)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h2>12.<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<p>Increase the number of both resamplings and experiments to 10,000 (<span class="math notranslate nohighlight">\(N_{EXP}\)</span> and <span class="math notranslate nohighlight">\(N_{Boot}\)</span>).  How do the distributions of means change?  How does the mean of the resampled means compare to the mean of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>?  How do the percentiles of the resampled means compare to the confidence interval of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>?  How many experiments yield confidence intervals that contain <code class="docutils literal notranslate"><span class="pre">randData1</span></code>’s mean and/or 0?  (If you have not hardcoded <span class="math notranslate nohighlight">\(N_{Exp} = 200\)</span> and <span class="math notranslate nohighlight">\(N_{BOOT} = 200\)</span>, this will be easy to re-run!)</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_Exp</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">N_boot</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1">### Generate simulated data</span>
+<span class="n">bigData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N_Exp</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>  <span class="c1">## What is the shape of this array?</span>
+
+<span class="n">manyMeans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bigData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">isInCI</span> <span class="o">=</span> <span class="p">(</span><span class="n">manyMeans</span> <span class="o">&gt;=</span> <span class="n">realCI1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">manyMeans</span> <span class="o">&lt;=</span> <span class="n">realCI1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">fracInCI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">isInCI</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_Exp</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fracInCI</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> of the newly simulated means lie in realCI1!&quot;</span><span class="p">)</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">z_alpha</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">([[</span><span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]])</span>  <span class="c1">## We&#39;re going to vectorize this process</span>
+
+<span class="n">manyMeans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bigData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">manyStds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">bigData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">manyCIs</span> <span class="o">=</span> <span class="n">manyMeans</span> <span class="o">+</span> <span class="n">z_alpha</span> <span class="o">*</span> <span class="n">manyStds</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">isInCIs</span> <span class="o">=</span> <span class="p">(</span><span class="n">manyCIs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">realMean1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">manyCIs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">realMean1</span><span class="p">)</span>
+<span class="n">fracInCIs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">isInCIs</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_Exp</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fracInCIs</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> of the newly simulated CIs contain realMean1!&quot;</span><span class="p">)</span>
+
+<span class="c1">### Generate bootstrapped data</span>
+<span class="n">bootData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">realData1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N_boot</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">bootMeans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bootData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">bootCI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The 95% interval for the bootstrapped means is (</span><span class="si">{</span><span class="n">bootCI</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bootCI</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The original confidence interval for this mean is (</span><span class="si">{</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">realCI1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="n">allBootMean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">)</span>
+
+<span class="c1">### Let&#39;s plot</span>
+<span class="n">cblind</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bootMeans</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">manyMeans</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">realMean1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;realMean1 = </span><span class="si">{</span><span class="n">realMean1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">allBootMean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean of Bootstraps = </span><span class="si">{</span><span class="n">allBootMean</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">manyMeans</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">cblind</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean of Simulations = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">manyMeans</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Mean of Bootstrapped Sample&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.25% of the newly simulated means lie in realCI1!
+69.13% of the newly simulated CIs contain realMean1!
+The 95% interval for the bootstrapped means is (-0.353, 0.063)
+The original confidence interval for this mean is (-0.349, 0.061)
+</pre></div>
+</div>
+<img alt="../../_images/Worksheet_2_1_Bootstrapping_Solutions_25_1.png" src="../../_images/Worksheet_2_1_Bootstrapping_Solutions_25_1.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -538,10 +1193,10 @@ title="Print to PDF"
             <p class="prev-next-title">Worksheet 2.1: An introdution to bootstrapping</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Assignment_2.html" title="next page">
+    <a class='right-next' id="next-link" href="Worksheet_2_2_OLS_LinReg.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assignment 2</p>
+        <p class="prev-next-title">Worksheet 2.2: OLS Linear Regression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

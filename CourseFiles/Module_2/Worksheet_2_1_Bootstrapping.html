@@ -50,9 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Worksheet_2_1_Bootstrapping_Solutions.html" />
+    <link rel="next" title="GUIDE to Worksheet 2.1" href="Worksheet_2_1_Bootstrapping_Solutions.html" />
     <link rel="prev" title="Module 2: Parameter Estimation and Model Fitting" href="Module2_CourseNotes.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -230,7 +232,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="Module_2.html">
-     Module 2
+     Module 2: Parameter Estimation and Model Fitting
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
     <label for="toctree-checkbox-4">
@@ -246,6 +248,31 @@ const thebe_selector_output = ".output, .cell_output"
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
        Worksheet 2.1: An introdution to bootstrapping
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_1_Bootstrapping_Solutions.html">
+       GUIDE to Worksheet 2.1
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_2_OLS_LinReg.html">
+       Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_2_OLS_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.2: OLS Linear Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg.html">
+       Worksheet 2.3: Bootstrapping linear regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="Worksheet_2_3_Boot_LinReg_Solutions.html">
+       SOLUTIONS to Worksheet 2.3: Bootstrapping linear regression
       </a>
      </li>
      <li class="toctree-l3">
@@ -468,6 +495,92 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="worksheet-2-1-an-introdution-to-bootstrapping">
 <h1>Worksheet 2.1: An introdution to bootstrapping<a class="headerlink" href="#worksheet-2-1-an-introdution-to-bootstrapping" title="Permalink to this headline">#</a></h1>
+<p>Welcome to the first worksheet of Module 2! The worksheets are designed to work in parallel to the course notes and lectures. They are not intended to be summary assessments at the end of a module, but as <strong>necessary content</strong> that you consume on your way to the assignments (and eventually attacking your own data!). As a result, if there are parts of the worksheet that you don’t understand or are having trouble with, make sure to <strong>ask for help!</strong></p>
+<p>In this worksheet you will be introduced to the nuts and bolts of <strong>bootstrapping</strong>.  As we’ll emphasize here – and often in the course – bootstrapping is simply the computational technique of leveraging your computer’s ability to easily generate many random numbers in order to <em>re-sample</em> our data to make estimates and confidence intervals.</p>
+<p>Unlike ML and MAP estimation, where the heavy lifting is largely mathematical, bootstrapping is a computational method, so you’ll need to practice <em>doing</em> it before it might be intuitive.  As you’ll see, the gist of the method is that re-sampling our data is as close as we can get to approximating the underlying data distribution without actually going out and collecting new data.  By calculating our parameter of interest from many re-samples, we can approximate the distribution of that parameter as if we had done many experiments.</p>
+<div class="admonition-worksheet-goals admonition">
+<p class="admonition-title">Worksheet Goals</p>
+<p>By the end of this worksheet, you will have practiced the following skills:</p>
+<ul class="simple">
+<li><p><mark style="background-color: #e26563">PCS-1</mark> Calculating the estimate and confidence interval of the mean using theoretical formulas.</p></li>
+<li><p><mark style="background-color: #e26563">PCS-2</mark> Calculating the estimate and confidence interval of the mean using bootstrapping.</p></li>
+<li><p><mark style="background-color: #ffda5c">TS-1</mark> Discussing the differences between different methods for making estimates and intervals.</p></li>
+<li><p><mark style="background-color: #6b9cee">MVD</mark> Illustrating uncertainty in estimates.</p></li>
+<li><p><mark style="background-color: #92c57a">NQP-1</mark> Comparing and critiquing different methods for making estimates and intervals.</p></li>
+</ul>
+</div>
+<ol>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">np.random.randn</span></code> generate a list of <span class="math notranslate nohighlight">\(N=100\)</span>  random numbers distributed according to the <strong>standard normal distribution</strong> (mean,<span class="math notranslate nohighlight">\(\mu = 0\)</span> and variance, <span class="math notranslate nohighlight">\(\sigma^2 = 1\)</span>).  Save these numbers as a variable called <code class="docutils literal notranslate"><span class="pre">realData1</span></code>. Calculate the mean using <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> and the 95% confidence interval using the formula</p>
+<div class="math notranslate nohighlight">
+\[\left[
+\mu\pm z_{\alpha/2} \frac{\sigma}{\sqrt{N}}
+\right],\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the sample mean, <span class="math notranslate nohighlight">\(\sigma\)</span> is the sample standard deviation, <span class="math notranslate nohighlight">\(N\)</span> is the number of samples, and <span class="math notranslate nohighlight">\(z_{p}\)</span> is the <span class="math notranslate nohighlight">\(p^{\text{th}}\)</span> percentile of the standard normal distribution (<code class="docutils literal notranslate"><span class="pre">scipy.stats.norm.ppf</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are concerned about a Python function, you should always use the <code class="docutils literal notranslate"><span class="pre">help(function_Im_worried_about)</span></code> utility in Jupyter and the <strong>internet</strong> to help you understand how to use it.  In particular, you should make sure you look-up/understand (in more or less this order):</p>
+<ul class="simple">
+<li><p>The outputs of the function</p></li>
+<li><p>The inputs of the function</p></li>
+<li><p>Examples of usage of the function (typically near the bottom of the documentation)</p></li>
+<li><p>The keyword options of the function</p></li>
+</ul>
+<p> </p>
+<p>In the same vein, if you think that there’s something you want to do in Python, you should Google “normal random Python”, for example and see what pops up.  This may sound like cheap advice, but it is actually an essential skill for a Python programmer.  As we mentioned, one of the benefits of Python is that it’s so widely used and developed.  You will never take advantage of that without Googling your problems.</p>
+<p> </p>
+<p>Also, <span class="math notranslate nohighlight">\(z_{\alpha/2}\approx-1.96\)</span> if <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>, just as a reference.</p>
+</div>
+</li>
+<li><p><strong>In a new cell</strong> generate <span class="math notranslate nohighlight">\(N_{EXP} = 200\)</span> new sets of <span class="math notranslate nohighlight">\(N=100\)</span> normally distributed numbers.  Calculate their means.  Based on your understanding of a confidence interval, how many of these means would you expect to lie in the confidence interval you generated in problem 2?  How many of the means actually lie in your confidence interval?</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If this surprises you, run your code a couple times (make sure to change the seed)!  What this should hopefully start to point out is that a confidence interval is not quite what you think it is!</p>
+<p> </p>
+<p>Also, you should use this problem as an example of how you can use Python and your computer to *check your intuition} about theoretical concepts!  We literally do things like this all the time as a simple way to make sure our understanding of things isn’t wildly off-base.</p>
+</div>
+</li>
+<li><p>Using your <span class="math notranslate nohighlight">\(N_{EXP}=200\)</span> new sets of <span class="math notranslate nohighlight">\(N=100\)</span> normally distributed numbers, calculate <span class="math notranslate nohighlight">\(N_{EXP}=200\)</span> confidence intervals.  In how many confidence intervals did your original mean (the mean of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>) lie?</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For reference, when I ran this, I got 172, or 86% of intervals.  So not really anywhere near 95%…</p>
+</div>
+</li>
+<li><p>Repeat the above, with <span class="math notranslate nohighlight">\(N_{EXP} = 10000\)</span>.  Then try <span class="math notranslate nohighlight">\(N = 5000\)</span>.  What can you deduce about confidence intervals?  (Hint: try <a class="reference external" href="https://towardsdatascience.com/random-seeds-and-reproducibility-933da79446e3">changing the seed</a> in step 1 and running everything again.)</p></li>
+<li><p>The true mean of the underlying distribution is <span class="math notranslate nohighlight">\(\mu=0\)</span> because the data <em>actually come</em> from a standard normal distribution.  In how many of your confidence intervals does <span class="math notranslate nohighlight">\(\mu = 0\)</span> lie?  (Rerun your code a few times to check that your result is “stable”.)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is what makes confidence intervals so tricky!  <a class="reference external" href="https://rpsychologist.com/d3/CI/">This website</a> animates the simulation you’ve just done.  When you’re using the mean of <code class="docutils literal notranslate"><span class="pre">randData1</span></code> as a comparison, you can think of adding another vertical dashed line in the moving plot on the right.</p>
+<p>In any case, you can think of confidence intervals as being an assessment of whether your <em>experiment</em> captured the true parameter, not whether the true parameter is in your interval.</p>
+</div>
+</li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">help(np.random.choice)</span></code> into a Jupyter cell and read the documentation for this function.  In particular, note the keyword arguments and describe them to yourself.  Try using the function on a few test cases of your own design to see if it works the way you want.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is absolutely our intention that by the end of this course (or worksheet) you are sick of us telling you to test functions, build code slowly, and add print statements!</p>
+</div>
+</li>
+<li><p>Re-sample <code class="docutils literal notranslate"><span class="pre">randData1</span></code> <em>with replacement</em> <span class="math notranslate nohighlight">\(N_{Boot} = 200\)</span> times.  Calculate the mean of each of these re-samplings.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For many of you, this is your first bootstrapping!  Congrats!  Now, make sure to check that you’ve done what you think you’ve done.  It’s likely that you won’t be able to check by-eye whether this has gone correctly, so what can you do?  (It certainly is likely that you won’t raise any actual errors.)  This is where testing new functions on smaller problems becomes invaluable!</p>
+</div>
+</li>
+<li><p>Before writing any more code, write down what you think the <em>mean</em> of your bootstrapped means is.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Again, getting in the habit of forming expectations based on your conceptual understanding <em>before</em> you do things isn’t just some pedantry that we’re peddling.  It’s literally the only way that you’ll be able to learn anything from this work.  If you don’t have expectations, it will just be numbers and plots and you’ll never know if you’re right or wrong!</p>
+</div>
+</li>
+<li><p>Calculate the mean of your bootstrapped means.  How does it compare to the mean of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>?  What does the <em>distribution</em> of these resampled means look like?</p></li>
+<li><p>Consider your array of <span class="math notranslate nohighlight">\(N_{Exp} = 200\)</span> means generated from independent “experiments”.  How does the distribution of these means compare to the distribution of resampled means?</p></li>
+<li><p>Calculate the <span class="math notranslate nohighlight">\(2.5^{\text{th}}\)</span> and <span class="math notranslate nohighlight">\(97.5^{\text{th}}\)</span> percentiles of the resampled means.  How do they compare to the confidence interval generated in Problem 1?</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most of this worksheet has focused on exploring calculated confidence intervals, but now we get to the real utility of bootstrapping: we can get confidence intervals <em>computationally</em>!</p>
+</div>
+</li>
+<li><p>Increase the number of both resamplings and experiments to 10,000 (<span class="math notranslate nohighlight">\(N_{EXP}\)</span> and <span class="math notranslate nohighlight">\(N_{Boot}\)</span>).  How do the distributions of means change?  How does the mean of the resampled means compare to the mean of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>?  How do the percentiles of the resampled means compare to the confidence interval of <code class="docutils literal notranslate"><span class="pre">randData1</span></code>?  How many experiments yield confidence intervals that contain <code class="docutils literal notranslate"><span class="pre">randData1</span></code>’s mean and/or 0?  (If you have not hardcoded <span class="math notranslate nohighlight">\(N_{Exp} = 200\)</span> and <span class="math notranslate nohighlight">\(N_{BOOT} = 200\)</span>, this will be easy to re-run!)</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -507,7 +620,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="Worksheet_2_1_Bootstrapping_Solutions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">GUIDE to Worksheet 2.1</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
