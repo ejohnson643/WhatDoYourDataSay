@@ -56,7 +56,7 @@ maximizes the likelihood function for exponentially distributed data, $\tau_i$. 
 Calculate $\hat{\lambda}$ for both sets of intervals: $\tau^+$ and $\tau^-$.
 
 To complete the estimation, we need to also give a confidence interval for $\hat{\lambda}$.  In the following sub-problems, you're going to explore how getting the theory correct can be tricky and can lead to more or less consistent results.  (Throughout this problem you can assume that we want a 95\% confidence interval, that is, $\alpha = 0.05$.)
-    
+
 1. <mark style="background-color: #e26563">PCS-1</mark>, <mark style="background-color: #ffda5c">TS-1</mark>, <mark style="background-color: #92c57a">NQP-1</mark> If you didn't know anything about exponential distributions or confidence intervals, you may have seen that sometimes people give intervals as `mean` $\pm$ `stddev`.  Will this work for our estimate of the rate parameter, $\lambda$?  Try it out: calculate
     ```{math}
     I = \frac{1}{\bar{\tau}\pm \sqrt{\text{Var}[\tau]}}
@@ -66,7 +66,7 @@ To complete the estimation, we need to also give a confidence interval for $\hat
 2. <mark style="background-color: #e26563">PCS-1</mark>, <mark style="background-color: #ffda5c">TS-1</mark>, <mark style="background-color: #92c57a">NQP-1</mark> If you do some more reading, you might find that the formula for a confidence interval is often given as 
     ```{math}
     :label: eqn_NormConfInt
-    `mean} \pm\,\,z_{\alpha/2} \times`stderror},
+    \texttt{mean} \pm\,\,z_{\alpha/2} \times\texttt{stderror},
     ```
     where the *standard error* is given as `stderror`$=$`stddev`$ / \sqrt{N}$, and $z_{\alpha/2}$ is the $p^{th}$ *percentile* of the standard normal distribution.  You can calculate percentiles of a normal distribution using `scipy.stats.norm.ppf(p)`, we have `mean` $=\hat{\lambda}$, so we just need `stddev` to complete the formula.  You may be tempted to use the standard deviation from the data as in the previous problem, but a quick Wikipedia search shows that the variance of exponentially distributed variables is $1/\lambda^2$, so that maybe we can use $\hat{\lambda} = $`stddev`.  Thus the interval now becomes
     ```{math}
@@ -98,11 +98,11 @@ To further unpack the differences in the confidence interval formulas, let's try
 
 1. <mark style="background-color: #e26563">PCS-1</mark> Randomly draw $N=100$ intervals from one of the lists ($\tau^+$ or $\tau^-$) and estimate the rate parameter $\lambda$ (calculate a point estimate *and* and interval!).  Save this estimate as `lHat0` and `lConfInt0`.  Use the *exact* confidence interval formula in Equation {eq}`eqn_ExactConfInt`.
 
-2. <mark style="background-color: #e26563">PCS-1,2</mark>, <mark style="background-color: #ffda5c">TS-1</mark> Repeat the previous problem $N_{exp}$ times, where $N_{exp}$ is a large number of your choosing.  Show the distribution of estimates, $\hat{\lambda}$ and describe its shape.  Where is it centered?  On `\lHat0`?  On the value calculated in 1.a?
+2. <mark style="background-color: #e26563">PCS-1,2</mark>, <mark style="background-color: #ffda5c">TS-1</mark> Repeat the previous problem $N_{exp}$ times, where $N_{exp}$ is a large number of your choosing.  Show the distribution of estimates, $\hat{\lambda}$ and describe its shape.  Where is it centered?  On `lHat0`?  On the value calculated in 1.1?
 
 3. <mark style="background-color: #e26563">PCS</mark>, <mark style="background-color: #ffda5c">TS-1</mark> Equation {eq}`eqn_ApproxConfInt` suggested that $\lambda$ is normally distributed.  Overlay a plot of a normal distribution with mean, $\mu = \hat{\lambda}$, and standard deviation $\sigma = \hat{\lambda}/\sqrt{N}$, where these can be calculated using all the intervals.  Qualitatively discuss how well the distribution of estimates match this curve.
 
-4.<mark style="background-color: #e26563">PCS-2</mark>, <mark style="background-color: #ffda5c">TS-1</mark> The exact confidence interval (Equation {eq}`eqn_ExactConfInt`) used the fact that $\lambda$ is $\chi^2$-distributed.  Use `scipy.stats.chi2.pdf(xCoords, df=2*N, scale=1/(2*N*tauBar))` to overlay a plot of this distribution. Qualitatively discuss how well the distribution of estimates match this curve.
+4. <mark style="background-color: #e26563">PCS-2</mark>, <mark style="background-color: #ffda5c">TS-1</mark> The exact confidence interval (Equation {eq}`eqn_ExactConfInt`) used the fact that $\lambda$ is $\chi^2$-distributed.  Use `scipy.stats.chi2.pdf(xCoords, df=2*N, scale=1/(2*N*tauBar))` to overlay a plot of this distribution. Qualitatively discuss how well the distribution of estimates match this curve.
 
 5. <mark style="background-color: #ffda5c">TS-1</mark> , <mark style="background-color: #6b9cee">MVD</mark>  Indicate where `lHat0` and `lConfInt0` fall on the distribution.  Determine the fraction of the $N_{exp}$ estimates that fall in `lConfInt0`.  Discuss this fraction - does it make sense to you?  (If needed, run your code several times to convince yourself!)
 
@@ -164,7 +164,7 @@ In this problem, you're going to explore how changing the "noise" in your data i
         
 2. <mark style="background-color: #e26563">PCS-2</mark>, <mark style="background-color: #ffda5c">TS-2</mark>, <mark style="background-color: #6b9cee">MVD</mark> Use linear regression methods (see Worksheet 2.2) to fit the model
     ```{math}
-    \hat{y}_i = \beta_0 + \beta_1\x_i
+    \hat{y}_i = \beta_0 + \beta_1 x_i
     ```
     to both your synthetic data sets.  Compare the regression coefficients and plot the fitted model over the data.
         
@@ -172,7 +172,7 @@ In this problem, you're going to explore how changing the "noise" in your data i
         
 ### 2.2: Estimating Regression Coefficients
 
-Select $N = 20$ of each of your generated data sets.  We're now going to generate confidence regions for $\beta_1$, the regression coefficient, in three ways: (i) a confidence interval from theory, (ii) a credible interval from a posterior distribution, and (iii) a confidence interval from bootstrapping.
+We're now going to generate confidence regions for $\beta_1$, the regression coefficient, in three ways: (i) a confidence interval from theory, (ii) a credible interval from a posterior distribution, and (iii) a confidence interval from bootstrapping.
     
 1. <mark style="background-color: #e26563">PCS-1,3</mark> We won't discuss the theory here, but just as we learned that exponential rate parameters are $\chi^2$-distributed, it can [be shown](https://stats.stackexchange.com/questions/117406/proof-that-the-coefficients-in-an-ols-model-follow-a-t-distribution-with-n-k-d) that regression coefficients are $t$-distributed, so that the formula for their confidence interval is given by
     ```{math}
@@ -186,17 +186,17 @@ Select $N = 20$ of each of your generated data sets.  We're now going to generat
     s_x = \sqrt{\sum_{i=1}^N(x_i - \bar{x})^2}\,\qquad\text{and}\qquad
     s_y = \sqrt{\frac{\sum_{i=1}^N(y_i - \hat{y}_i)^2}{N-2}}.
     ```
-    In these formulas, $\bar{x}$ is the mean of $x_i$, and $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1x_i$ is the model prediction and $t_{\nu}(p)$ is the $p$\ts{th} percentile of the Student's $t$-distribution with $\nu$ degrees of freedom (`scipy.stats.t.ppf(p, nu)`).
+    In these formulas, $\bar{x}$ is the mean of $x_i$, and $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1x_i$ is the model prediction and $t_{\nu}(p)$ is the $p^{\text{th}}$ percentile of the Student's $t$-distribution with $\nu$ degrees of freedom (`scipy.stats.t.ppf(p, nu)`).
 
     Calculate the 95\% confidence interval for your estimates $\beta_1$ from both data sets using this formula.
 
 2. <mark style="background-color: #e26563">PCS-1,3</mark> Alternately, we can pose the problem in a Bayesian way.  Use the priors in the notes for $\beta$ with $\mu_{\beta} = \hat{\beta}_{OLS}$ and $\delta_{\beta} = 10$.  Use $\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^Nr_i^2}$.  Then use Equation 29 from the notes and `scipy.stats.norm.ppf` to calculate 95\% credible intervals for $\beta_1$ from both data sets.
 
-3. <mark style="background-color: #e26563">PCS-2,3</mark> Bootstrap your $N=20$ data points from each synthetic data set many times.  Use your preferred linear regression method to generate an estimate $\hat{\beta}_1$ from each bootstrapped sample.  Report the 95\% confidence interval from the distribution of bootstrapped estimates.
+3. <mark style="background-color: #e26563">PCS-2,3</mark> Bootstrap your data from each synthetic data set many times.  Use your preferred linear regression method to generate an estimate $\hat{\beta}_1$ from each bootstrapped sample.  Report the 95\% confidence interval from the distribution of bootstrapped estimates.
 
 4. <mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-2</mark> Illustrate these intervals with a relevant figure.  Discuss the similarities and differences in these intervals.  Is $\beta_1 = 0$ in any of these intervals?
 
-### 2.3:
+### 2.3: How much data is enough?
 
 <mark style="background-color: #e26563">PCS</mark>, <mark style="background-color: #ffda5c">TS</mark>, <mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP</mark>  Choose one of the three methods for generating intervals of confidence and make a figure that demonstrates how this interval depends on the amount of data.  Use either synthetic data set.  Indicate approximately how many data points you need before you can be "sure" that $\beta_1\neq0$.  How many do you need before you're "sure" that it's not 0.9?  0.99?
 
@@ -206,9 +206,9 @@ Select $N = 20$ of each of your generated data sets.  We're now going to generat
     
 In this problem you're going to deal with *real data*!  You're going to move past generating intervals of confidence and instead think about a model's predictive ability.    
 
-### 3.1:
+### 3.1: Prepare the data
 
-<mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-2</mark> **BONUS - The Data:** Consider the dataset [here](https://github.com/ejohnson643/WhatDoYourDataSay/blob/main/CourseFiles/Module_2/Resources/abalones.csv). As described [here](https://archive.ics.uci.edu/ml/datasets/Abalone), the data consist of some measurements of [abalones](https://en.wikipedia.org/wiki/Abalone), which are a type of ocean mollusk.  Explore the data set and describe the measurements.  We're going to use the variable `rings` as our response variable; pick two of the continuous measurements (not `sex` or `rings`)  and *standardize* your response variable, $y$ and your covariates $x_1$ and $x_2$ so that they have mean = 0 and standard deviation = 1.  We'll notate the standardized quantities with a * ($y^*$, $x_1^*$, and $x_2^*$).  Plot $y^*$ vs $x_1^*$ and $y^*$ vs $x_2^*$.  State whether you expect a linear model to perform well on this problem.
+<mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-2</mark> **BONUS** Consider the dataset [here](https://github.com/ejohnson643/WhatDoYourDataSay/blob/main/CourseFiles/Module_2/Resources/abalones.csv). As described [here](https://archive.ics.uci.edu/ml/datasets/Abalone), the data consist of some measurements of [abalones](https://en.wikipedia.org/wiki/Abalone), which are a type of ocean mollusk.  Explore the data set and describe the measurements.  We're going to use the variable `rings` as our response variable; pick two of the continuous measurements (not `sex` or `rings`)  and *standardize* your response variable, $y$ and your covariates $x_1$ and $x_2$ so that they have mean = 0 and standard deviation = 1.  We'll notate the standardized quantities with a * ($y^*$, $x_1^*$, and $x_2^*$).  Plot $y^*$ vs $x_1^*$ and $y^*$ vs $x_2^*$.  State whether you expect a linear model to perform well on this problem.
 
 ### 3.2: Testing and Training Sets
 
@@ -245,13 +245,13 @@ to generate an estimate for the binding energy of those repressors, $\Delta\vare
     
 You may or may not be surprised to learn that a common experimental technique for measuring cellular activity is to *take pictures* of cells at specific wavelengths of light.  This measures activity because the cells have been modified so that specific proteins fluoresce at specific wavelengths.  What this looks like then is the images in [this folder](https://github.com/ejohnson643/WhatDoYourDataSay/tree/main/CourseFiles/Module_2/Resources/Philips_Garcia_Data/laci_full_set).  In each of these images, a specific strain of bacteria has been imaged at a couple wavelengths (a yellow one and a red one), and the idea is that the amount of light (number of photons) measured at those wavelengths directly corresponds to how much of a desired protein (LacI) exists in the cells or their environment.
     
-### 4.1:
+### 4.1: Image processing
 
 <mark style="background-color: #6b9cee">MVD</mark> The immediate trouble then is that bacteria don't sort themselves nicely into grids or patterns, so we have to either manually indicate where bacteria are in the images or help the computer use the images to detect the bacteria.  This might not seem worth it for this data set, but modern experiments regularly have hundreds or thousands of images, so automating this process is necessary!  (It's also more consistent!)  To help you see what this process looks like, we have prepared a [Python module](https://github.com/ejohnson643/WhatDoYourDataSay/blob/main/CourseFiles/Module_2/Resources/Problem2_4_ImageProcessingPackage.py) for processing these specific images.
         
 Download [the module](https://github.com/ejohnson643/WhatDoYourDataSay/blob/main/CourseFiles/Module_2/Resources/Problem2_4_ImageProcessingPackage.py) into the same location that you put the data (and that you are running your notebook).  Use the [assistance notebook here](https://github.com/ejohnson643/WhatDoYourDataSay/blob/main/CourseFiles/Module_2/Resources/Assignment2_Fall2020_Q4_Help.ipynb) to learn how to extract the YFP values from the images.  Describe the workflow of going from images to fold-change in YFP fluorescence in that notebook in your own words.  Use an appropriate figure to show the distribution of YFP fluorescence in each of the 7 strains.  Predict which non-control strain (not `Auto` or `Delta`) contains the most repressors and which contains the least.
         
-### 4.2.
+### 4.2: Fit the model
 
 <mark style="background-color: #e26563">PCS-3</mark>, <mark style="background-color: #ffda5c">TS</mark>, <mark style="background-color: #6b9cee">MVD</mark>, <mark style="background-color: #92c57a">NQP-2</mark> Using the direct measurements of the repressor copy number, $R$, that are given in Figure 4A of the paper, use least-squares regression to estimate $\beta\Delta\varepsilon_{RD}$ under the model given in Equation {eq}`eqn_Eq5`.  Make sure to report point estimates and intervals of confidence.  Plot your data and the fitted lines.  Plot lines corresponding to the edges of your intervals.  When plotting the data points, use error bars corresponding to the errors in measurement.  These are given by Figure 4A for $R$, and are assumed to be 30\% for the fold-change measurements (this is again from the paper).
 
